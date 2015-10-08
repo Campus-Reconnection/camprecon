@@ -7,6 +7,8 @@
 <body>
 <img src="images/campusreconnectionlogo.png" />
 <div id="pagediv">
+<?php include("includes/menustrip.php"); ?>
+<br />
 <?php include("includes/weeklyschedule.php"); ?>
 <br />
 <?php include("includes/quicklist.php"); ?>
