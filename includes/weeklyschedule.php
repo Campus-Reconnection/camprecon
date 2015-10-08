@@ -5,7 +5,7 @@ echo "<tr>\r\n<th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>
 //Print 8am to 11am.
 for ($i = 8; $i < 12; $i++)
 {
-	echo "<tr>\r\n<td class=\"ws\">" . $i . ":00am</td><td class=\"ws\" rowspan=\"2\"></td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td>\r\n</tr>";
+	echo "<tr>\r\n<td class=\"ws\">" . $i . ":00am</td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td>\r\n</tr>";
 }
 
 //Print 12:00pm.
