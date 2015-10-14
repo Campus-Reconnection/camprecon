@@ -8,9 +8,11 @@
 <img src="images/campusreconnectionlogo.png" />
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
-<br />
+<span class="title">Weekly Schedule:</span>
+<br /><br />
 <?php include("includes/weeklyschedule.php"); ?>
 <br />
+<span class="title">Quick List:</span>
 <?php include("includes/quicklist.php"); ?>
 <br />
 </div>
