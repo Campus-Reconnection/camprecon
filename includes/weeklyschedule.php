@@ -3,12 +3,6 @@ echo "<table class=\"schedule\">\r\n";
 echo "<tr>\r\n<th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th>\r\n</tr>";
 
 $times = array('8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm','8:00pm');
-=======
-//Print 8am to 11am.
-for ($i = 8; $i < 12; $i++)
-{
-	echo "<tr>\r\n<td class=\"ws\">" . $i . ":00am</td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td><td class=\"ws\"></td>\r\n</tr>";
-}
 
 $schedule = array(
 	array("","","","",""), //8am
