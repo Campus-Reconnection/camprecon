@@ -5,7 +5,6 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <header>
 <img src="images/campusreconnectionlogo.png" />
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
@@ -16,7 +15,6 @@
   <li><a href="#">Expenses</a></li>
   <li><a href="#">Other</a></li>
   </ul>
-</header>
 <span class="title">Weekly Schedule:</span>
 <br /><br />
 <?php include("includes/weeklyschedule.php"); ?>
