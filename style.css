@@ -6,6 +6,18 @@ body {
 	font-family:arial;
 }
 
+header {
+	position: fixed;
+}
+
+header ul {
+	list-style-type: none;
+}
+
+header li {
+	display: inline;
+}
+
 span.title {
 	font-size:1.5em;
 }
