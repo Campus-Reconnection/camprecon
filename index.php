@@ -14,6 +14,7 @@
 <br />
 <span class="title">Quick List:</span>
 <?php include("includes/quicklist.php"); ?>
+<p></p>
 <br />
 </div>
 </body>
