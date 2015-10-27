@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<!-- Addition made here -->
 <img src="images/campusreconnectionlogo.png" />
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
