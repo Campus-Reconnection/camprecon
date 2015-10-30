@@ -5,8 +5,9 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<img src="images/campusreconnectionlogo.png" />
+<a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 <div id="pagediv">
+<?php include("includes/menustrip.php"); ?>
 <span class="title">Academic Advisor Information:</span>
 <br /><br />
 <table class="schedule">

@@ -1,6 +1,6 @@
 <?php
 echo "<table class=\"schedule\">\r\n";
-echo "<tr>\r\n<th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th>\r\n</tr>";
+echo "<tr>\r\n<td class=\"thr\">Time</td><td class=\"thr\">Monday</td><td class=\"thr\">Tuesday</td><td class=\"thr\">Wednesday</td><td class=\"thr\">Thursday</td><td class=\"thr\">Friday</td>\r\n</tr>";
 
 $times = array('8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm','8:00pm');
 

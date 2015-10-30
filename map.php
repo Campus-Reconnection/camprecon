@@ -44,9 +44,10 @@ google.maps.event.addDomListener(window,"load",initMap);
 </script>
 </head>
 <body>
-<img src="images/campusreconnectionlogo.png" />
+<a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 <div id="pagediv">
-<div id="googleMap" style="width:960px;height:640px;"></div>
+<?php include("includes/menustrip.php"); ?>
+<div id="googleMap" style="width:960px;height:640px; box-shadow:0px 0px 24px #4f4f4f;"></div>
 </div>
 </body>
 </html>

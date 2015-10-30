@@ -5,12 +5,14 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<img src="images/campusreconnectionlogo.png" />
+<a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Weekly Schedule:</span>
-<br /><br />
+<br />
+<div id="sch-container">
 <?php include("includes/weeklyschedule.php"); ?>
+</div>
 <br />
 <span class="title">Quick List:</span>
 <?php include("includes/quicklist.php"); ?>

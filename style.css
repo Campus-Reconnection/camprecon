@@ -3,11 +3,47 @@ html {overflow-y:scroll;} /*Permanent scrollbar ya' know.*/
 body {
 	background-image:url("images/bg01.png");
 	background-repeat:repeat-x;
-	font-family:arial;
+	font-family:arial; 
 }
 
 span.title {
 	font-size:1.5em;
+}
+
+span.text-attn {
+	color:#00ff00;
+}
+
+td.advcell { /*Advisor table cell*/
+	background-color:#efefef;
+	border:1px solid black;
+	width:240px;
+	height:24px;
+	padding:2px;
+	text-align:center;
+}
+
+div#pagediv { /*Centered container that all page materials squeeze into.*/
+	width:960px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+}
+
+div#sch-container { /*Couldn't get a shadow on schedule table itself. So we use a container.*/
+	box-shadow:0px 0px 24px #4f4f4f;
+}
+
+table#quicklist { /*The essential quick list.*/
+	font-size:0.75em;
+	padding:8px;
+	width:480px;
+	height:272px;
+	background-color:#52ae63;
+	background-image:url("images/bg02.png");
+	background-size:100% 100%;
+	border:1px solid black;
+	box-shadow:0px 0px 24px #4f4f4f;
 }
 
 /*----------------------------------------
@@ -25,9 +61,10 @@ table.schedule {
   td.aews +Alternate weekly schedule cell.
   td.fws  +Full weekly schedule cell.
   td.tws  +Time weekly schedule cell.
+  td.thr  +Table header. <th> is too lame.
 ----------------------------------------*/
 
-td.ews, td.aews, td.fws, td.tws {
+td.ews, td.aews, td.fws, td.tws, td.thr {
 	border:1px solid black;
 	width:160px;
 	height:24px;
@@ -41,6 +78,8 @@ td.aews {
 
 td.fws {
 	background-color:#52ae63;
+	background-image:url("images/bg02.png");
+	background-size:100% 100%;
 	color:#ffffff;
 }
 
@@ -48,39 +87,29 @@ td.tws {
 	background-color:#ffff7f;
 }
 
-/*--------------------------------------*/
-
-td.advcell { /*Advisor table cell*/
-	background-color:#efefef;
-	border:1px solid black;
-	width:240px;
-	height:24px;
-	padding:2px;
-	text-align:center;
+td.thr {
+	background-color:#001f0f;
+	color:#afafaf;
 }
 
-div#pagediv {
-	width:960px;
-	margin-left:auto;
-	margin-right:auto;
-	position:relative;
-	top:64px;
-}
 
-div#quicklist {
-	padding:0px;
-	font-size:0.75em;
-	width:512px;
-	height:272px;
-}
+/*----------------------------------------
+MENU STRIP
+This is super touchy. Best leave it alone.
+----------------------------------------*/
 
-.win_table {width:100%; height:100%; border-collapse:collapse;}
-.win_nwcorner {background-image:url("images/rndblu/border_nw.png"); width:28px; height:28px; background-position:right bottom;}
-.win_necorner {background-image:url("images/rndblu/border_ne.png"); width:28px; height:28px; background-position:left bottom;}
-.win_secorner {background-image:url("images/rndblu/border_se.png"); width:28px; height:28px; background-position:left top;}
-.win_swcorner {background-image:url("images/rndblu/border_sw.png"); width:28px; height:28px; background-position:right top;}
-.win_wborder {background-image:url("images/rndblu/border_w.png"); background-repeat:repeat-y; background-position:right;}
-.win_sborder {background-image:url("images/rndblu/border_s.png"); background-repeat:repeat-x; background-position:top;}
-.win_eborder {background-image:url("images/rndblu/border_e.png"); background-repeat:repeat-y; background-position:left;}
-.win_nborder {background-image:url("images/rndblu/border_n.png"); background-repeat:repeat-x; background-position:bottom;}
-.win_center {background-color:#52ae63; vertical-align:top; text-color:#000000; padding:8px;}
+.clearfix:after {display:block; clear:both;}
+.menu-wrap {width:100%; background:#001f0f;}
+.menu {width:960px; margin:0px auto;}
+.menu li {margin:0px; list-style:none; font-family:arial;}
+.menu li:hover > a, .menu > a {text-decoration:none; color:#ffffff;}
+.menu a {color:#9f9f9f;}
+.menu .arrow {font-size:0.75em; line-height:0%;}
+.menu > ul > li {float:left; display:inline-block; position:relative; font-size:1em;}
+.menu > ul > li > a {padding:8px; width:192px; display:inline-block; text-align:center;}
+.menu > ul > li:hover > a, .menu > ul {background:#001f0f;}
+.menu li:hover .sub-menu {z-index:1; opacity:1;}
+.sub-menu {width:100%; padding:0px; position:absolute; top:100%; left:0px; z-index:-1; opacity:0; background:#001f0f;}
+.sub-menu li {display:block; font-size:1em;}
+.sub-menu li a {padding:8px; display:block;}
+.sub-menu li a:hover {background:#52ae63; color:#001f0f; padding:7px; border:1px solid #001f0f;}
