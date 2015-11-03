@@ -7,6 +7,7 @@ If you don't know what PHP is, then git outta here!
 <ul>
 <li>Navigation menus.</li>
 <li>Weekly schedule shell.</li>
+<li>Google Maps data.</li>
 </ul>
 ###What needs to be worked on?
 <ul>
