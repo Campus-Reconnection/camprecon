@@ -13,6 +13,34 @@ function addmarker($Name,$Var,$Latitude,$Longitude)
 	echo "var " . $Var . "info = new google.maps.InfoWindow({content:\"" . $Name . "\"}); " . $Var . "info.open(map," . $Var . "marker);\r\n";
 	echo "google.maps.event.addListener(" . $Var . "marker,\"click\",function(){" . $Var . "info.open(map," . $Var . "marker);});\r\n";
 }
+
+function plotfromdatabase()
+{
+	$servername = "localhost";
+	$username = "root";
+	$password = "bds";
+	$dbname = "camprecon";
+	
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+	if (!$conn)
+	{
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	
+	$sql = "SELECT strFacilityName, intFacilityID, intLatitude, intLongitude FROM tblfacility WHERE intFacilityID >= 33 AND intFacilityID < 72;";
+	$result = mysqli_query($conn, $sql);
+	
+	if (mysqli_num_rows($result) > 0)
+	{
+		while($row = mysqli_fetch_assoc($result))
+		{
+			addmarker($row["strFacilityName"],strtolower(substr($row["strFacilityName"],0,1).$row["intFacilityID"]),$row["intLatitude"],$row["intLongitude"]);
+		}
+	}
+	
+	mysqli_close($conn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +61,8 @@ function initMap()
   
   var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
   
-  //Markers go here:
   <?php 
-    addmarker("Quenitin Burdick Building","qbb",46.893617,-96.803128);
-	addmarker("Minard Hall","minard",46.891419,-96.802421);
+    plotfromdatabase();
   ?> 
 }
 google.maps.event.addDomListener(window,"load",initMap);

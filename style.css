@@ -39,6 +39,7 @@ table#quicklist { /*The essential quick list.*/
 	padding:8px;
 	width:480px;
 	height:272px;
+	color:#ffffff;
 	background-color:#52ae63;
 	background-image:url("images/bg02.png");
 	background-size:100% 100%;
