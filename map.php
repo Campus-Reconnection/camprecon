@@ -18,7 +18,7 @@ function plotfromdatabase()
 {
 	$servername = "localhost";
 	$username = "root";
-	$password = "bds";
+	$password = "camprecon";
 	$dbname = "camprecon";
 	
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
