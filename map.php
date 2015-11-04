@@ -17,7 +17,21 @@ function addmarker($Name,$Var,$Latitude,$Longitude)
 
 function plotfromdatabase()
 {
+<<<<<<< HEAD
 	$conn = openDB();
+=======
+	$servername = "localhost";
+	$username = "root";
+	$password = "camprecon";
+	$dbname = "camprecon";
+	
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+	if (!$conn)
+	{
+		die("Connection failed: " . mysqli_connect_error());
+	}
+>>>>>>> origin/master
 	
 	$sql = "SELECT strFacilityName, intFacilityID, intLatitude, intLongitude FROM tblfacility WHERE intFacilityID >= 33 AND intFacilityID < 72;";
 	$result = mysqli_query($conn, $sql);
