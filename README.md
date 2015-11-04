@@ -21,7 +21,6 @@ If you don't know what PHP is, then git outta here!
 <li>Search bar.</li>
 <li>These pages:</li>
 <ul>
-<li>Transcript</li>
 <li>Add Classes / Drop Classes</li>
 <li>Housing / Parking Permit / Finances</li>
 <li>Activities and Tickets</li>
