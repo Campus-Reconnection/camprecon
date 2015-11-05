@@ -1,6 +1,6 @@
 <?php
 
-require('system.php');
+require("system.php");
 
 $sql = "SELECT crs.strCourseName as courseName,
 			   crs.intCredits as courseCredits,
@@ -18,23 +18,33 @@ $sql = "SELECT crs.strCourseName as courseName,
 				when sectionSeason = 'Fall' then 2
 				end,
 				courseID;";
+				
 $result = queryDB($sql);
+
 if (mysqli_num_rows($result) > 0)
 {
-	//$xml = new SimpleXMLElement("<transcript></transcript>");
-	//foreach($result as $key => $value) {
-	//	$courseNode = $xml->addChild("course");
-	//	foreach($value as $key2 => $value2) {
-	//		$lcKey2 = strtolower($key2);
-	//		$courseNode->addChild("$lcKey2",htmlspecialchars("$value2"));
-	//	}
-	//}
-	//echo $xml->asXML();
+	/*
+	$xml = new SimpleXMLElement("<transcript></transcript>");
 	
-	while ($row = mysqli_fetch_assoc($result)) {
+	foreach($result as $key => $value)
+	{
+		$courseNode = $xml->addChild("course");
+		foreach($value as $key2 => $value2)
+		{
+			$lcKey2 = strtolower($key2);
+			$courseNode->addChild("$lcKey2",htmlspecialchars("$value2"));
+		}
+	}
+	echo $xml->asXML();
+	*/
+	
+	while ($row = mysqli_fetch_assoc($result))
+	{
 		$transcript[] = $row;
 	}
 
 	$struct = array("transcript" => $transcript);
 	print json_encode($struct);
 }
+
+?>

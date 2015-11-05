@@ -1,6 +1,7 @@
 <?php
 
-	function openDB() {
+	function openDB()
+	{
 		$servername = "localhost";
 		$username = "root";
 		$password = "camprecon";
@@ -16,31 +17,39 @@
 		return $conn;
 	}
 	
-	function closeDB($conn) {
+	function closeDB($conn)
+	{
 		mysqli_close($conn);
 	}
 	
-	function queryDB($sql) {
+	function queryDB($sql)
+	{
 		$conn = openDB();
 		$result = mysqli_query($conn, $sql);
 		closeDB($conn);
 		return $result;
 	}
 	
-	function array_to_xml($object_info, $xml_object_info) {
-		foreach($object_info as $key => $value) {
+	function array_to_xml($object_info, $xml_object_info)
+	{
+		foreach ($object_info as $key => $value)
+		{
 			$lcKey = strtolower($key);
-			if(is_array($value)) {
-				if(!is_numeric($lcKey)){
+			if (is_array($value))
+			{
+				if (!is_numeric($lcKey))
+				{
 					$subnode = $xml_object_info->addChild("$lcKey");
 					array_to_xml($value, $subnode);
 				}
-				else{
+				else
+				{
 					$subnode = $xml_object_info->addChild("item");
 					array_to_xml($value, $subnode);
 				}
 			}
-			else {
+			else
+			{
 				$xml_object_info->addChild("$lcKey",htmlspecialchars("$value"));
 			}
 		}
