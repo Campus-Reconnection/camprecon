@@ -28,6 +28,9 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<SCRIPT SRC="javascript/jquery-2.1.4.min.js"></SCRIPT>
 	<script>
+		// Objects & Variables
+		// =============================
+		
 		var mainTranscript;
 		
 		var Transcript = function(){
@@ -108,6 +111,9 @@
 			this.points = credits * creditsMultiplier;
 		}
 		
+		// Methods
+		//=============================
+		
 		// Get transcript data on page load
 		$(function(){
 			var $loading = $("#overlay").hide();
@@ -129,13 +135,16 @@
 			   });
 		});
 		
+		// Builds the transcript using the response data
 		function buildTranscript(json) {
 			var t = new Transcript();
 			var currentSemester;
+			// set first semester to the earliest section season and year
 			$.each(json.transcript, function(i, v){
 				currentSemester = new Semester(v.sectionSeason, v.sectionYear);
 				return false;
 			});
+			// fill semesters with courses
 			$.each(json.transcript, function(i, v){
 				if(currentSemester.season != v.sectionSeason || currentSemester.year != v.sectionYear)
 				{
@@ -148,16 +157,18 @@
 			currentSemester.calculateTerm();
 			t.semesters.push(currentSemester);
 			t.calculateCumulative();
-			console.log(t);
+			//console.log(t);
 			return t;
 		}
 		
+		// runs whenever the combo box changes
 		function semesterSelected(sem) {
 			sem = parseInt(sem);
-			if (sem == -1){ return; }
-			$("#transcriptA").find('tbody').find('tr').remove();
+			if (sem == -1){ return; } // if the default option is selected do nothing
+			$("#transcriptA").find('tbody').find('tr').remove(); // delete all of the old data
 			var semester = mainTranscript.semesters[sem];
 			for(course of semester.courses){
+				// re-fill the first table
 				$("#transcriptA").find('tbody')
 					.append($('<tr>')
 						.append(
@@ -169,12 +180,12 @@
 							$('<td>').text((course.points).toFixed(3)))
 						);
 			}
+			// fill the second table
 			$("#termGpa").text((semester.termGpa).toFixed(3));
 			$("#termAttempted").text((semester.termAttemptedCredits).toFixed(3));
 			$("#termEarned").text((semester.termEarnedCredits).toFixed(3));
 			$("#termGpaUnits").text((semester.termGpaUnits).toFixed(3));
 			$("#termPoints").text((semester.termPoints).toFixed(3));
-			
 			$("#cumlGpa").text((semester.cumlGpa).toFixed(3));
 			$("#cumlAttempted").text((semester.cumlAttemptedCredits).toFixed(3));
 			$("#cumlEarned").text((semester.cumlEarnedCredits).toFixed(3));
