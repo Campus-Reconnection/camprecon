@@ -114,3 +114,66 @@ This is super touchy. Best leave it alone.
 .sub-menu li {display:block; font-size:1em;}
 .sub-menu li a {padding:8px; display:block;}
 .sub-menu li a:hover {background:#52ae63; color:#001f0f; padding:7px; border:1px solid #001f0f;}
+
+/*---------------------------------------
+TRANSCRIPT
+---------------------------------------*/
+
+table#transcriptA {
+	border-collapse:collapse;
+	font-size:0.90em;
+}
+
+table#transcriptA td {
+	padding-left:5px;
+	padding-right:5px;
+}
+
+table#transcriptA td:nth-child(1) {
+	width:85px;
+	text-align:left;
+}
+
+table#transcriptA td:nth-child(2) {
+	width:280px;
+	text-align:left;
+}
+
+table#transcriptA td + td + td {
+	width:70px;
+	text-align:right;
+}
+
+table#transcriptA td:nth-child(5) {
+	text-align:center;
+}
+
+table#transcriptB {
+	border-collapse:collapse;
+	font-size:0.90em;
+}
+
+table#transcriptB td {
+	padding-left:5px;
+	padding-right:5px;
+}
+
+table#transcriptB td:nth-child(1) {
+	width:85px;
+	text-align:left;
+}
+
+table#transcriptB td:nth-child(2) {
+	width:130px;
+	text-align:left;
+}
+
+table#transcriptB td:nth-child(3) {
+	width:140px;
+	text-align:right;
+}
+
+table#transcriptB td + td + td {
+	width:70px;
+	text-align:right;
+}

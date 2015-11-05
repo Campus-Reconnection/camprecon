@@ -108,6 +108,7 @@
 			this.points = credits * creditsMultiplier;
 		}
 		
+		// Get transcript data on page load
 		$(function(){
 			var $loading = $("#overlay").hide();
 			$(document)
@@ -153,33 +154,32 @@
 		
 		function semesterSelected(sem) {
 			sem = parseInt(sem);
-			$("#transcript").find('tbody').find('tr').remove();
 			if (sem == -1){ return; }
+			$("#transcriptA").find('tbody').find('tr').remove();
 			var semester = mainTranscript.semesters[sem];
 			for(course of semester.courses){
-				$("#transcript").find('tbody')
+				$("#transcriptA").find('tbody')
 					.append($('<tr>')
 						.append(
-							$('<td>').text(course.id.substring(0,4)),
-							$('<td>').text(course.id.substring(4)),
-							$('<td>').attr('colspan', '2').text(course.name),
-							$('<td>').text(course.credits),
-							$('<td>').text(course.earnedCredits),
+							$('<td>').text(course.id.substring(0,4) + " " + course.id.substring(4)),
+							$('<td>').text(course.name),
+							$('<td>').text((course.credits).toFixed(3)),
+							$('<td>').text((course.earnedCredits).toFixed(3)),
 							$('<td>').text(course.grade),
-							$('<td>').text(course.points))
+							$('<td>').text((course.points).toFixed(3)))
 						);
 			}
-			$("#termGpa").text(semester.termGpa);
-			$("#termAttempted").text(semester.termAttemptedCredits);
-			$("#termEarned").text(semester.termEarnedCredits);
-			$("#termGpaUnits").text(semester.termGpaUnits);
-			$("#termPoints").text(semester.termPoints);
+			$("#termGpa").text((semester.termGpa).toFixed(3));
+			$("#termAttempted").text((semester.termAttemptedCredits).toFixed(3));
+			$("#termEarned").text((semester.termEarnedCredits).toFixed(3));
+			$("#termGpaUnits").text((semester.termGpaUnits).toFixed(3));
+			$("#termPoints").text((semester.termPoints).toFixed(3));
 			
-			$("#cumlGpa").text(semester.cumlGpa);
-			$("#cumlAttempted").text(semester.cumlAttemptedCredits);
-			$("#cumlEarned").text(semester.cumlEarnedCredits);
-			$("#cumlGpaUnits").text(semester.cumlGpaUnits);
-			$("#cumlPoints").text(semester.cumlPoints);
+			$("#cumlGpa").text((semester.cumlGpa).toFixed(3));
+			$("#cumlAttempted").text((semester.cumlAttemptedCredits).toFixed(3));
+			$("#cumlEarned").text((semester.cumlEarnedCredits).toFixed(3));
+			$("#cumlGpaUnits").text((semester.cumlGpaUnits).toFixed(3));
+			$("#cumlPoints").text((semester.cumlPoints).toFixed(3));
 		}
 		
 	</script>
@@ -191,25 +191,29 @@
 		<span class="title">Transcript</span>
 		<br />
 		<select id="selectSemester" onchange="semesterSelected(this.value)">
-			<option value="0">Select Semester...</option>
+			<option value="-1">Select Semester...</option>
 			<?php fillSelect() ?>
 		</select>
 		<br />
 		<br />
 		<br />
 		<div id="transcriptDiv">
-			<table id="transcript">
-				<thead>
-					<tr><td colspan="2">Course</td><td colspan="2">Description</td><td>Attempted</td><td>Earned</td><td>Grade</td><td>Points</td>
+			<table id="transcriptA">
+				<thead class="transcriptTableHead">
+					<tr><td>Course</td><td>Description</td><td>Attempted</td><td>Earned</td><td>Grade</td><td>Points</td>
 				</thead>
 				<tbody>
 				</tbody>
-				<tfoot>
-					<tr><td>&nbsp;</td></tr>
-					<tr><td colspan="4"></td><td>Attempted</td><td>Earned</td><td>GPA Units</td><td>Points</td></tr>
-					<tr><td colspan="2">Term GPA:</td><td id="termGpa"></td><td>Term Totals:</td><td id="termAttempted"></td><td id="termEarned"></td><td id="termGpaUnits"></td><td id="termPoints"></td></tr>
-					<tr><td colspan="2">Cum GPA:</td><td id="cumlGpa"></td><td>Term Totals:</td><td id="cumlAttempted"></td><td id="cumlEarned"></td><td id="cumlGpaUnits"></td><td id="cumlPoints"></td></tr>
-				</tfoot>
+			</table>
+			<br />
+			<table id="transcriptB">
+				<thead>
+					<tr><td></td><td></td><td></td><td>Attempted</td><td>Earned</td><td>GPA Units</td><td>Points</td></tr>
+				</thead>
+				<tbody>
+					<tr><td>Term GPA:</td><td id="termGpa"></td><td>Term Totals:</td><td id="termAttempted"></td><td id="termEarned"></td><td id="termGpaUnits"></td><td id="termPoints"></td></tr>
+					<tr><td>Cum GPA:</td><td id="cumlGpa"></td><td>Term Totals:</td><td id="cumlAttempted"></td><td id="cumlEarned"></td><td id="cumlGpaUnits"></td><td id="cumlPoints"></td></tr>
+				</tbody>
 			</table>
 		</div>
 		<div id='overlay'></div>
