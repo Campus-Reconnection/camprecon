@@ -1,4 +1,5 @@
 <?php
+require("library/system.php");
 function addmarker($Name,$Var,$Latitude,$Longitude)
 {
 	//-----------------------------------------------------------------//
@@ -12,6 +13,20 @@ function addmarker($Name,$Var,$Latitude,$Longitude)
 	echo "var " . $Var . "marker = new google.maps.Marker({position:{lat:" . $Latitude . ", lng:" . $Longitude . "}, map:map, title:\"" . $Name . "\"});\r\n";
 	echo "var " . $Var . "info = new google.maps.InfoWindow({content:\"" . $Name . "\"}); " . $Var . "info.open(map," . $Var . "marker);\r\n";
 	echo "google.maps.event.addListener(" . $Var . "marker,\"click\",function(){" . $Var . "info.open(map," . $Var . "marker);});\r\n";
+}
+
+function plotfromdatabase()
+{
+	$sql = "SELECT strFacilityName, intFacilityID, intLatitude, intLongitude FROM tblfacility WHERE intFacilityID >= 33 AND intFacilityID < 72;";
+	$result = queryDB($sql);
+	
+	if (mysqli_num_rows($result) > 0)
+	{
+		while($row = mysqli_fetch_assoc($result))
+		{
+			addmarker($row["strFacilityName"],strtolower(substr($row["strFacilityName"],0,1).$row["intFacilityID"]),$row["intLatitude"],$row["intLongitude"]);
+		}
+	}
 }
 ?>
 
@@ -33,21 +48,19 @@ function initMap()
   
   var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
   
-  //Markers go here:
   <?php 
-    addmarker("Quenitin Burdick Building","qbb",46.893617,-96.803128);
-	addmarker("Minard Hall","minard",46.891419,-96.802421);
+    plotfromdatabase();
   ?> 
 }
-google.maps.event.addDomListener(window,"load",initMap);
 
+google.maps.event.addDomListener(window,"load",initMap);
 </script>
 </head>
 <body>
 <a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
-<div id="googleMap" style="width:960px;height:640px; box-shadow:0px 0px 24px #4f4f4f;"></div>
+<div id="googleMap"></div>
 </div>
 </body>
 </html>

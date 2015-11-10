@@ -1,0 +1,1679 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.1.14
+- http://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Nov 05, 2015 at 08:21 PM
+- Server version: 5.6.17
+- PHP Version: 5.5.12
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="camprecon" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="tblcourse">
+                CREATE TABLE `tblcourse` (
+                  `strCourseID` varchar(10) NOT NULL,
+                  `strCourseName` varchar(25) NOT NULL,
+                  `strDepartment` varchar(25) NOT NULL,
+                  `strGenEdCategory` varchar(3) NOT NULL,
+                  `strPrerequisite` varchar(10) DEFAULT NULL,
+                  `strCorequisite` varchar(10) DEFAULT NULL,
+                  `intCredits` int(1) NOT NULL,
+                  `dblFee` float NOT NULL,
+                  `strCourseDescription` varchar(140) DEFAULT NULL,
+                  PRIMARY KEY (`strCourseID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblfacility">
+                CREATE TABLE `tblfacility` (
+                  `intFacilityID` int(7) NOT NULL,
+                  `strFacilityName` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strStreet` varchar(32) NOT NULL,
+                  `strCity` varchar(16) NOT NULL,
+                  `strState` varchar(2) NOT NULL,
+                  `strPostCode` varchar(9) NOT NULL,
+                  `intLongitude` float NOT NULL,
+                  `intLatitude` float NOT NULL,
+                  PRIMARY KEY (`intFacilityID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblfaculty">
+                CREATE TABLE `tblfaculty` (
+                  `intFacultyID` int(7) unsigned NOT NULL,
+                  `strLastName` varchar(24) NOT NULL,
+                  `strFirstName` varchar(24) NOT NULL,
+                  `strMiddleName` varchar(24) NOT NULL,
+                  `strDepartment` varchar(20) NOT NULL,
+                  `strPosition` varchar(15) NOT NULL,
+                  `blnAdvisor` varchar(1) NOT NULL,
+                  `strFacultyEID` varchar(24) NOT NULL,
+                  `intSecurityGroup` int(3) NOT NULL,
+                  PRIMARY KEY (`intFacultyID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblnotifications">
+                CREATE TABLE `tblnotifications` (
+                  `intNotificationID` int(12) NOT NULL,
+                  `intStudentID` int(7) NOT NULL,
+                  `intFacultyID` int(7) NOT NULL,
+                  `strNotification` varchar(140) NOT NULL,
+                  PRIMARY KEY (`intNotificationID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblpictureid">
+                CREATE TABLE `tblpictureid` (
+                  `intExternalID` int(7) NOT NULL,
+                  `vntImage` varchar(32) NOT NULL,
+                  PRIMARY KEY (`intExternalID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblroom">
+                CREATE TABLE `tblroom` (
+                  `intRoomID` int(5) NOT NULL AUTO_INCREMENT,
+                  `intFacilityID` int(7) NOT NULL,
+                  `intRoomNumber` int(5) DEFAULT NULL,
+                  `intSeats` int(3) DEFAULT NULL,
+                  PRIMARY KEY (`intRoomID`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=2502 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblsection">
+                CREATE TABLE `tblsection` (
+                  `intSectionID` int(12) unsigned NOT NULL AUTO_INCREMENT,
+                  `intSectionNumber` tinyint(3) unsigned NOT NULL,
+                  `strCourseID` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strRoomID` int(5) NOT NULL,
+                  `intFacultyID` int(7) unsigned NOT NULL,
+                  `intTimeSlotID` int(3) NOT NULL,
+                  `intYear` int(4) NOT NULL,
+                  `strSeason` varchar(8) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `dtmStart` timestamp NOT NULL,
+                  `dtmEnd` timestamp NOT NULL,
+                  `intCapacity` int(3) NOT NULL,
+                  `intWaitlistTotal` int(3) NOT NULL,
+                  `blnOnlineSection` tinyint(1) NOT NULL,
+                  `strRequiredText` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  PRIMARY KEY (`intSectionID`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblsectionschedule">
+                CREATE TABLE `tblsectionschedule` (
+                  `intTimeSlotID` int(3) NOT NULL,
+                  `strDayFormat` int(5) NOT NULL,
+                  `timeStart` time NOT NULL,
+                  `timeEnd` time NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblstudent">
+                CREATE TABLE `tblstudent` (
+                  `intStudentID` int(7) unsigned NOT NULL,
+                  `intFacultyID` int(7) unsigned NOT NULL,
+                  `strFirstName` varchar(24) NOT NULL,
+                  `strLastName` varchar(24) NOT NULL,
+                  `strMiddleName` varchar(24) DEFAULT NULL,
+                  `strStatus` varchar(8) NOT NULL,
+                  `strEnrollmentStatus` varchar(8) NOT NULL,
+                  `strStudentType` varchar(3) NOT NULL,
+                  `strMajor1` varchar(20) NOT NULL,
+                  `strMajor2` varchar(20) DEFAULT NULL,
+                  `strMajor3` varchar(20) DEFAULT NULL,
+                  `strMinor1` varchar(20) DEFAULT NULL,
+                  `strMinor2` varchar(20) DEFAULT NULL,
+                  `strMinor3` varchar(20) DEFAULT NULL,
+                  `dblGPA` float DEFAULT NULL,
+                  `intCredits` int(3) DEFAULT NULL,
+                  `blnActiveService` tinyint(1) DEFAULT NULL,
+                  `intSecurityGroup` int(3) NOT NULL,
+                  PRIMARY KEY (`intStudentID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblstudentenrollment">
+                CREATE TABLE `tblstudentenrollment` (
+                  `intStudentID` int(7) NOT NULL,
+                  `intSectionID` int(12) NOT NULL,
+                  `strSectionGrade` varchar(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strEnrollmentStatus` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strPermitStatus` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `intWaitlistPosition` int(3) DEFAULT NULL,
+                  PRIMARY KEY (`intStudentID`,`intSectionID`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblusercontact">
+                CREATE TABLE `tblusercontact` (
+                  `intContactID` int(7) NOT NULL,
+                  `intExternalID` int(7) NOT NULL,
+                  `strCountry` varchar(15) DEFAULT NULL,
+                  `strStreet` varchar(15) DEFAULT NULL,
+                  `strCity` varchar(15) DEFAULT NULL,
+                  `strState` varchar(2) DEFAULT NULL,
+                  `strPostCode` varchar(9) DEFAULT NULL,
+                  `intMobileNumber` int(11) DEFAULT NULL,
+                  `intHomeNumber` int(11) DEFAULT NULL,
+                  `intEmergencyNumber` int(11) DEFAULT NULL,
+                  `strEmergencyContactType` varchar(15) DEFAULT NULL,
+                  `strEmergencyContactLastName` varchar(24) DEFAULT NULL,
+                  `strEmergencyContactFirstName` varchar(24) DEFAULT NULL,
+                  `blnEmergencyContact` tinyint(1) DEFAULT NULL,
+                  `blnMailingAddress` tinyint(1) DEFAULT NULL,
+                  `blnPermanent` tinyint(1) DEFAULT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'camprecon'
+    -->
+    <database name="camprecon">
+        <!-- Table tblcourse -->
+        <table name="tblcourse">
+            <column name="strCourseID">CHEM121</column>
+            <column name="strCourseName">General Chemistry I</column>
+            <column name="strDepartment">Chemistry</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CHEM121L</column>
+            <column name="strCourseName">General Chemistry I Lab</column>
+            <column name="strDepartment">Chemistry</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">1</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI160</column>
+            <column name="strCourseName">Computer Science I</column>
+            <column name="strDepartment">Computer Science</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">CSCI160L</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI160L</column>
+            <column name="strCourseName">Computer Science I Lab</column>
+            <column name="strDepartment">Computer Science</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">CSCI160</column>
+            <column name="intCredits">1</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI161</column>
+            <column name="strCourseName">Computer Science II</column>
+            <column name="strDepartment">Computer Science</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">CSCI160</column>
+            <column name="strCorequisite">CSCI161L</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI161L</column>
+            <column name="strCourseName">Computer Science II Lab</column>
+            <column name="strDepartment">Computer Science</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">CSCI161L</column>
+            <column name="strCorequisite">CSCI161</column>
+            <column name="intCredits">1</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">ENGL120</column>
+            <column name="strCourseName">College Composition II</column>
+            <column name="strDepartment">English</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">ENGL110</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">ENGR311</column>
+            <column name="strCourseName">History/Tenchnology/Ameri</column>
+            <column name="strDepartment">Egineering</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">MATH105</column>
+            <column name="strCourseName">Trigonometry</column>
+            <column name="strDepartment">Mathematics</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">MATH165</column>
+            <column name="strCourseName">Calculus I</column>
+            <column name="strDepartment">Mathematics</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">MATH105</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">4</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">MUSC111</column>
+            <column name="strCourseName">Marching Band</column>
+            <column name="strDepartment">Music</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">1</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">UNIV189</column>
+            <column name="strCourseName">Skills for Academic Succe</column>
+            <column name="strDepartment">University</column>
+            <column name="strGenEdCategory"></column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">1</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <!-- Table tblfacility -->
+        <table name="tblfacility">
+            <column name="intFacilityID">1</column>
+            <column name="strFacilityName">Old Main</column>
+            <column name="strStreet">1340 Administration Avenue</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8001</column>
+            <column name="intLatitude">46.8916</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">3</column>
+            <column name="strFacilityName">Ceres Hall</column>
+            <column name="strStreet">1301 Administration Avenue</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7989</column>
+            <column name="intLatitude">46.8922</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">5</column>
+            <column name="strFacilityName">Ladd Hall</column>
+            <column name="strStreet">1231 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8021</column>
+            <column name="intLatitude">46.8928</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">6</column>
+            <column name="strFacilityName">Memorial Union</column>
+            <column name="strStreet">1401 Administration Avenue</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8008</column>
+            <column name="intLatitude">46.8931</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">7</column>
+            <column name="strFacilityName">E. Morrow Lebedeff Hall</column>
+            <column name="strStreet">1310 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8001</column>
+            <column name="intLatitude">46.8937</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">8</column>
+            <column name="strFacilityName">Churchill Hall</column>
+            <column name="strStreet">1300 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7992</column>
+            <column name="intLatitude">46.8938</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">9</column>
+            <column name="strFacilityName">Dinan Hall</column>
+            <column name="strStreet">1337 Administration Avenue</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8001</column>
+            <column name="intLatitude">46.8926</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">10</column>
+            <column name="strFacilityName">Alba Bales House</column>
+            <column name="strStreet">1260 University Drive North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7986</column>
+            <column name="intLatitude">46.8926</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">11</column>
+            <column name="strFacilityName">Putnam Hall</column>
+            <column name="strStreet">1361-1397 12th Ave N</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8005</column>
+            <column name="intLatitude">46.8909</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">12</column>
+            <column name="strFacilityName">Library</column>
+            <column name="strStreet">1201 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8013</column>
+            <column name="intLatitude">46.8909</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">13</column>
+            <column name="strFacilityName">South Engineering</column>
+            <column name="strStreet">1211 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8015</column>
+            <column name="intLatitude">46.8918</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">14</column>
+            <column name="strFacilityName">Agricultural and Biosystems Engineering</column>
+            <column name="strStreet">1221 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8021</column>
+            <column name="intLatitude">46.8925</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">15</column>
+            <column name="strFacilityName">Dunbar Laboratories</column>
+            <column name="strStreet">1301 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8022</column>
+            <column name="intLatitude">46.8932</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">16</column>
+            <column name="strFacilityName">Music Education Building</column>
+            <column name="strStreet">1511 12th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8038</column>
+            <column name="intLatitude">46.8908</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">17</column>
+            <column name="strFacilityName">Geosciences</column>
+            <column name="strStreet">1321 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8023</column>
+            <column name="intLatitude">46.8937</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">18</column>
+            <column name="strFacilityName">Dolve Hall</column>
+            <column name="strStreet">1319 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8007</column>
+            <column name="intLatitude">46.8949</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">20</column>
+            <column name="strFacilityName">Bentson/Bunker Fieldhouse</column>
+            <column name="strStreet">1301 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7988</column>
+            <column name="intLatitude">46.8949</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">21</column>
+            <column name="strFacilityName">Minard Hall</column>
+            <column name="strStreet">1210 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8027</column>
+            <column name="intLatitude">46.8915</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">22</column>
+            <column name="strFacilityName">Heating Plant</column>
+            <column name="strStreet">1235 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8033</column>
+            <column name="intLatitude">46.8918</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">23</column>
+            <column name="strFacilityName">Morrill Hall</column>
+            <column name="strStreet">1230 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8033</column>
+            <column name="intLatitude">46.8925</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">25</column>
+            <column name="strFacilityName">Quentin Burdick Building</column>
+            <column name="strStreet">1320 Albrecht Blvd</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8035</column>
+            <column name="intLatitude">46.8936</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">26</column>
+            <column name="strFacilityName">Hultz Hall</column>
+            <column name="strStreet">1300 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8036</column>
+            <column name="intLatitude">46.8931</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">28</column>
+            <column name="strFacilityName">Harris Hall</column>
+            <column name="strStreet">1250 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8045</column>
+            <column name="intLatitude">46.8926</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">31</column>
+            <column name="strFacilityName">Thorson Maintenance Center</column>
+            <column name="strStreet">1310 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8048</column>
+            <column name="intLatitude">46.8932</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">32</column>
+            <column name="strFacilityName">Maintenance Buildings</column>
+            <column name="strStreet">1516 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8054</column>
+            <column name="intLatitude">46.8932</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">33</column>
+            <column name="strFacilityName">Plant Sciences Greenhouse</column>
+            <column name="strStreet">1230 16 1/2 Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8074</column>
+            <column name="intLatitude">46.8922</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">34</column>
+            <column name="strFacilityName">Sheppherd Arena</column>
+            <column name="strStreet">1350 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8035</column>
+            <column name="intLatitude">46.8948</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">36</column>
+            <column name="strFacilityName">Wiidakas Laboratory</column>
+            <column name="strStreet">1350 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8044</column>
+            <column name="intLatitude">46.8948</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">37</column>
+            <column name="strFacilityName">Waldron Hall</column>
+            <column name="strStreet">1360 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8045</column>
+            <column name="intLatitude">46.8954</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">42</column>
+            <column name="strFacilityName">Stockbridge Hall</column>
+            <column name="strStreet">1420 University Drive North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7986</column>
+            <column name="intLatitude">46.8961</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">43</column>
+            <column name="strFacilityName">Bison Court (East)</column>
+            <column name="strStreet">1440 University Drive North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.799</column>
+            <column name="intLatitude">46.8972</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">44</column>
+            <column name="strFacilityName">Bison Court (West)</column>
+            <column name="strStreet">1440 University Drive North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7999</column>
+            <column name="intLatitude">46.8972</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">46</column>
+            <column name="strFacilityName">Animal Nutrition and Physiology Center</column>
+            <column name="strStreet">1801 15th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8095</column>
+            <column name="intLatitude">46.8984</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">49</column>
+            <column name="strFacilityName">Dacotah Field</column>
+            <column name="strStreet">1310 17th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.801</column>
+            <column name="intLatitude">46.9004</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">50</column>
+            <column name="strFacilityName">Wallman Wellness Center</column>
+            <column name="strStreet">1707 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8083</column>
+            <column name="intLatitude">46.8946</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">52</column>
+            <column name="strFacilityName">Sudro Hall</column>
+            <column name="strStreet">1401 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8021</column>
+            <column name="intLatitude">46.8958</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">53</column>
+            <column name="strFacilityName">Walster Hall</column>
+            <column name="strStreet">1402 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8035</column>
+            <column name="intLatitude">46.8959</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">55</column>
+            <column name="strFacilityName">Reed Hall</column>
+            <column name="strStreet">1431 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8019</column>
+            <column name="intLatitude">46.8973</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">56</column>
+            <column name="strFacilityName">Burgum Hall</column>
+            <column name="strStreet">1333 12th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7998</column>
+            <column name="intLatitude">46.8909</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">57</column>
+            <column name="strFacilityName">Weible Hall (North)</column>
+            <column name="strStreet">1420 14th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8011</column>
+            <column name="intLatitude">46.8969</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">58</column>
+            <column name="strFacilityName">Johnson Hall</column>
+            <column name="strStreet">1431 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8019</column>
+            <column name="intLatitude">46.897</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">59</column>
+            <column name="strFacilityName">Residence Dining Center</column>
+            <column name="strStreet">1411 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8024</column>
+            <column name="intLatitude">46.8965</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">60</column>
+            <column name="strFacilityName">Potato Research-Pesticide Storage</column>
+            <column name="strStreet">1220 16th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8047</column>
+            <column name="intLatitude">46.8917</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">61</column>
+            <column name="strFacilityName">Residence Life Facility Services</column>
+            <column name="strStreet">1230 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8045</column>
+            <column name="intLatitude">46.8917</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">62</column>
+            <column name="strFacilityName">Weible Hall (South)</column>
+            <column name="strStreet">1420 14th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8011</column>
+            <column name="intLatitude">46.8962</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">63</column>
+            <column name="strFacilityName">Engineering Center</column>
+            <column name="strStreet">1401 Centennial Blvd</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8013</column>
+            <column name="intLatitude">46.8945</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">64</column>
+            <column name="strFacilityName">Engineering</column>
+            <column name="strStreet">1315 Centennial Blvd</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8007</column>
+            <column name="intLatitude">46.8944</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">65</column>
+            <column name="strFacilityName">Electrical and Computer Engineering</column>
+            <column name="strStreet">1411 Centennial Blvd</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8019</column>
+            <column name="intLatitude">46.8945</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">66</column>
+            <column name="strFacilityName">Civil and Industrial Engineering</column>
+            <column name="strStreet">1410 14th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8013</column>
+            <column name="intLatitude">46.8951</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">67</column>
+            <column name="strFacilityName">Sevrinson Hall</column>
+            <column name="strStreet">1422 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8033</column>
+            <column name="intLatitude">46.8972</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">68</column>
+            <column name="strFacilityName">Thompson Hall</column>
+            <column name="strStreet">1412 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8034</column>
+            <column name="intLatitude">46.8967</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">69</column>
+            <column name="strFacilityName">Askanase Hall</column>
+            <column name="strStreet">1210 Albrecht Blvd</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8027</column>
+            <column name="intLatitude">46.8908</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">70</column>
+            <column name="strFacilityName">Gate City Bank Auditorium</column>
+            <column name="strStreet">1330 Bolley Dr</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8045</column>
+            <column name="intLatitude">46.8943</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">71</column>
+            <column name="strFacilityName">Stevens Hall</column>
+            <column name="strStreet">1340 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.805</column>
+            <column name="intLatitude">46.8944</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">72</column>
+            <column name="strFacilityName">Sanford Health Athletic Complex/Scheels Center</column>
+            <column name="strStreet">1300 17th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.799</column>
+            <column name="intLatitude">46.9004</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">75</column>
+            <column name="strFacilityName">Auxillary Enterprises</column>
+            <column name="strStreet">1523 12th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8056</column>
+            <column name="intLatitude">46.8912</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">76</column>
+            <column name="strFacilityName">Seim Hall</column>
+            <column name="strStreet">1510 15th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8044</column>
+            <column name="intLatitude">46.8973</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">77</column>
+            <column name="strFacilityName">Pavek Hall</column>
+            <column name="strStreet">1420 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8046</column>
+            <column name="intLatitude">46.8965</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">78</column>
+            <column name="strFacilityName">Loftsgard Hall</column>
+            <column name="strStreet">1360 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8036</column>
+            <column name="intLatitude">46.8955</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">79</column>
+            <column name="strFacilityName">Ellig Sports Complex</column>
+            <column name="strStreet">1707 15th Ave N</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8083</column>
+            <column name="intLatitude">46.8991</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">80</column>
+            <column name="strFacilityName">West Dining Center</column>
+            <column name="strStreet">1500 15th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8039</column>
+            <column name="intLatitude">46.8968</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">81</column>
+            <column name="strFacilityName">Sugar Beet Research</column>
+            <column name="strStreet">1230 16th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8064</column>
+            <column name="intLatitude">46.8924</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">82</column>
+            <column name="strFacilityName">Van Es Hall</column>
+            <column name="strStreet">1523 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8056</column>
+            <column name="intLatitude">46.8945</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">83</column>
+            <column name="strFacilityName">Katherine Kilbourne Burgum Family Life, 4-H Center</column>
+            <column name="strStreet">1400 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8009</column>
+            <column name="intLatitude">46.8935</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">84</column>
+            <column name="strFacilityName">Ehly Hall</column>
+            <column name="strStreet">1315 Centennial Blvd</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8001</column>
+            <column name="intLatitude">46.8944</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">85</column>
+            <column name="strFacilityName">Robinson Hall</column>
+            <column name="strStreet">1601 Centennial Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8068</column>
+            <column name="intLatitude">46.895</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">86</column>
+            <column name="strFacilityName">Service Center/Pilot Plant</column>
+            <column name="strStreet">1401 17th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8065</column>
+            <column name="intLatitude">46.8956</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">87</column>
+            <column name="strFacilityName">Hastings Hall</column>
+            <column name="strStreet">1320 Bolley Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8045</column>
+            <column name="intLatitude">46.8938</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">88</column>
+            <column name="strFacilityName">Niskanen Hall</column>
+            <column name="strStreet">134 N University Dr</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7968</column>
+            <column name="intLatitude">46.9028</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">93</column>
+            <column name="strFacilityName">Northern Crops Institute</column>
+            <column name="strStreet">1240 16th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8045</column>
+            <column name="intLatitude">46.8922</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">94</column>
+            <column name="strFacilityName">Construction Management Engineering</column>
+            <column name="strStreet">1400 14th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8013</column>
+            <column name="intLatitude">46.8948</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">95</column>
+            <column name="strFacilityName">Parking Office</column>
+            <column name="strStreet">1801 15th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8094</column>
+            <column name="intLatitude">46.8979</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">101</column>
+            <column name="strFacilityName">Mathew Living Learning Center (East)</column>
+            <column name="strStreet">1435 18th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8074</column>
+            <column name="intLatitude">46.8961</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">104</column>
+            <column name="strFacilityName">Mathew Living Learning Center (West)</column>
+            <column name="strStreet">1435 18th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8083</column>
+            <column name="intLatitude">46.8961</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">105</column>
+            <column name="strFacilityName">Biosciences Research Laboratory</column>
+            <column name="strStreet">1616 Albrecht Boulevard</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8034</column>
+            <column name="intLatitude">46.9003</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">106</column>
+            <column name="strFacilityName">Alumni Center</column>
+            <column name="strStreet">1241 N University Dr</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7976</column>
+            <column name="intLatitude">46.892</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">110</column>
+            <column name="strFacilityName">Bison Block I</column>
+            <column name="strStreet">1414 12th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8027</column>
+            <column name="intLatitude">46.8902</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">114</column>
+            <column name="strFacilityName">Niskanen Expansion</column>
+            <column name="strStreet">134 N University Dr</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7958</column>
+            <column name="intLatitude">46.9035</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">117</column>
+            <column name="strFacilityName">SGC Building</column>
+            <column name="strStreet">1919 University Drive North, Sui</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7971</column>
+            <column name="intLatitude">46.9058</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">118</column>
+            <column name="strFacilityName">Johansen Hall</column>
+            <column name="strStreet">1313 18th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8082</column>
+            <column name="intLatitude">46.8937</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">119</column>
+            <column name="strFacilityName">AES Greenhouse</column>
+            <column name="strStreet">1440 18th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8098</column>
+            <column name="intLatitude">46.8961</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">120</column>
+            <column name="strFacilityName">Northern Crops Science Laboratory</column>
+            <column name="strStreet">1307 18th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8077</column>
+            <column name="intLatitude">46.893</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">122</column>
+            <column name="strFacilityName">Fargodome</column>
+            <column name="strStreet">1800 N University Dr</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8011</column>
+            <column name="intLatitude">46.903</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">123</column>
+            <column name="strFacilityName">Newman Outdoor Field</column>
+            <column name="strStreet">1515 15th Ave, Fargo, ND 58102</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8046</column>
+            <column name="intLatitude">46.8983</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">127</column>
+            <column name="strFacilityName">Renaissance Hall</column>
+            <column name="strStreet">650 Northern Pacific Ave</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7905</column>
+            <column name="intLatitude">46.8756</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">128</column>
+            <column name="strFacilityName">Criminal Justice and Public Policy</column>
+            <column name="strStreet">1616 12th Avenue Northwest</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8073</column>
+            <column name="intLatitude">46.8901</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">130</column>
+            <column name="strFacilityName">Research and Technology Park</column>
+            <column name="strStreet">1810 18th St N</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8077</column>
+            <column name="intLatitude">46.9033</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">131</column>
+            <column name="strFacilityName">Research I</column>
+            <column name="strStreet">1735 NDSU Research Park Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8058</column>
+            <column name="intLatitude">46.9019</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">132</column>
+            <column name="strFacilityName">Research II</column>
+            <column name="strStreet">1805 NDSU Research Park Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.806</column>
+            <column name="intLatitude">46.9033</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">133</column>
+            <column name="strFacilityName">Technology Incubator</column>
+            <column name="strStreet">1854 NDSU Research Circle North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8111</column>
+            <column name="intLatitude">46.9041</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">135</column>
+            <column name="strFacilityName">John Deere Electronic Solutions</column>
+            <column name="strStreet">1336 14th Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.808</column>
+            <column name="intLatitude">46.9023</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">136</column>
+            <column name="strFacilityName">Shelly Ellig Indoor Track and Field Facility</column>
+            <column name="strStreet">1625 14th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8013</column>
+            <column name="intLatitude">46.8995</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">137</column>
+            <column name="strFacilityName">Research I Addition</column>
+            <column name="strStreet">1735 NDSU Research Park Drive</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8059</column>
+            <column name="intLatitude">46.9016</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">139</column>
+            <column name="strFacilityName">Batcheller Technology Center</column>
+            <column name="strStreet">1810 NDSU Research Circle North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8095</column>
+            <column name="intLatitude">46.9033</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">140</column>
+            <column name="strFacilityName">Graduate Center</column>
+            <column name="strStreet">1201 12th Ave N</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7971</column>
+            <column name="intLatitude">46.8905</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">142</column>
+            <column name="strFacilityName">Barry, Richard H., Hall</column>
+            <column name="strStreet">811 2nd Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7934</column>
+            <column name="intLatitude">46.8788</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">144</column>
+            <column name="strFacilityName">Klai Hall</column>
+            <column name="strStreet">711 2nd Avenue North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7914</column>
+            <column name="intLatitude">46.8785</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">145</column>
+            <column name="strFacilityName">STEM Classroom and Lab Building</column>
+            <column name="strStreet">1300-1322 N University Dr</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7989</column>
+            <column name="intLatitude">46.8931</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">147</column>
+            <column name="strFacilityName">Lord and Burnham Greenhouses</column>
+            <column name="strStreet">1221 16th Street North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.8055</column>
+            <column name="intLatitude">46.8925</column>
+        </table>
+        <table name="tblfacility">
+            <column name="intFacilityID">166</column>
+            <column name="strFacilityName">University Village</column>
+            <column name="strStreet">1745 University Drive North</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="intLongitude">-96.7959</column>
+            <column name="intLatitude">46.9017</column>
+        </table>
+        <!-- Table tblfaculty -->
+        <!-- Table tblnotifications -->
+        <!-- Table tblpictureid -->
+        <!-- Table tblroom -->
+        <table name="tblroom">
+            <column name="intRoomID">1</column>
+            <column name="intFacilityID">25</column>
+            <column name="intRoomNumber">101</column>
+            <column name="intSeats">30</column>
+        </table>
+        <!-- Table tblsection -->
+        <table name="tblsection">
+            <column name="intSectionID">1</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CHEM121</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">2</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CHEM121L</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">3</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CSCI160</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">4</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CSCI160L</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">5</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CSCI161</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">6</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CSCI161L</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">7</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">ENGL120</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">8</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">ENGR311</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">9</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">MATH105</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">10</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">MATH165</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">11</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">MUSC111</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">12</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">UNIV189</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2013</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStart">2015-11-03 17:41:24</column>
+            <column name="dtmEnd">2015-11-03 17:41:24</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">13</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CSCI160</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 18:41:05</column>
+            <column name="dtmEnd">2015-11-03 18:41:05</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <table name="tblsection">
+            <column name="intSectionID">14</column>
+            <column name="intSectionNumber">1</column>
+            <column name="strCourseID">CSCI160L</column>
+            <column name="strRoomID">1</column>
+            <column name="intFacultyID">0</column>
+            <column name="intTimeSlotID">0</column>
+            <column name="intYear">2014</column>
+            <column name="strSeason">Spring</column>
+            <column name="dtmStart">2015-11-03 18:41:30</column>
+            <column name="dtmEnd">2015-11-03 18:41:30</column>
+            <column name="intCapacity">30</column>
+            <column name="intWaitlistTotal">0</column>
+            <column name="blnOnlineSection">0</column>
+            <column name="strRequiredText"></column>
+        </table>
+        <!-- Table tblsectionschedule -->
+        <!-- Table tblstudent -->
+        <table name="tblstudent">
+            <column name="intStudentID">0</column>
+            <column name="intFacultyID">0</column>
+            <column name="strFirstName">Girl</column>
+            <column name="strLastName">Nobody</column>
+            <column name="strMiddleName">P.</column>
+            <column name="strStatus">Active</column>
+            <column name="strEnrollmentStatus">FullTime</column>
+            <column name="strStudentType">Sop</column>
+            <column name="strMajor1">Computer Science</column>
+            <column name="strMajor2">NULL</column>
+            <column name="strMajor3">NULL</column>
+            <column name="strMinor1">Evil</column>
+            <column name="strMinor2">NULL</column>
+            <column name="strMinor3">NULL</column>
+            <column name="dblGPA">3.71</column>
+            <column name="intCredits">100</column>
+            <column name="blnActiveService">0</column>
+            <column name="intSecurityGroup">0</column>
+        </table>
+        <!-- Table tblstudentenrollment -->
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">1</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">2</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">3</column>
+            <column name="strSectionGrade">C</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">4</column>
+            <column name="strSectionGrade">C</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">5</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">6</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">7</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">8</column>
+            <column name="strSectionGrade">B</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">9</column>
+            <column name="strSectionGrade">B</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">10</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">11</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">12</column>
+            <column name="strSectionGrade">C</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">13</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">0</column>
+            <column name="intSectionID">14</column>
+            <column name="strSectionGrade">A</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
+        <!-- Table tblusercontact -->
+    </database>
+</pma_xml_export>
