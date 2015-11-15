@@ -7,7 +7,13 @@ If you don't know what PHP is, then git outta here!
 <ul>
 <li>Navigation menus.</li>
 <li>Weekly schedule shell.</li>
-<li>Google Maps data.</li>
+<li>Google Maps data and connection to database.</li>
+</ul>
+###What's being worked on?
+<ul>
+<li>Transcript page (Adam Hart)</li>
+<li>Query functions (Erik Canton)</li>
+<li>VM server setup (Buster)</li>
 </ul>
 ###What needs to be worked on?
 <ul>
@@ -15,12 +21,10 @@ If you don't know what PHP is, then git outta here!
 <li>Search bar.</li>
 <li>These pages:</li>
 <ul>
-<li>Transcript</li>
 <li>Add Classes / Drop Classes</li>
 <li>Housing / Parking Permit / Finances</li>
 <li>Activities and Tickets</li>
 </ul>
-<li>Connection between database and map.</li>
 <li>Connection between database and weekly schedule.</li>
 <li>And et cetera...</li>
 </ul>

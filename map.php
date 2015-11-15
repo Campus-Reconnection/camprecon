@@ -1,4 +1,5 @@
 <?php
+require("library/system.php");
 function addmarker($Name,$Var,$Latitude,$Longitude)
 {
 	//-----------------------------------------------------------------//
@@ -16,20 +17,8 @@ function addmarker($Name,$Var,$Latitude,$Longitude)
 
 function plotfromdatabase()
 {
-	$servername = "localhost";
-	$username = "root";
-	$password = "bds";
-	$dbname = "camprecon";
-	
-	$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-	if (!$conn)
-	{
-		die("Connection failed: " . mysqli_connect_error());
-	}
-	
 	$sql = "SELECT strFacilityName, intFacilityID, intLatitude, intLongitude FROM tblfacility WHERE intFacilityID >= 33 AND intFacilityID < 72;";
-	$result = mysqli_query($conn, $sql);
+	$result = queryDB($sql);
 	
 	if (mysqli_num_rows($result) > 0)
 	{
@@ -38,8 +27,6 @@ function plotfromdatabase()
 			addmarker($row["strFacilityName"],strtolower(substr($row["strFacilityName"],0,1).$row["intFacilityID"]),$row["intLatitude"],$row["intLongitude"]);
 		}
 	}
-	
-	mysqli_close($conn);
 }
 ?>
 
@@ -65,15 +52,15 @@ function initMap()
     plotfromdatabase();
   ?> 
 }
-google.maps.event.addDomListener(window,"load",initMap);
 
+google.maps.event.addDomListener(window,"load",initMap);
 </script>
 </head>
 <body>
 <a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
-<div id="googleMap" style="width:960px;height:640px; box-shadow:0px 0px 24px #4f4f4f;"></div>
+<div id="googleMap"></div>
 </div>
 </body>
 </html>
