@@ -14,6 +14,7 @@ If you don't know what PHP is, then git outta here!
 <li>Transcript page (Adam Hart)</li>
 <li>Query functions (Erik Canton)</li>
 <li>VM server setup (Buster)</li>
+<li>Class Planner page (Alex B/Erin)</li>
 </ul>
 ###What needs to be worked on?
 <ul>
