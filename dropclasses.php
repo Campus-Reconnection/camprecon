@@ -32,7 +32,7 @@
 <td class="advcell">PHYS211</td>
 <td class="advcell">Physics</td>
 <td class="advcell">MoWeFr 10:00AM - 10:50AM</td>
-<td class="advcell">SE </td>
+<td class="advcell">South Engineering, 116 </td>
 <td class="advcell">Warren Christensen</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 <td class="advcell">Modern Software Development</td>
 <td class="advcell">MoWeFr 2:00PM - 2:50PM</td>
 <td class="advcell">Quentin Burdick Bldg, 102</td>
-<td class="advcell">Oksana</td>
+<td class="advcell">Oksana Myronovych</td>
 </tr>
 <tr>
 <td class="advcell"><input type="checkbox" name="class2"</td>
@@ -64,12 +64,31 @@
 <td class="advcell">Statistics</td>
 <td class="advcell">TuTh 2:00PM - 2:50PM</td>
 <td class="advcell">Van Es, 101</td>
-<td class="advcell">Tatjana</td>
+<td class="advcell">Tatjana Miljkovic</td>
 </tr>
 </table>
 </div>
 <br />
-<input type="submit" value="Drop Selected Classes" style="float:right">
+<input type="button" value="Delete selected courses" onclick="removeRow('schedule')" style="float: right">
+<script>
+function removeRow(id){
+	var objTable = document.getElementById(id);
+	var iRow = objTable.rows.length;
+	var counter=0;
+	if(objTable.rows.length>1){
+		for(var i=0;i<objTable.rows.length; i++){
+			var chk=objTable.rows[i].cells[0].childNodes[0];
+			if(chk.checked){
+				objTable.deleteRow(i);
+				iRow--;
+				i--;
+				counter=counter+1;
+			}
+		}
+	}
+}
+
+</script>
 </form>
 </body>
 </html>
