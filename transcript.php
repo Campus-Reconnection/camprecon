@@ -130,7 +130,7 @@
 					mainTranscript = buildTranscript(json);
 					$loading.hide();
 					console.log("Transcript built!");
-					semesterSelected(-1);
+					semesterSelected(0);
 				}
 			   });
 		});
@@ -202,7 +202,6 @@
 		<span class="title">Transcript</span>
 		<br />
 		<select id="selectSemester" onchange="semesterSelected(this.value)">
-			<option value="-1">Select Semester...</option>
 			<?php fillSelect() ?>
 		</select>
 		<br />
@@ -223,7 +222,7 @@
 				</thead>
 				<tbody>
 					<tr><td>Term GPA:</td><td id="termGpa"></td><td>Term Totals:</td><td id="termAttempted"></td><td id="termEarned"></td><td id="termGpaUnits"></td><td id="termPoints"></td></tr>
-					<tr><td>Cum GPA:</td><td id="cumlGpa"></td><td>Term Totals:</td><td id="cumlAttempted"></td><td id="cumlEarned"></td><td id="cumlGpaUnits"></td><td id="cumlPoints"></td></tr>
+					<tr><td>Cum GPA:</td><td id="cumlGpa"></td><td>Cum Totals:</td><td id="cumlAttempted"></td><td id="cumlEarned"></td><td id="cumlGpaUnits"></td><td id="cumlPoints"></td></tr>
 				</tbody>
 			</table>
 		</div>

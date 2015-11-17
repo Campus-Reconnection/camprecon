@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Nov 05, 2015 at 08:21 PM
+- Generation Time: Nov 10, 2015 at 06:30 PM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -30,6 +30,15 @@
                   PRIMARY KEY (`strCourseID`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
             </pma:table>
+            <pma:table name="tbldepartment">
+                CREATE TABLE `tbldepartment` (
+                  `intDeptID` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+                  `strDeptCode` varchar(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strDeptName` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  PRIMARY KEY (`intDeptID`),
+                  UNIQUE KEY `strDeptCode` (`strDeptCode`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=latin1;
+            </pma:table>
             <pma:table name="tblfacility">
                 CREATE TABLE `tblfacility` (
                   `intFacilityID` int(7) NOT NULL,
@@ -45,15 +54,15 @@
             </pma:table>
             <pma:table name="tblfaculty">
                 CREATE TABLE `tblfaculty` (
-                  `intFacultyID` int(7) unsigned NOT NULL,
-                  `strLastName` varchar(24) NOT NULL,
-                  `strFirstName` varchar(24) NOT NULL,
-                  `strMiddleName` varchar(24) NOT NULL,
-                  `strDepartment` varchar(20) NOT NULL,
-                  `strPosition` varchar(15) NOT NULL,
-                  `blnAdvisor` varchar(1) NOT NULL,
-                  `strFacultyEID` varchar(24) NOT NULL,
-                  `intSecurityGroup` int(3) NOT NULL,
+                  `intFacultyID` int(7) unsigned NOT NULL AUTO_INCREMENT,
+                  `strLastName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strFirstName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strMiddleName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strDepartment` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strPosition` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `blnAdvisor` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strFacultyEID` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `intSecurityGroup` int(3) unsigned NOT NULL DEFAULT '0',
                   PRIMARY KEY (`intFacultyID`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
             </pma:table>
@@ -77,10 +86,10 @@
                 CREATE TABLE `tblroom` (
                   `intRoomID` int(5) NOT NULL AUTO_INCREMENT,
                   `intFacilityID` int(7) NOT NULL,
-                  `intRoomNumber` int(5) DEFAULT NULL,
+                  `strRoomNumber` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
                   `intSeats` int(3) DEFAULT NULL,
                   PRIMARY KEY (`intRoomID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=2502 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblsection">
                 CREATE TABLE `tblsection` (
@@ -103,15 +112,22 @@
             </pma:table>
             <pma:table name="tblsectionschedule">
                 CREATE TABLE `tblsectionschedule` (
-                  `intTimeSlotID` int(3) NOT NULL,
-                  `strDayFormat` int(5) NOT NULL,
-                  `timeStart` time NOT NULL,
-                  `timeEnd` time NOT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                  `intDaySlotID` tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
+                  `strDayFormat` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  PRIMARY KEY (`intDaySlotID`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="tblsectiontimes">
+                CREATE TABLE `tblsectiontimes` (
+                  `intTimeSlotID` int(4) NOT NULL AUTO_INCREMENT,
+                  `timStartTime` time NOT NULL,
+                  `timEndTime` time NOT NULL,
+                  PRIMARY KEY (`intTimeSlotID`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblstudent">
                 CREATE TABLE `tblstudent` (
-                  `intStudentID` int(7) unsigned NOT NULL,
+                  `intStudentID` int(7) unsigned NOT NULL AUTO_INCREMENT,
                   `intFacultyID` int(7) unsigned NOT NULL,
                   `strFirstName` varchar(24) NOT NULL,
                   `strLastName` varchar(24) NOT NULL,
@@ -130,7 +146,7 @@
                   `blnActiveService` tinyint(1) DEFAULT NULL,
                   `intSecurityGroup` int(3) NOT NULL,
                   PRIMARY KEY (`intStudentID`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblstudentenrollment">
                 CREATE TABLE `tblstudentenrollment` (
@@ -302,6 +318,547 @@
             <column name="intCredits">1</column>
             <column name="dblFee">0</column>
             <column name="strCourseDescription">NULL</column>
+        </table>
+        <!-- Table tbldepartment -->
+        <table name="tbldepartment">
+            <column name="intDeptID">1</column>
+            <column name="strDeptCode">ACCT</column>
+            <column name="strDeptName">Accounting</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">2</column>
+            <column name="strDeptCode">AS</column>
+            <column name="strDeptName">Aerospace Studies</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">3</column>
+            <column name="strDeptCode">AGEC</column>
+            <column name="strDeptName">Agribusiness &amp; Appl Econ</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">4</column>
+            <column name="strDeptCode">ABEN</column>
+            <column name="strDeptName">Agricultural &amp; Biosystems Engr</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">5</column>
+            <column name="strDeptCode">ASM</column>
+            <column name="strDeptName">Agricultural Systems Mgmt</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">6</column>
+            <column name="strDeptCode">AGRI</column>
+            <column name="strDeptName">Agriculture</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">7</column>
+            <column name="strDeptCode">ANSC</column>
+            <column name="strDeptName">Animal Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">8</column>
+            <column name="strDeptCode">ANTH</column>
+            <column name="strDeptName">Anthropology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">9</column>
+            <column name="strDeptCode">ADHM</column>
+            <column name="strDeptName">Apparel, Design &amp; Hosp Mgmt</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">10</column>
+            <column name="strDeptCode">ARB</column>
+            <column name="strDeptName">Arabic</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">11</column>
+            <column name="strDeptCode">ARCH</column>
+            <column name="strDeptName">Architecture</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">12</column>
+            <column name="strDeptCode">ART</column>
+            <column name="strDeptName">Art</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">13</column>
+            <column name="strDeptCode">AHSS</column>
+            <column name="strDeptName">Arts Humanities &amp; Social Sci</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">14</column>
+            <column name="strDeptCode">AST</column>
+            <column name="strDeptName">Astronomy - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">15</column>
+            <column name="strDeptCode">ATHL</column>
+            <column name="strDeptName">Athletics</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">16</column>
+            <column name="strDeptCode">BIOC</column>
+            <column name="strDeptName">Biochemistry</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">17</column>
+            <column name="strDeptCode">BIOL</column>
+            <column name="strDeptName">Biological Sciences</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">18</column>
+            <column name="strDeptCode">BOT</column>
+            <column name="strDeptName">Botany</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">19</column>
+            <column name="strDeptCode">BUSN</column>
+            <column name="strDeptName">Business Administration</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">20</column>
+            <column name="strDeptCode">CFS</column>
+            <column name="strDeptName">Cereal and Food Sciences</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">21</column>
+            <column name="strDeptCode">CHEM</column>
+            <column name="strDeptName">Chemistry</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">22</column>
+            <column name="strDeptCode">CHIN</column>
+            <column name="strDeptName">Chinese - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">23</column>
+            <column name="strDeptCode">CE</column>
+            <column name="strDeptName">Civil Engineering</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">24</column>
+            <column name="strDeptCode">CLAS</column>
+            <column name="strDeptName">Classical Languages</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">25</column>
+            <column name="strDeptCode">CPM</column>
+            <column name="strDeptName">Coatings &amp; Polymeric Materials</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">26</column>
+            <column name="strDeptCode">COMM</column>
+            <column name="strDeptName">Communication</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">27</column>
+            <column name="strDeptCode">COM</column>
+            <column name="strDeptName">Communication - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">28</column>
+            <column name="strDeptCode">CED</column>
+            <column name="strDeptName">Community Development</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">29</column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strDeptName">Computer Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">30</column>
+            <column name="strDeptCode">CM&amp;E</column>
+            <column name="strDeptName">Construction Management &amp; Eng</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">31</column>
+            <column name="strDeptCode">CNED</column>
+            <column name="strDeptName">Counselor Education</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">32</column>
+            <column name="strDeptCode">CJ</column>
+            <column name="strDeptName">Criminal Justice</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">33</column>
+            <column name="strDeptCode">ECON</column>
+            <column name="strDeptName">Economics</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">34</column>
+            <column name="strDeptCode">EDUC</column>
+            <column name="strDeptName">Education</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">35</column>
+            <column name="strDeptCode">EE</column>
+            <column name="strDeptName">Electrical Engineering</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">36</column>
+            <column name="strDeptCode">ECE</column>
+            <column name="strDeptName">Electrical and Computer Eng</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">37</column>
+            <column name="strDeptCode">EMGT</column>
+            <column name="strDeptName">Emergency Management</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">38</column>
+            <column name="strDeptCode">ENGR</column>
+            <column name="strDeptName">Engineering</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">39</column>
+            <column name="strDeptCode">ENGL</column>
+            <column name="strDeptName">English</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">40</column>
+            <column name="strDeptCode">ENT</column>
+            <column name="strDeptName">Entomology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">41</column>
+            <column name="strDeptCode">ECS</column>
+            <column name="strDeptName">Envir &amp; Conserv Sciences</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">42</column>
+            <column name="strDeptCode">ENVD</column>
+            <column name="strDeptName">Environmental Design</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">43</column>
+            <column name="strDeptCode">FIN</column>
+            <column name="strDeptName">Finance</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">44</column>
+            <column name="strDeptCode">SAFE</column>
+            <column name="strDeptName">Food Safety</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">45</column>
+            <column name="strDeptCode">FREN</column>
+            <column name="strDeptName">French</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">46</column>
+            <column name="strDeptCode">GEOG</column>
+            <column name="strDeptName">Geography</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">47</column>
+            <column name="strDeptCode">GEOL</column>
+            <column name="strDeptName">Geology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">48</column>
+            <column name="strDeptCode">GERM</column>
+            <column name="strDeptName">German</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">49</column>
+            <column name="strDeptCode">GCOM</column>
+            <column name="strDeptName">Graphic Communications - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">50</column>
+            <column name="strDeptCode">GDTC</column>
+            <column name="strDeptName">Graphic Desgn Tech - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">51</column>
+            <column name="strDeptCode">GRK</column>
+            <column name="strDeptName">Greek - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">52</column>
+            <column name="strDeptCode">HNES</column>
+            <column name="strDeptName">Health, Nutrition and Exercise</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">53</column>
+            <column name="strDeptCode">HIST</column>
+            <column name="strDeptName">History</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">54</column>
+            <column name="strDeptCode">HON</column>
+            <column name="strDeptName">Honors</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">55</column>
+            <column name="strDeptCode">H&amp;CE</column>
+            <column name="strDeptName">Human &amp; Community Education</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">56</column>
+            <column name="strDeptCode">HDFS</column>
+            <column name="strDeptName">Human Dev and Family Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">57</column>
+            <column name="strDeptCode">HD&amp;E</column>
+            <column name="strDeptName">Human Development &amp; Education</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">58</column>
+            <column name="strDeptCode">IME</column>
+            <column name="strDeptName">Industrial Manufacturing &amp; Eng</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">59</column>
+            <column name="strDeptCode">INTL</column>
+            <column name="strDeptName">International Studies</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">60</column>
+            <column name="strDeptCode">JAPN</column>
+            <column name="strDeptName">Japanese - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">61</column>
+            <column name="strDeptCode">LA</column>
+            <column name="strDeptName">Landscape Architecture</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">62</column>
+            <column name="strDeptCode">LANG</column>
+            <column name="strDeptName">Language</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">63</column>
+            <column name="strDeptCode">LAT</column>
+            <column name="strDeptName">Latin - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">64</column>
+            <column name="strDeptCode">LEAD</column>
+            <column name="strDeptName">Leadership</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">65</column>
+            <column name="strDeptCode">LIB</column>
+            <column name="strDeptName">Library Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">66</column>
+            <column name="strDeptCode">MGMT</column>
+            <column name="strDeptName">Management</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">67</column>
+            <column name="strDeptCode">MIS</column>
+            <column name="strDeptName">Management Information Systems</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">68</column>
+            <column name="strDeptCode">MRKT</column>
+            <column name="strDeptName">Marketing</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">69</column>
+            <column name="strDeptCode">MPH</column>
+            <column name="strDeptName">Master of Public Health</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">70</column>
+            <column name="strDeptCode">MNT</column>
+            <column name="strDeptName">Materials and Nanotechnology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">71</column>
+            <column name="strDeptCode">MATH</column>
+            <column name="strDeptName">Mathematics</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">72</column>
+            <column name="strDeptCode">ME</column>
+            <column name="strDeptName">Mechanical Engineering</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">73</column>
+            <column name="strDeptCode">MLS</column>
+            <column name="strDeptName">Medical Laboratory Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">74</column>
+            <column name="strDeptCode">MICR</column>
+            <column name="strDeptName">Microbiology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">75</column>
+            <column name="strDeptCode">MS</column>
+            <column name="strDeptName">Military Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">76</column>
+            <column name="strDeptCode">MUSC</column>
+            <column name="strDeptName">Music</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">77</column>
+            <column name="strDeptCode">MUS</column>
+            <column name="strDeptName">Music - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">78</column>
+            <column name="strDeptCode">NRM</column>
+            <column name="strDeptName">Natural Resource Management</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">79</column>
+            <column name="strDeptCode">NORW</column>
+            <column name="strDeptName">Norwegian - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">80</column>
+            <column name="strDeptCode">NURS</column>
+            <column name="strDeptName">Nursing</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">81</column>
+            <column name="strDeptCode">PARA</column>
+            <column name="strDeptName">Paralegal - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">82</column>
+            <column name="strDeptCode">PSCI</column>
+            <column name="strDeptName">Pharmaceutical Sciences</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">83</column>
+            <column name="strDeptCode">PHRM</column>
+            <column name="strDeptName">Pharmacy Practice</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">84</column>
+            <column name="strDeptCode">PHIL</column>
+            <column name="strDeptName">Philosophy</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">85</column>
+            <column name="strDeptCode">PE</column>
+            <column name="strDeptName">Physical Education - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">86</column>
+            <column name="strDeptCode">PHYS</column>
+            <column name="strDeptName">Physics</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">87</column>
+            <column name="strDeptCode">PPTH</column>
+            <column name="strDeptName">Plant Pathology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">88</column>
+            <column name="strDeptCode">PLSC</column>
+            <column name="strDeptName">Plant Sciences</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">89</column>
+            <column name="strDeptCode">POLS</column>
+            <column name="strDeptName">Political Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">90</column>
+            <column name="strDeptCode">PSYC</column>
+            <column name="strDeptName">Psychology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">91</column>
+            <column name="strDeptCode">PSY</column>
+            <column name="strDeptName">Psychology - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">92</column>
+            <column name="strDeptCode">RS</column>
+            <column name="strDeptName">Radiologic Sciences</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">93</column>
+            <column name="strDeptCode">RNG</column>
+            <column name="strDeptName">Range Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">94</column>
+            <column name="strDeptCode">RELS</column>
+            <column name="strDeptName">Religious Studies</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">95</column>
+            <column name="strDeptCode">RC</column>
+            <column name="strDeptName">Respiratory Care</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">96</column>
+            <column name="strDeptCode">STEM</column>
+            <column name="strDeptName">Sci, Tech, Engr, Math</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">97</column>
+            <column name="strDeptCode">SOC</column>
+            <column name="strDeptName">Sociology</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">98</column>
+            <column name="strDeptCode">SOIL</column>
+            <column name="strDeptName">Soil Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">99</column>
+            <column name="strDeptCode">SPAN</column>
+            <column name="strDeptName">Spanish</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">100</column>
+            <column name="strDeptCode">SPED</column>
+            <column name="strDeptName">Special Education - TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">101</column>
+            <column name="strDeptCode">SLHS</column>
+            <column name="strDeptName">Speech Lang/Hearing Scnc TCU</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">102</column>
+            <column name="strDeptCode">STAT</column>
+            <column name="strDeptName">Statistics</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">103</column>
+            <column name="strDeptCode">THEA</column>
+            <column name="strDeptName">Theatre</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">104</column>
+            <column name="strDeptCode">TL</column>
+            <column name="strDeptName">Transportation &amp; Logistics</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">105</column>
+            <column name="strDeptCode">UNIV</column>
+            <column name="strDeptName">University Studies</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">106</column>
+            <column name="strDeptCode">VETS</column>
+            <column name="strDeptName">Veterinary Science</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">107</column>
+            <column name="strDeptCode">WGS</column>
+            <column name="strDeptName">Women and Gender Studies</column>
+        </table>
+        <table name="tbldepartment">
+            <column name="intDeptID">108</column>
+            <column name="strDeptCode">ZOO</column>
+            <column name="strDeptName">Zoology</column>
         </table>
         <!-- Table tblfacility -->
         <table name="tblfacility">
@@ -1311,8 +1868,20 @@
         <table name="tblroom">
             <column name="intRoomID">1</column>
             <column name="intFacilityID">25</column>
-            <column name="intRoomNumber">101</column>
+            <column name="strRoomNumber">101</column>
             <column name="intSeats">30</column>
+        </table>
+        <table name="tblroom">
+            <column name="intRoomID">2</column>
+            <column name="intFacilityID">25</column>
+            <column name="strRoomNumber">102</column>
+            <column name="intSeats">30</column>
+        </table>
+        <table name="tblroom">
+            <column name="intRoomID">3</column>
+            <column name="intFacilityID">25</column>
+            <column name="strRoomNumber">104</column>
+            <column name="intSeats">150</column>
         </table>
         <!-- Table tblsection -->
         <table name="tblsection">
@@ -1540,9 +2109,110 @@
             <column name="strRequiredText"></column>
         </table>
         <!-- Table tblsectionschedule -->
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">1</column>
+            <column name="strDayFormat">MWF</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">2</column>
+            <column name="strDayFormat">TH</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">3</column>
+            <column name="strDayFormat">M</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">4</column>
+            <column name="strDayFormat">MW</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">5</column>
+            <column name="strDayFormat">T</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">6</column>
+            <column name="strDayFormat">H</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">7</column>
+            <column name="strDayFormat">MTWHF</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">8</column>
+            <column name="strDayFormat">MWHF</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">9</column>
+            <column name="strDayFormat">MF</column>
+        </table>
+        <table name="tblsectionschedule">
+            <column name="intDaySlotID">10</column>
+            <column name="strDayFormat">WF</column>
+        </table>
+        <!-- Table tblsectiontimes -->
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">1</column>
+            <column name="timStartTime">08:00:00</column>
+            <column name="timEndTime">08:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">2</column>
+            <column name="timStartTime">09:00:00</column>
+            <column name="timEndTime">09:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">3</column>
+            <column name="timStartTime">10:00:00</column>
+            <column name="timEndTime">10:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">4</column>
+            <column name="timStartTime">11:00:00</column>
+            <column name="timEndTime">11:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">5</column>
+            <column name="timStartTime">12:00:00</column>
+            <column name="timEndTime">12:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">6</column>
+            <column name="timStartTime">13:00:00</column>
+            <column name="timEndTime">13:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">7</column>
+            <column name="timStartTime">14:00:00</column>
+            <column name="timEndTime">14:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">8</column>
+            <column name="timStartTime">15:00:00</column>
+            <column name="timEndTime">15:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">9</column>
+            <column name="timStartTime">16:00:00</column>
+            <column name="timEndTime">16:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">10</column>
+            <column name="timStartTime">17:00:00</column>
+            <column name="timEndTime">17:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">11</column>
+            <column name="timStartTime">18:00:00</column>
+            <column name="timEndTime">18:50:00</column>
+        </table>
+        <table name="tblsectiontimes">
+            <column name="intTimeSlotID">12</column>
+            <column name="timStartTime">19:00:00</column>
+            <column name="timEndTime">19:50:00</column>
+        </table>
         <!-- Table tblstudent -->
         <table name="tblstudent">
-            <column name="intStudentID">0</column>
+            <column name="intStudentID">1</column>
             <column name="intFacultyID">0</column>
             <column name="strFirstName">Girl</column>
             <column name="strLastName">Nobody</column>
