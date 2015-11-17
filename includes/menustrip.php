@@ -3,6 +3,7 @@
 <ul class="clearfix">
 <li><a href="#">Personal<span class="arrow">&nbsp;&#9660;</span></a>
 <ul class="sub-menu">
+<li><a href="#">Profile</a></li>
 <li><a href="transcript.php">Transcript</a></li>
 <li><a href="advisor.php">Advisor</a></li>
 <li><a href="dolist.php">Holds / To Do / Inbox</a></li>
