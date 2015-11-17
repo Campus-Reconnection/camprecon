@@ -42,16 +42,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				$stmt = mysqli_prepare($conn, "INSERT INTO tblFaculty VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
 				mysqli_stmt_bind_param($stmt, 'sssisisi', $lName, $fName, $mName, $dept, $pos, $isAdvisor, $EID, $secGroup);
 				mysqli_stmt_execute($stmt);
+				closeDB($conn);
 				
 				echo 'Faculty member added successfully!';
 			}
 			else { echo "That faculty member already exists!"; }
 			break;
+		case 'student';
+			$fName = $_POST['fName'];
+			$lName = $_POST['lName'];
+			$mName = ($_POST['mName'] == "" ? null : $_POST['mName']);
+			$status = $_POST['status'];
+			$enrStatus = $_POST['enrStatus'];
+			$sType = $_POST['sType'];
+			$major1 = ($_POST['major1'] == "" ? null : $_POST['major1']);
+			$major2 = ($_POST['major2'] == "" ? null : $_POST['major2']);
+			$major3 = ($_POST['major3'] == "" ? null : $_POST['major3']);
+			$minor1 = ($_POST['minor1'] == "" ? null : $_POST['minor1']);
+			$minor2 = ($_POST['minor2'] == "" ? null : $_POST['minor2']);
+			$minor3 = ($_POST['minor3'] == "" ? null : $_POST['minor3']);
+			$gpa = $_POST['gpa'];
+			$credits = $_POST['credits'];
+			$aService = ($_POST['aService'] == "1" ? true : false);
+			$EID = strtolower($fName.".".$lName);
+			
+			$sql = "SELECT intStudentID FROM tblStudent WHERE strFirstName = '" . $fName . "' AND strLastName = '" . $lName . "'";
+			if (!mysqli_fetch_row(queryDB($sql)))
+			{
+				$mysqli = new mysqli("localhost", "root", "camprecon", "camprecon");
+				$sql = "INSERT INTO tblStudent VALUES (NULL, 7654321, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 5)";
+				$stmt = $mysqli->prepare($sql);
+				if ($stmt) {
+					$stmt->bind_param('sssssssssssssdii', $fName, $lName, $mName, $EID, $status, $enrStatus, $sType, $major1, $major2, $major3, $minor1, $minor2, $minor3, $gpa, $credits, $aService);
+					$stmt->execute();
+					$stmt->close();
+				}
+				else {printf('errno: %d, error: %s', $mysqli->errno, $mysqli->error);}
+
+				$mysqli->close();
+				
+				echo 'Student "'.$fName.' '.$lName.'" added successfully!';
+			}
+			else { echo "That student name already exists!"; }
+			break;
 		default:
 			echo 'Bad request type';
 			break;
 	}
-	
 }
 else { echo 'Bad request method'; }
 ?>

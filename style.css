@@ -127,6 +127,7 @@ TRANSCRIPT
 ---------------------------------------*/
 
 table#transcriptA {
+	width:100%;
 	border-collapse:collapse;
 	font-size:0.90em;
 }
@@ -156,6 +157,7 @@ table#transcriptA td:nth-child(5) {
 }
 
 table#transcriptB {
+	width:100%;
 	border-collapse:collapse;
 	font-size:0.90em;
 }
