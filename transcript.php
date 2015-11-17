@@ -206,7 +206,6 @@
 		</select>
 		<br />
 		<br />
-		<br />
 		<div class="shadow-container">
 			<table id="transcriptA">
 				<thead class="transcriptTableHead">
