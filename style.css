@@ -184,3 +184,24 @@ table#transcriptB td + td + td {
 	width:70px;
 	text-align:right;
 }
+
+/*---------------------------------------
+PROFILE PAGE
+---------------------------------------*/
+
+table#profile {
+	padding-left:25px;
+}
+
+td.profile-field {
+	padding: 5px;
+	font-weight:bold;
+}
+
+td.profile-data {
+	padding: 5px;
+}
+
+td.sub-field {
+	padding-left:30px;
+}
