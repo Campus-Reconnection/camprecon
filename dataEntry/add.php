@@ -76,14 +76,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 					$stmt->bind_param('sssssssssssssdii', $fName, $lName, $mName, $EID, $status, $enrStatus, $sType, $major1, $major2, $major3, $minor1, $minor2, $minor3, $gpa, $credits, $aService);
 					$stmt->execute();
 					$stmt->close();
+					echo 'Student "'.$fName.' '.$lName.'" added successfully!';
 				}
 				else {printf('errno: %d, error: %s', $mysqli->errno, $mysqli->error);}
 
 				$mysqli->close();
-				
-				echo 'Student "'.$fName.' '.$lName.'" added successfully!';
 			}
 			else { echo "That student name already exists!"; }
+			break;
+		case 'course';
+			$deptCode = $_POST['dept'];
+			$courseId = $deptCode . $_POST['courseId'];
+			$courseName = $_POST['courseName'];
+			$genEdCat = ($_POST['genEdCat'] == "" ? null : $_POST['genEdCat']);
+			$preReq = ($_POST['preReq'] == "" ? null : $_POST['preReq']);
+			$coReq = ($_POST['coReq'] == "" ? null : $_POST['coReq']);
+			$credits = $_POST['credits'];
+			$fee = $_POST['fee'];
+			$courseDesc = ($_POST['courseDesc'] == "" ? null : $_POST['courseDesc']);
+			
+			$sql = "SELECT strCourseID FROM tblCourse WHERE strCourseID = '" . $courseId . "'";
+			if (!mysqli_fetch_row(queryDB($sql)))
+			{
+				$mysqli = new mysqli("localhost", "root", "camprecon", "camprecon");
+				$sql = "INSERT INTO tblCourse VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				$stmt = $mysqli->prepare($sql);
+				if ($stmt) {
+					$stmt->bind_param('ssssssids', $courseId, $courseName, $deptCode, $genEdCat, $preReq, $coReq, $credits, $fee, $courseDesc);
+					$stmt->execute();
+					$stmt->close();
+					echo 'Course "'.$courseName.'" added successfully!';
+				}
+				else {printf('errno: %d, error: %s', $mysqli->errno, $mysqli->error);}
+
+				$mysqli->close();
+			}
+			else { echo "That course ID already exists!"; }
 			break;
 		default:
 			echo 'Bad request type';

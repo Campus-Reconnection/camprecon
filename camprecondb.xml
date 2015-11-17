@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Nov 10, 2015 at 06:30 PM
+- Generation Time: Nov 18, 2015 at 12:17 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -18,15 +18,15 @@
         <pma:database name="camprecon" collation="latin1_swedish_ci" charset="latin1">
             <pma:table name="tblcourse">
                 CREATE TABLE `tblcourse` (
-                  `strCourseID` varchar(10) NOT NULL,
-                  `strCourseName` varchar(25) NOT NULL,
-                  `strDepartment` varchar(25) NOT NULL,
-                  `strGenEdCategory` varchar(3) NOT NULL,
-                  `strPrerequisite` varchar(10) DEFAULT NULL,
-                  `strCorequisite` varchar(10) DEFAULT NULL,
+                  `strCourseID` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strCourseName` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strDeptCode` varchar(4) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strGenEdCategory` varchar(3) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strPrerequisite` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strCorequisite` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
                   `intCredits` int(1) NOT NULL,
                   `dblFee` float NOT NULL,
-                  `strCourseDescription` varchar(140) DEFAULT NULL,
+                  `strCourseDescription` varchar(140) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
                   PRIMARY KEY (`strCourseID`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
             </pma:table>
@@ -58,13 +58,13 @@
                   `strLastName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `strFirstName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `strMiddleName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-                  `strDepartment` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `intDeptID` tinyint(3) unsigned NOT NULL,
                   `strPosition` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `blnAdvisor` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `strFacultyEID` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `intSecurityGroup` int(3) unsigned NOT NULL DEFAULT '0',
                   PRIMARY KEY (`intFacultyID`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblnotifications">
                 CREATE TABLE `tblnotifications` (
@@ -132,6 +132,7 @@
                   `strFirstName` varchar(24) NOT NULL,
                   `strLastName` varchar(24) NOT NULL,
                   `strMiddleName` varchar(24) DEFAULT NULL,
+                  `strStudentEID` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `strStatus` varchar(8) NOT NULL,
                   `strEnrollmentStatus` varchar(8) NOT NULL,
                   `strStudentType` varchar(3) NOT NULL,
@@ -146,7 +147,7 @@
                   `blnActiveService` tinyint(1) DEFAULT NULL,
                   `intSecurityGroup` int(3) NOT NULL,
                   PRIMARY KEY (`intStudentID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblstudentenrollment">
                 CREATE TABLE `tblstudentenrollment` (
@@ -190,8 +191,8 @@
         <table name="tblcourse">
             <column name="strCourseID">CHEM121</column>
             <column name="strCourseName">General Chemistry I</column>
-            <column name="strDepartment">Chemistry</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">CHEM</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">3</column>
@@ -201,8 +202,8 @@
         <table name="tblcourse">
             <column name="strCourseID">CHEM121L</column>
             <column name="strCourseName">General Chemistry I Lab</column>
-            <column name="strDepartment">Chemistry</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">CHEM</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">1</column>
@@ -212,8 +213,8 @@
         <table name="tblcourse">
             <column name="strCourseID">CSCI160</column>
             <column name="strCourseName">Computer Science I</column>
-            <column name="strDepartment">Computer Science</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">CSCI160L</column>
             <column name="intCredits">3</column>
@@ -223,8 +224,8 @@
         <table name="tblcourse">
             <column name="strCourseID">CSCI160L</column>
             <column name="strCourseName">Computer Science I Lab</column>
-            <column name="strDepartment">Computer Science</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">CSCI160</column>
             <column name="intCredits">1</column>
@@ -234,8 +235,8 @@
         <table name="tblcourse">
             <column name="strCourseID">CSCI161</column>
             <column name="strCourseName">Computer Science II</column>
-            <column name="strDepartment">Computer Science</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">CSCI160</column>
             <column name="strCorequisite">CSCI161L</column>
             <column name="intCredits">3</column>
@@ -245,8 +246,8 @@
         <table name="tblcourse">
             <column name="strCourseID">CSCI161L</column>
             <column name="strCourseName">Computer Science II Lab</column>
-            <column name="strDepartment">Computer Science</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">CSCI161L</column>
             <column name="strCorequisite">CSCI161</column>
             <column name="intCredits">1</column>
@@ -254,10 +255,21 @@
             <column name="strCourseDescription">NULL</column>
         </table>
         <table name="tblcourse">
+            <column name="strCourseID">CSCI374</column>
+            <column name="strCourseName">Computer Organization and Architecture</column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
+            <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
             <column name="strCourseID">ENGL120</column>
             <column name="strCourseName">College Composition II</column>
-            <column name="strDepartment">English</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">ENGL</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">ENGL110</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">3</column>
@@ -266,9 +278,9 @@
         </table>
         <table name="tblcourse">
             <column name="strCourseID">ENGR311</column>
-            <column name="strCourseName">History/Tenchnology/Ameri</column>
-            <column name="strDepartment">Egineering</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strCourseName">History of Tenchnology in America</column>
+            <column name="strDeptCode">ENGR</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">3</column>
@@ -278,8 +290,8 @@
         <table name="tblcourse">
             <column name="strCourseID">MATH105</column>
             <column name="strCourseName">Trigonometry</column>
-            <column name="strDepartment">Mathematics</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">MATH</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">3</column>
@@ -289,8 +301,8 @@
         <table name="tblcourse">
             <column name="strCourseID">MATH165</column>
             <column name="strCourseName">Calculus I</column>
-            <column name="strDepartment">Mathematics</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">MATH</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">MATH105</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">4</column>
@@ -300,8 +312,8 @@
         <table name="tblcourse">
             <column name="strCourseID">MUSC111</column>
             <column name="strCourseName">Marching Band</column>
-            <column name="strDepartment">Music</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strDeptCode">MUSC</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">1</column>
@@ -310,9 +322,9 @@
         </table>
         <table name="tblcourse">
             <column name="strCourseID">UNIV189</column>
-            <column name="strCourseName">Skills for Academic Succe</column>
-            <column name="strDepartment">University</column>
-            <column name="strGenEdCategory"></column>
+            <column name="strCourseName">Skills for Academic Success</column>
+            <column name="strDeptCode">UNIV</column>
+            <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">1</column>
@@ -1862,6 +1874,39 @@
             <column name="intLatitude">46.9017</column>
         </table>
         <!-- Table tblfaculty -->
+        <table name="tblfaculty">
+            <column name="intFacultyID">1</column>
+            <column name="strLastName">Radermacher</column>
+            <column name="strFirstName">Alex</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">29</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">alex.radermacher</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
+        <table name="tblfaculty">
+            <column name="intFacultyID">2</column>
+            <column name="strLastName">Myronovych</column>
+            <column name="strFirstName">Oksana</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">29</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">oksana.myronovych</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
+        <table name="tblfaculty">
+            <column name="intFacultyID">3</column>
+            <column name="strLastName">Jin</column>
+            <column name="strFirstName">Wei</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">29</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">wei.jin</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
         <!-- Table tblnotifications -->
         <!-- Table tblpictureid -->
         <!-- Table tblroom -->
@@ -2213,13 +2258,14 @@
         <!-- Table tblstudent -->
         <table name="tblstudent">
             <column name="intStudentID">1</column>
-            <column name="intFacultyID">0</column>
+            <column name="intFacultyID">7654321</column>
             <column name="strFirstName">Girl</column>
             <column name="strLastName">Nobody</column>
             <column name="strMiddleName">P.</column>
+            <column name="strStudentEID">girl.nobody</column>
             <column name="strStatus">Active</column>
             <column name="strEnrollmentStatus">FullTime</column>
-            <column name="strStudentType">Sop</column>
+            <column name="strStudentType">und</column>
             <column name="strMajor1">Computer Science</column>
             <column name="strMajor2">NULL</column>
             <column name="strMajor3">NULL</column>
@@ -2229,7 +2275,49 @@
             <column name="dblGPA">3.71</column>
             <column name="intCredits">100</column>
             <column name="blnActiveService">0</column>
-            <column name="intSecurityGroup">0</column>
+            <column name="intSecurityGroup">5</column>
+        </table>
+        <table name="tblstudent">
+            <column name="intStudentID">2</column>
+            <column name="intFacultyID">7654321</column>
+            <column name="strFirstName">Adam</column>
+            <column name="strLastName">Hart</column>
+            <column name="strMiddleName">Paul</column>
+            <column name="strStudentEID">adam.hart</column>
+            <column name="strStatus">active</column>
+            <column name="strEnrollmentStatus">Fulltime</column>
+            <column name="strStudentType">und</column>
+            <column name="strMajor1">Computer Science</column>
+            <column name="strMajor2">NULL</column>
+            <column name="strMajor3">NULL</column>
+            <column name="strMinor1">NULL</column>
+            <column name="strMinor2">NULL</column>
+            <column name="strMinor3">NULL</column>
+            <column name="dblGPA">3.7</column>
+            <column name="intCredits">100</column>
+            <column name="blnActiveService">0</column>
+            <column name="intSecurityGroup">5</column>
+        </table>
+        <table name="tblstudent">
+            <column name="intStudentID">3</column>
+            <column name="intFacultyID">7654321</column>
+            <column name="strFirstName">Buster</column>
+            <column name="strLastName">Schrader</column>
+            <column name="strMiddleName">Dash</column>
+            <column name="strStudentEID">buster.schrader</column>
+            <column name="strStatus">active</column>
+            <column name="strEnrollmentStatus">Fulltime</column>
+            <column name="strStudentType">und</column>
+            <column name="strMajor1">Undeclared</column>
+            <column name="strMajor2">NULL</column>
+            <column name="strMajor3">NULL</column>
+            <column name="strMinor1">NULL</column>
+            <column name="strMinor2">NULL</column>
+            <column name="strMinor3">NULL</column>
+            <column name="dblGPA">0</column>
+            <column name="intCredits">0</column>
+            <column name="blnActiveService">0</column>
+            <column name="intSecurityGroup">5</column>
         </table>
         <!-- Table tblstudentenrollment -->
         <table name="tblstudentenrollment">
