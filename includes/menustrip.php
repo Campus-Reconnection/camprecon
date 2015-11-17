@@ -12,7 +12,7 @@
 <ul class="sub-menu">
 <li><a href="map.php">Class Planner</a></li>
 <li><a href="#">Add Classes</a></li>
-<li><a href="#">Drop Classes</a></li>
+<li><a href="dropclasses.php">Drop Classes</a></li>
 </ul></li>
 <li><a href="#">Expenses<span class="arrow">&nbsp;&#9660;</span></a>
 <ul class="sub-menu">

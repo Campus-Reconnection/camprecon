@@ -40,7 +40,7 @@
   <td class="profile-data">Dark Side</td>
   </tr>
   <tr>
-  <td class="profile-field sub-field">GPA:</td>
+  <td class="profile-field">GPA:</td>
   <td class="profile-data">3.00</td>
   </tr>
   <tr>

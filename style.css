@@ -30,7 +30,7 @@ div#pagediv { /*Centered container that all page materials squeeze into.*/
 	position:relative;
 }
 
-div#sch-container { /*Couldn't get a shadow on schedule table itself. So we use a container.*/
+div.shadow-container { /*Couldn't get a shadow on schedule table itself. So we use a container.*/
 	box-shadow:0px 0px 24px #4f4f4f;
 }
 
@@ -127,6 +127,7 @@ TRANSCRIPT
 ---------------------------------------*/
 
 table#transcriptA {
+	width:100%;
 	border-collapse:collapse;
 	font-size:0.90em;
 }
@@ -156,6 +157,7 @@ table#transcriptA td:nth-child(5) {
 }
 
 table#transcriptB {
+	width:100%;
 	border-collapse:collapse;
 	font-size:0.90em;
 }

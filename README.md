@@ -7,13 +7,13 @@ If you don't know what PHP is, then git outta here!
 <ul>
 <li>Navigation menus.</li>
 <li>Weekly schedule shell.</li>
+<li>VM server setup.</li>
 <li>Google Maps data and connection to database.</li>
 </ul>
 ###What's being worked on?
 <ul>
 <li>Transcript page (Adam Hart)</li>
 <li>Query functions (Erik Canton)</li>
-<li>VM server setup (Buster)</li>
 <li>Class Planner page (Alex B/Erin)</li>
 <li>Drop Classes (Nicole)</li>
 <li>Add Classes (Kevin)</li>
