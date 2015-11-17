@@ -1,6 +1,8 @@
 <?php
 require("system.php");
 
+function searchCourseID($dep, $course) {
+
 $sql = "SELECT strCourseName as courseName,
 			intSectionNumber as secNumber,
 			intSectionTimeStart as secStartTime,
@@ -16,7 +18,7 @@ $sql = "SELECT strCourseName as courseName,
 			INNER JOIN tblFaculty ON tblSection.intFacultyID = tblFaculty.intFacultyID
 			INNER JOIN tblRoom ON tblSection.intRoomID = tblRoom.intRoomID
 			INNER JOIN tblFacility ON tblRoom.intFacilityID = tblFacility.intFacilityID
-			WHERE tblCourse.strDepartment like '%$q%' or tblCourse.strCourseID like '%$q%'";
+			WHERE tblCourse.strDepartment like '%$dep%' or tblCourse.strCourseID like '%$course%'";
 
 $result = queryDB($sql);
 
@@ -25,10 +27,20 @@ if (mysqli_num_rows($result) > 0)
 	foreach($rows as $row) {
 		echo "<tr>";
 			echo "<td>".$row['courseName']."</td>";
-			#do this for all attributes
-
+			echo "<td>".$row['secNumber']."</td>";
+			echo "<td>".$row['secStartTime']."</td>";
+			echo "<td>".$row['secEndTime']."</td>";
+			echo "<td>".$row['dayPattern']."</td>";
+			echo "<td>".$row['dtmStart']."</td>";
+			echo "<td>".$row['dtmEnd']."</td>";
+			echo "<td>".$row['strFirstName']."</td>";
+			echo "<td>".$row['strLastName']."</td>";
+			echo "<td>".$row['strFacilityName']."</td>";
+			echo "<td>".$row['intRoomNumber']."</td>";
 		echo "</tr>";	
 	}
+}
+
 }
 
 ?>
