@@ -10,7 +10,7 @@
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Weekly Schedule:</span>
 <br />
-<div id="sch-container">
+<div class="shadow-container">
 <?php include("includes/weeklyschedule.php"); ?>
 </div>
 <br />

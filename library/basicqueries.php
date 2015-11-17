@@ -1,24 +1,9 @@
 <?php
- 
- // Server and DB Information
-$servername = "134.129.125.206";
-$username = "ecanton";
-$password = "FishPants2015";
-$dbname = "myDB";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-function getEmergencyContactInfo($id) {
-	$sql = "SELECT intEmergencyNumber, strEmergencyContactLastName, strEmergencyContactFirstName
-		FROM tblUserContact
-		WHERE intExternalID = $id";
-		$result = $conn->query($sql);
-		return $result;
+function getEmergencyContactInfo($conn,$id)
+{
+	$sql = "SELECT intEmergencyNumber, strEmergencyContactLastName, strEmergencyContactFirstName FROM tblUserContact WHERE intExternalID = $id";
+	return mysqli_query($conn,$sql);
 }
 
 function getPermenantContactInfo() {}
@@ -41,20 +26,16 @@ function getSelectedCourseCoordinates() {}
 
 function getAllStudentCoursesDone() {}
 
-function getStudentMajor($id) {
-	$sql = "SELECT major1, major2, major3
-		FROM Student 
-		WHERE StudentID = $id";
-	$result = $conn->query($sql);
-	return $result;
+function getStudentMajor($conn,$id)
+{
+	$sql = "SELECT strMajor1, strMajor2, strMajor3 FROM tblstudent WHERE intStudentID = $id";
+	return mysqli_query($conn,$sql);
 }
 
-function getStudentMinor($id) {
-	$sql = "SELECT minor1, minor2, minor3
-		FROM Student 
-		WHERE StudentID = $id";
-	$result = $conn->query($sql);
-	return $result;
+function getStudentMinor($conn,$id)
+{
+	$sql = "SELECT strMinor1, strMinor2, strMinor3 FROM tblstudent WHERE intStudentID = $id";
+	return mysqli_query($conn,$sql);
 }
 
 function getAdviseeRoster() {}

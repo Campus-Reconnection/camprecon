@@ -10,12 +10,13 @@
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Holds:</span>
 <br /><br />
+<div class="shadow-container">
 <table class="schedule">
 <tr>
-<th>Item</th>
-<th>Amount</th>
-<th>Date</th>
-<th>Department</th>
+<td class="thr">Item</td>
+<td class="thr">Amount</td>
+<td class="thr">Date</td>
+<td class="thr">Department</td>
 </tr>
 <tr>
 <td class="advcell">Financial Obligation Agreement</td>
@@ -24,15 +25,17 @@
 <td class="advcell">Customer Account Services</td>
 </tr>
 </table>
+</div>
 <br />
 <span class="title">To-Do:</span>
 <br /><br />
+<div class="shadow-container">
 <table class="schedule">
 <tr>
-<th>Item</th>
-<th>Date</th>
-<th>Status</th>
-<th>Description</th>
+<td class="thr">Item</td>
+<td class="thr">Date</td>
+<td class="thr">Status</td>
+<td class="thr">Description</td>
 </tr>
 <tr>
 <td class="advcell">Audit</td>
@@ -41,15 +44,17 @@
 <td class="advcell">We messed everything up sor...</td>
 </tr>
 </table>
+</div>
 <br />
 <span class="title">Inbox:</span>
 <br /><br />
+<div class="shadow-container">
 <table class="schedule">
 <tr>
-<th>Date</th>
-<th>Description</th>
-<th>From</th>
-<th>&nbsp;</th>
+<td class="thr">Date</td>
+<td class="thr">Description</td>
+<td class="thr">From</td>
+<td class="thr">&nbsp;</td>
 </tr>
 <tr>
 <td class="advcell">10/10/1964</td>
@@ -58,6 +63,7 @@
 <td class="advcell">View</td>
 </tr>
 </table>
+</div>
 </div>
 </body>
 </html>

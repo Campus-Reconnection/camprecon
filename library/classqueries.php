@@ -1,25 +1,6 @@
 <?php
 
 /*
-This Class contains query methods for the 
-'Class Management' section of the website
-*/
-
-// Server and DB Information
-$servername = "134.129.125.206";
-$username = "ecanton";
-$password = "FishPants2015";
-$dbname = "myDB";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-
-
-/*
 // Search for class by class ID 
 // param: class ID ( CSCI222, STAT360, ...)
 // return: ID, Name, and Section
@@ -32,7 +13,6 @@ function classSearchID($id) {
 		ON tblSection.strCourseID = tblCourse.strCourseID";
 	$result = $conn->query($sql);
 	return $result;
-
 }
 
 /*

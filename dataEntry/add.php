@@ -30,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			$isAdvisor = false;
 			if ($_POST['isAdv'] == '1') {$isAdvisor = true;}
 			$EID = strtolower($fName.".".$lName);
-			$secGroup = 2;
-			if ($isAdvisor) {$secGroup = 3;}
-			if ($mName == "''") {$mName = null;}
+			$secGroup = 3;
+			if ($isAdvisor) {$secGroup = 2;}
+			if ($mName == "") {$mName = null;}
 			
 			$sql = "SELECT intFacultyID FROM tblFaculty WHERE strFirstName = '" . $fName . "' AND strLastName = '" . $lName . "' AND intDeptID = " . $dept;
 			$result = queryDB($sql);
-			if (!$result)
+			if (!mysqli_fetch_row($result))
 			{
 				$conn = openDB();
 				$stmt = mysqli_prepare($conn, "INSERT INTO tblFaculty VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
