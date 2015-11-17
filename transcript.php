@@ -19,14 +19,14 @@
 			}
 		}
 	}
-	
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Campus Reconnection</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<SCRIPT SRC="javascript/jquery-2.1.4.min.js"></SCRIPT>
+	<script SRC="javascript/jquery-2.1.4.min.js"></script>
 	<script>
 		// Objects & Variables
 		// =============================
@@ -227,7 +227,6 @@
 			</table>
 		</div>
 		<div id='overlay'></div>
-		
 	</div>
 </body>
 </html>

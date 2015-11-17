@@ -10,12 +10,13 @@
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Academic Advisor Information:</span>
 <br /><br />
+<div class="shadow-container">
 <table class="schedule">
 <tr>
-<th>Name</th>
-<th>Phone</th>
-<th>Email</th>
-<th>Program</th>
+<td class="thr">Name</td>
+<td class="thr">Phone</td>
+<td class="thr">Email</td>
+<td class="thr">Program</td>
 </tr>
 <tr>
 <td class="advcell">George Georgeson</td>
@@ -30,6 +31,7 @@
 <td class="advcell">Business</td>
 </tr>
 </table>
+</div>
 </div>
 </body>
 </html>
