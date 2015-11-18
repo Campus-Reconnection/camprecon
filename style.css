@@ -184,3 +184,28 @@ table#transcriptB td + td + td {
 	width:70px;
 	text-align:right;
 }
+/*----------------
+ Planner
+ -----------------*/
+table#planner {
+	border-collapse: collapse;
+}
+table#planner, th, planner td{
+	border: 1px solid black;
+}
+table#planner th{
+	text-align: left;
+	vertical-align:center;
+	background-color:#52ae63;
+	background-image:url("images/bg02.png");
+	background-size:100% 100%;
+	color:#ffffff;
+}
+td#planner.highlight{
+	color: #000000;
+	background-color:#ffff7f;
+}
+
+}
+
+	
