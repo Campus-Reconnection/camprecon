@@ -1,25 +1,34 @@
 <?php
     //session_start();
 	require("library/system.php");
-	//loginHandler();
+	//loginHandler();	
 	
 	function fillSelect() {
+		//$eid = $_SESSION['cruser'];
+		$eid = 'girl.nobody'; //temporary solution
+		$mysqli = getMysqli();
 		$sql = "SELECT DISTINCT sec.intYear as iYear, sec.strSeason as sSeason
 				FROM tblSection sec
 				JOIN tblStudentEnrollment enr ON sec.intSectionID = enr.intSectionID
-				WHERE enr.intStudentID = 1
-				ORDER BY iYear;";
-		$result = queryDB($sql);
-	
-		if (mysqli_num_rows($result) > 0)
-		{
-			$i = 0;
-			while($row = mysqli_fetch_assoc($result))
+				JOIN tblStudent stu ON stu.intStudentID = enr.intStudentID
+				WHERE stu.strStudentEID = ?
+				ORDER BY iYear";
+				
+		if ($query = $mysqli->prepare($sql)) {
+			$query->bind_param('s', $eid);
+			if ($query->execute())
 			{
-				echo '<option value="' . $i . '">' . $row['sSeason'] . ' ' . $row['iYear'] . '</option>';
-				$i++;
+				$result = $query->get_result();
+				$i = 0;
+				while($row = $result->fetch_assoc())
+				{
+					echo '<option value="' . $i . '">' . $row['sSeason'] . ' ' . $row['iYear'] . '</option>';
+					$i++;
+				}
+				$query->close();
 			}
 		}
+		$mysqli->close();
 	}
 ?>
 

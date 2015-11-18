@@ -20,6 +20,7 @@
 		if ($_SESSION['crlogin'] == false)
 		{
 			header("Location:/login.php");
+			exit();
 		}
 	}
 	
@@ -51,6 +52,11 @@
 		$result = mysqli_query($conn, $sql);
 		closeDB($conn);
 		return $result;
+	}
+	
+	function getMysqli()
+	{
+		return new mysqli("localhost", "root", "camprecon", "camprecon");
 	}
 
 ?>
