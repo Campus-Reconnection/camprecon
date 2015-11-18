@@ -20,9 +20,10 @@
 <li><a href="#">Parking Permit</a></li>
 <li><a href="#">Finances</a></li>
 </ul></li>
-<li><a href="#">Other<span class="arrow">&nbsp;&#9660;</span></a>
+<li><a href="#">Miscellaneous<span class="arrow">&nbsp;&#9660;</span></a>
 <ul class="sub-menu">
 <li><a href="#">Activities / Tickets</a></li>
+<li><a href="http://netflix.com/">Netflix</a></li>
 </ul></li>
 </ul>
 </nav>
