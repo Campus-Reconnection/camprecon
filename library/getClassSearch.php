@@ -1,7 +1,7 @@
 <?php
 require("system.php");
 
-function searchCourseID($dep, $course) {
+function searchCourses($dep, $course) {
 
 $sql = "SELECT strCourseName as courseName,
 			intSectionID as secID,
@@ -61,8 +61,7 @@ function addCourse($secID) {
 function getAllDepartments() {
 	$sql = "SELECT strDepartment
 		FROM tblCourse";
-	$result = queryDB($sql);
-	return $result;
+	return $sql;
 }
 
 ?>

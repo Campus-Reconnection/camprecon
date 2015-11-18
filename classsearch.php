@@ -13,7 +13,9 @@
 		<select name = "department">
 			<?php
 				require("library/getClassSearch.php");
-				$result = getAllDepartments();
+				require("library/system.php");
+				$sql = getAllDepartments();
+				$result = queryDB($sql);
 				if(mysqli_num_rows($result) > 0)
 				{
 					$i = 0;
@@ -26,7 +28,7 @@
 			?>
 		</select>
 		<p>Class Number
-			<input type="text" name="classnumber" placeholder = "Enter Class Number" size="15" maxlength="30" />
+			<input type="text" name="classnumber" placeholder = "Class Number" size="15" maxlength="30" />
 		</p>
 		</div>
 		<div id='overlay'></div>
@@ -49,12 +51,12 @@
 					<td></td>
 				</tr>
 		<?php
-			require("library/getClassSearch.php");
+			//require("library/getClassSearch.php");
 			if(isset($_POST['search']))
 			{
 				$classnumber=$_POST['classnumber'];
 				$department=$_POST['department'];
-				searchCourseID($department, $classnumber);
+				searchCourses($department, $classnumber);
 			}
 			else
 			{
@@ -67,7 +69,7 @@
 		</p>
 
 		<?php
-			require("library/getClassSearch.php");
+			//require("library/getClassSearch.php");
 			//if(isset($_POST['add']))
 			//{
 
