@@ -57,4 +57,12 @@ function addCourse($secID) {
 
 	$result = queryDB($sql);
 }
+
+function getAllDepartments() {
+	$sql = "SELECT strDepartment
+		FROM tblCourse";
+	$result = queryDB($sql);
+	return $result;
+}
+
 ?>

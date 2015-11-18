@@ -12,7 +12,7 @@
 		<br />
 		<select name = "department">
 			<?php
-				require("library/classqueries.php");
+				require("library/getClassSearch.php");
 				$result = getAllDepartments();
 				while ($row = mysql_fetch_array($result)) {
 					?>
