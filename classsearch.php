@@ -23,7 +23,7 @@
 					$i = 0;
 					while ($row = mysql_fetch_array($result)) {
 					
-						echo '<option value="'.$i.'">' . $row['strDepartment'] . '</option>';
+						echo '<option value="'.$i.'">' . $row['strDeptCode'] . '</option>';
 						$i++;
 					}
 				}

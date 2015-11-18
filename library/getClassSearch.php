@@ -19,7 +19,7 @@ $sql = "SELECT strCourseName as courseName,
 			INNER JOIN tblFaculty ON tblSection.intFacultyID = tblFaculty.intFacultyID
 			INNER JOIN tblRoom ON tblSection.intRoomID = tblRoom.intRoomID
 			INNER JOIN tblFacility ON tblRoom.intFacilityID = tblFacility.intFacilityID
-			WHERE tblCourse.strDepartment like '%$dep%'";
+			WHERE tblCourse.strDeptCode like '%$dep%'";
 
 	if(!empty($course)) {
 		$sql = $sql . " AND tblCourse.strCourseID like '".$course."'";
@@ -52,15 +52,14 @@ if (mysqli_num_rows($result) > 0)
 
 function addCourse($secID) {
 
-	$sql = "INSERT INTO tblEnrollment VALUES(
+	$sql = "INSERT INTO tblstudentenrollment VALUES(
 		$secID)";
 
 	$result = queryDB($sql);
 }
 
 function getAllDepartments() {
-	$sql = "SELECT strDepartment
-		FROM tblCourse";
+	$sql = "SELECT * FROM `tbldepartment` ORDER BY `tbldepartment`.`strDeptCode` ASC";
 	return $sql;
 }
 
