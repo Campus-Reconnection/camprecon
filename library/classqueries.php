@@ -112,4 +112,11 @@ function getSectionRoom($sectionid) {
 	return $result;
 }
 
+function getAllDepartments() {
+	$sql = "SELECT strDepartment
+		FROM tblCourse";
+	$result = $conn->query($sql);
+	return $result;
+}
+
 ?>

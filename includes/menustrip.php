@@ -11,8 +11,13 @@
 <li><a href="#">Class Management<span class="arrow">&nbsp;&#9660;</span></a>
 <ul class="sub-menu">
 <li><a href="map.php">Class Planner</a></li>
+<<<<<<< HEAD
+<li><a href="classsearch.php">Add Classes</a></li>
+<li><a href="#">Drop Classes</a></li>
+=======
 <li><a href="#">Add Classes</a></li>
 <li><a href="dropclasses.php">Drop Classes</a></li>
+>>>>>>> master
 </ul></li>
 <li><a href="#">Expenses<span class="arrow">&nbsp;&#9660;</span></a>
 <ul class="sub-menu">
