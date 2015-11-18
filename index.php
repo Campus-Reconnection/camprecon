@@ -1,3 +1,4 @@
+<?php //session_start(); require("library/system.php"); loginHandler(); ?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,5 +1,28 @@
 <?php
-
+	
+	//Prevents hacks by cross-site scripting.
+	//Use anywhere you obtain information from the user. Textboxes, etc. 
+	function fixInput($data)
+	{
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+	
+	function loginHandler()
+	{
+		if (!isset($_SESSION['crlogin']))
+		{
+			$_SESSION['crlogin'] = false;
+		}
+		
+		if ($_SESSION['crlogin'] == false)
+		{
+			header("Location:/login.php");
+		}
+	}
+	
 	function openDB()
 	{
 		$servername = "localhost";
