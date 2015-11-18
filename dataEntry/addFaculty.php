@@ -78,13 +78,9 @@
 		});
 	});
 </script>
-
-
 </head>
 <body>
-
-<P>
-	
+<p>
 	<form id="submitFaculty" method ="post" action ="add.php">
 			<p>
 				First Name: <input type='text' id='firstName' maxlength='24'><br />
@@ -100,6 +96,6 @@
 			</p>
 			<p><input type="submit" value="Add!"></p>
 	</form>
-			
+</p>
 </body>
 </html>

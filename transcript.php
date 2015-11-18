@@ -1,23 +1,34 @@
 <?php
+    //session_start();
 	require("library/system.php");
+	//loginHandler();	
 	
 	function fillSelect() {
+		//$eid = $_SESSION['cruser'];
+		$eid = "girl.nobody"; //temporary solution
+		$mysqli = getMysqli();
 		$sql = "SELECT DISTINCT sec.intYear as iYear, sec.strSeason as sSeason
 				FROM tblSection sec
 				JOIN tblStudentEnrollment enr ON sec.intSectionID = enr.intSectionID
-				WHERE enr.intStudentID = 0
-				ORDER BY iYear;";
-		$result = queryDB($sql);
-	
-		if (mysqli_num_rows($result) > 0)
-		{
-			$i = 0;
-			while($row = mysqli_fetch_assoc($result))
+				JOIN tblStudent stu ON stu.intStudentID = enr.intStudentID
+				WHERE stu.strStudentEID = ?
+				ORDER BY iYear";
+				
+		if ($query = $mysqli->prepare($sql)) {
+			$query->bind_param('s', $eid);
+			if ($query->execute())
 			{
-				echo '<option value="' . $i . '">' . $row['sSeason'] . ' ' . $row['iYear'] . '</option>';
-				$i++;
+				$result = $query->get_result();
+				$i = 0;
+				while($row = $result->fetch_assoc())
+				{
+					echo '<option value="' . $i . '">' . $row['sSeason'] . ' ' . $row['iYear'] . '</option>';
+					$i++;
+				}
+				$query->close();
 			}
 		}
+		$mysqli->close();
 	}
 ?>
 
@@ -172,12 +183,12 @@
 				$("#transcriptA").find('tbody')
 					.append($('<tr>')
 						.append(
-							$('<td>').text(course.id.substring(0,4) + " " + course.id.substring(4)),
-							$('<td>').text(course.name),
-							$('<td>').text((course.credits).toFixed(3)),
-							$('<td>').text((course.earnedCredits).toFixed(3)),
-							$('<td>').text(course.grade),
-							$('<td>').text((course.points).toFixed(3)))
+							$('<td class="advcell">').text(course.id.substring(0,4) + " " + course.id.substring(4)),
+							$('<td class="advcell">').text(course.name),
+							$('<td class="advcell">').text((course.credits).toFixed(3)),
+							$('<td class="advcell">').text((course.earnedCredits).toFixed(3)),
+							$('<td class="advcell">').text(course.grade),
+							$('<td class="advcell">').text((course.points).toFixed(3)))
 						);
 			}
 			// fill the second table
@@ -196,33 +207,37 @@
 	</script>
 </head>
 <body>
+	<?php include("includes/loginfo.php"); ?>
 	<a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 	<div id="pagediv">
 		<?php include("includes/menustrip.php"); ?>
 		<span class="title">Transcript</span>
 		<br />
+		<br />
+		Semester:
 		<select id="selectSemester" onchange="semesterSelected(this.value)">
 			<?php fillSelect() ?>
 		</select>
 		<br />
 		<br />
-		<br />
-		<div id="transcriptDiv">
+		<div class="shadow-container">
 			<table id="transcriptA">
 				<thead class="transcriptTableHead">
-					<tr><td>Course</td><td>Description</td><td>Attempted</td><td>Earned</td><td>Grade</td><td>Points</td>
+					<tr><td class="thr">Course</td><td class="thr">Description</td><td class="thr">Attempted</td><td class="thr">Earned</td><td class="thr">Grade</td><td class="thr">Points</td>
 				</thead>
 				<tbody>
 				</tbody>
 			</table>
-			<br />
+		</div>
+		<br />
+		<div class="shadow-container">
 			<table id="transcriptB">
 				<thead>
-					<tr><td></td><td></td><td></td><td>Attempted</td><td>Earned</td><td>GPA Units</td><td>Points</td></tr>
+					<tr><td class="thr"></td><td class="thr"></td><td class="thr"></td><td class="thr">Attempted</td><td class="thr">Earned</td><td class="thr">GPA Units</td><td class="thr">Points</td></tr>
 				</thead>
 				<tbody>
-					<tr><td>Term GPA:</td><td id="termGpa"></td><td>Term Totals:</td><td id="termAttempted"></td><td id="termEarned"></td><td id="termGpaUnits"></td><td id="termPoints"></td></tr>
-					<tr><td>Cum GPA:</td><td id="cumlGpa"></td><td>Cum Totals:</td><td id="cumlAttempted"></td><td id="cumlEarned"></td><td id="cumlGpaUnits"></td><td id="cumlPoints"></td></tr>
+					<tr><td class="advcell">Term GPA:</td><td id="termGpa" class="advcell"></td><td class="advcell">Term Totals:</td><td id="termAttempted" class="advcell"></td><td id="termEarned" class="advcell"></td><td id="termGpaUnits" class="advcell"></td><td id="termPoints" class="advcell"></td></tr>
+					<tr><td class="advcell">Cum GPA:</td><td id="cumlGpa" class="advcell"></td><td class="advcell">Cum Totals:</td><td id="cumlAttempted" class="advcell"></td><td id="cumlEarned" class="advcell"></td><td id="cumlGpaUnits" class="advcell"></td><td id="cumlPoints" class="advcell"></td></tr>
 				</tbody>
 			</table>
 		</div>

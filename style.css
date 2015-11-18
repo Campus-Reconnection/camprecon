@@ -127,6 +127,7 @@ TRANSCRIPT
 ---------------------------------------*/
 
 table#transcriptA {
+	width:100%;
 	border-collapse:collapse;
 	font-size:0.90em;
 }
@@ -156,6 +157,7 @@ table#transcriptA td:nth-child(5) {
 }
 
 table#transcriptB {
+	width:100%;
 	border-collapse:collapse;
 	font-size:0.90em;
 }
@@ -184,8 +186,29 @@ table#transcriptB td + td + td {
 	width:70px;
 	text-align:right;
 }
+/*---------------------------------------
+PROFILE PAGE
+---------------------------------------*/
+
+table#profile {
+	padding-left:25px;
+}
+
+td.profile-field {
+	padding: 5px;
+	font-weight:bold;
+}
+
+td.profile-data {
+	padding: 5px;
+}
+
+td.sub-field {
+	padding-left:30px;
+}
+
 /*----------------
- Planner
+ PLANNER PAGE
  -----------------*/
 
 table#planner{
@@ -207,7 +230,3 @@ td#plannerSubReq{
 	padding: 3px;
 	background-color:#ffff7f;
 }
-
-}
-
-	
