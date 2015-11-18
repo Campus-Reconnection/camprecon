@@ -30,7 +30,7 @@ div#pagediv { /*Centered container that all page materials squeeze into.*/
 	position:relative;
 }
 
-div#sch-container { /*Couldn't get a shadow on schedule table itself. So we use a container.*/
+div.shadow-container { /*Couldn't get a shadow on schedule table itself. So we use a container.*/
 	box-shadow:0px 0px 24px #4f4f4f;
 }
 
