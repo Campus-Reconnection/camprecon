@@ -14,11 +14,16 @@
 			<?php
 				require("library/getClassSearch.php");
 				$result = getAllDepartments();
-				while ($row = mysql_fetch_array($result)) {
-					?>
-					<option value="dep1"> <?php echo $row['strDeparment']; ?> </option>
-				<?php } ?>
-			
+				if(mysqli_num_rows($result) > 0)
+				{
+					$i = 0;
+					while ($row = mysql_fetch_array($result)) {
+					
+						echo '<option value="'.$i.'">' . $row['strDepartment'] . '</option>';
+						$i++;
+					}
+				}
+			?>
 		</select>
 		<p>Class Number
 			<input type="text" name="classnumber" placeholder = "Enter Class Number" size="15" maxlength="30" />
