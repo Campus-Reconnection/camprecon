@@ -17,7 +17,7 @@
 <span class="title">Drop Classes:</span>
 <br />
 <div class="shadow-container">
-<table class="schedule">
+<table class="schedule" id="schedule">
 <tr>
 <td class="thr">Select</td>
 <td class="thr">Class</td>
