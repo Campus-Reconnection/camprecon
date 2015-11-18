@@ -3,23 +3,28 @@ require('../library/system.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-	$type = $_POST['type'];
+	$type = fixInput($_POST['type']);
 	
 	switch ($type) {
 		case 'room':
-			$facilityId = $_POST['facilityId'];
-			$roomNumber = $_POST['roomNumber'];
-			$seats = $_POST['seats'];
+			$facilityId = fixInput($_POST['facilityId']);
+			$roomNumber = fixInput($_POST['roomNumber']);
+			$seats = fixInput($_POST['seats']);
 			
-			$sql = "SELECT intRoomID FROM tblroom WHERE intFacilityID = '" . $facilityId . "', strRoomNumber = '" . $roomNumber . "'";
-			$result = queryDB($sql);
-			if (!$result)
+			$mysqli = getMysqli();
+			$query1 = $mysqli->prepare("SELECT intRoomID FROM tblroom WHERE intFacilityID = ?, strRoomNumber = ?");
+			$query1->bind_param('is', $facilityId, $roomNumber);
+			if ($query1->execute() && !$query1->get_result())
 			{
-				$sql = 'INSERT INTO tblroom VALUES(NULL,' . $facilityId . ',' . $roomNumber . ',' . $seats . ');';
-				queryDB($sql);
-				echo 'Room added successfully!';
+				$query2 = $mysqli->prepare("INSERT INTO tblroom VALUES(NULL, ?, ?, ?)");
+				$query2->bind_param('isi', $facilityId, $roomNumber, $seats);
+				if ($query2->execute()) { echo 'Room added successfully!'; }
+				else { printf('errno: %d, error: %s', $mysqli->errno, $mysqli->error); }
+				$query2->close();
 			}
 			else { echo "That room already exists!"; }
+			$query1->close();
+			$mysqli->close();
 			break;
 		case 'faculty';
 			$fName = $_POST['fName'];
@@ -98,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			$sql = "SELECT strCourseID FROM tblCourse WHERE strCourseID = '" . $courseId . "'";
 			if (!mysqli_fetch_row(queryDB($sql)))
 			{
-				$mysqli = new mysqli("localhost", "root", "camprecon", "camprecon");
+				$mysqli = getMysqli();
 				$sql = "INSERT INTO tblCourse VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$stmt = $mysqli->prepare($sql);
 				if ($stmt) {
