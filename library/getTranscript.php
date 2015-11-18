@@ -1,13 +1,11 @@
 <?php
-//session_start();
-require("system.php");
-//loginHandler();
+if (session_status() == PHP_SESSION_NONE) session_start();
+	require_once("system.php");
+	loginHandler();
 
 if ($_SERVER["REQUEST_METHOD"] == "GET"){
-	//$eid = $_SESSION['cruser'];
-	$eid = "girl.nobody"; // temporary solution
-	$mysqli = getMysqli();
-	
+	$eid = $_SESSION['cruser'];
+	//$eid = "girl.nobody"; // temporary solution
 	$sql = "SELECT crs.strCourseName AS courseName,
 			   crs.intCredits AS courseCredits,
 			   crs.strCourseID AS courseId,
@@ -25,20 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 				when sectionSeason = 'Fall' THEN 2
 				END,
 				courseID;";
-				
-	$query = $mysqli->prepare($sql);
-	if ($query) {
-		$query->bind_param"'s", $eid);
-		if ($query->execute())
-		{
-			$result = $query->get_result();
-			$transcript = $result->fetch_all(MYSQLI_ASSOC);
-			$struct = array("transcript" => $transcript);
-			print json_encode($struct);
-			$query->close();
-		}
+	
+	$transcript = dbGetAll($sql, "s", $eid);
+	if ($transcript)
+	{
+		$struct = array("transcript" => $transcript);
+		print json_encode($struct);
 	}
-	$mysqli->close();
+	else
+	{
+		// Error?
+	}
 }
 else {echo "Nice try.";}
 ?>

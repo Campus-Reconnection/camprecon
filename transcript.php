@@ -1,11 +1,10 @@
 <?php
-    //session_start();
+    if (session_status() == PHP_SESSION_NONE) session_start();
 	require("library/system.php");
-	//loginHandler();	
+	loginHandler();
 	
 	function fillSelect() {
-		//$eid = $_SESSION['cruser'];
-		$eid = "girl.nobody"; //temporary solution
+		$eid = $_SESSION['cruser'];
 		$mysqli = getMysqli();
 		$sql = "SELECT DISTINCT sec.intYear as iYear, sec.strSeason as sSeason
 				FROM tblSection sec

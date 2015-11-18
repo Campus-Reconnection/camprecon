@@ -34,6 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["crlogin"] == false)
 	{
 		$_SESSION["crlogin"] = true;
 		$_SESSION["cruser"] = $username;
+		
+		$result = mysqli_query($conn,"SELECT strFirstName, strLastName FROM tblStudent WHERE strStudentEID = '$username'");
+		$row = mysqli_fetch_row($result);
+		$_SESSION["crname"] = $row[0]." ".$row[1];
+		
+		$result = mysqli_query($conn,"SELECT vntImage FROM tblPictureID WHERE strOwner = '$username' AND blnIsThumb = 1");
+		$row = mysqli_fetch_row($result);
+		$_SESSION["crphototb"] = $row[0].".jpg";
 	}
 	else
 	{

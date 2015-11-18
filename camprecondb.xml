@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Nov 18, 2015 at 05:07 AM
+- Generation Time: Nov 18, 2015 at 11:49 PM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -64,14 +64,16 @@
                   `strFacultyEID` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `intSecurityGroup` int(3) unsigned NOT NULL DEFAULT '0',
                   PRIMARY KEY (`intFacultyID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblpictureid">
                 CREATE TABLE `tblpictureid` (
-                  `intExternalID` int(7) NOT NULL,
-                  `vntImage` varchar(32) NOT NULL,
+                  `intExternalID` int(7) NOT NULL AUTO_INCREMENT,
+                  `vntImage` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strOwner` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `blnIsThumb` tinyint(1) NOT NULL DEFAULT '0',
                   PRIMARY KEY (`intExternalID`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=1234562 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblroom">
                 CREATE TABLE `tblroom` (
@@ -80,7 +82,7 @@
                   `strRoomNumber` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
                   `intSeats` int(3) DEFAULT NULL,
                   PRIMARY KEY (`intRoomID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblsection">
                 CREATE TABLE `tblsection` (
@@ -139,7 +141,7 @@
                   `blnActiveService` tinyint(1) DEFAULT NULL,
                   `intSecurityGroup` int(3) NOT NULL,
                   PRIMARY KEY (`intStudentID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblstudentenrollment">
                 CREATE TABLE `tblstudentenrollment` (
@@ -170,12 +172,12 @@
             </pma:table>
             <pma:table name="tbluser">
                 CREATE TABLE `tbluser` (
-                  `intUserId` tinyint(8) unsigned NOT NULL AUTO_INCREMENT,
+                  `intUserId` int(8) unsigned NOT NULL AUTO_INCREMENT,
                   `strEID` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `strPassword` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   PRIMARY KEY (`intUserId`),
                   UNIQUE KEY `strEID` (`strEID`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=5820654 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblusercontact">
                 CREATE TABLE `tblusercontact` (
@@ -277,6 +279,17 @@
             <column name="strDeptCode">CSCI</column>
             <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI437</column>
+            <column name="strCourseName">Principles of Software Engineering</column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
+            <column name="strPrerequisite">CSCI161</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">3</column>
             <column name="dblFee">0</column>
@@ -1935,7 +1948,41 @@
             <column name="strFacultyEID">wei.jin</column>
             <column name="intSecurityGroup">3</column>
         </table>
+        <table name="tblfaculty">
+            <column name="intFacultyID">4</column>
+            <column name="strLastName">Kotala</column>
+            <column name="strFirstName">Pratap</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">29</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">pratap.kotala</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
+        <table name="tblfaculty">
+            <column name="intFacultyID">5</column>
+            <column name="strLastName">Cooley</column>
+            <column name="strFirstName">Dennis</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">84</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">dennis.cooley</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
         <!-- Table tblpictureid -->
+        <table name="tblpictureid">
+            <column name="intExternalID">1234560</column>
+            <column name="vntImage">derpvader</column>
+            <column name="strOwner">girl.nobody</column>
+            <column name="blnIsThumb">0</column>
+        </table>
+        <table name="tblpictureid">
+            <column name="intExternalID">1234561</column>
+            <column name="vntImage">derpvaderthumb</column>
+            <column name="strOwner">girl.nobody</column>
+            <column name="blnIsThumb">1</column>
+        </table>
         <!-- Table tblroom -->
         <table name="tblroom">
             <column name="intRoomID">1</column>
@@ -1954,6 +2001,12 @@
             <column name="intFacilityID">25</column>
             <column name="strRoomNumber">104</column>
             <column name="intSeats">150</column>
+        </table>
+        <table name="tblroom">
+            <column name="intRoomID">6</column>
+            <column name="intFacilityID">25</column>
+            <column name="strRoomNumber">105</column>
+            <column name="intSeats">40</column>
         </table>
         <!-- Table tblsection -->
         <table name="tblsection">
@@ -2365,6 +2418,27 @@
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
         </table>
+        <table name="tblstudent">
+            <column name="intStudentID">1000000</column>
+            <column name="intFacultyID">7654321</column>
+            <column name="strFirstName">Mister</column>
+            <column name="strLastName">Sir</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="strStudentEID">mister.sir</column>
+            <column name="strStatus">suspende</column>
+            <column name="strEnrollmentStatus">Parttime</column>
+            <column name="strStudentType">phd</column>
+            <column name="strMajor1">Underwater Basketwea</column>
+            <column name="strMajor2">NULL</column>
+            <column name="strMajor3">NULL</column>
+            <column name="strMinor1">Philosophy</column>
+            <column name="strMinor2">NULL</column>
+            <column name="strMinor3">NULL</column>
+            <column name="dblGPA">2.1</column>
+            <column name="intCredits">199</column>
+            <column name="blnActiveService">0</column>
+            <column name="intSecurityGroup">5</column>
+        </table>
         <!-- Table tblstudentenrollment -->
         <table name="tblstudentenrollment">
             <column name="intStudentID">1</column>
@@ -2480,6 +2554,11 @@
         </table>
         <!-- Table tbltask -->
         <!-- Table tbluser -->
+        <table name="tbluser">
+            <column name="intUserId">5820653</column>
+            <column name="strEID">girl.nobody</column>
+            <column name="strPassword">fishpants2015</column>
+        </table>
         <!-- Table tblusercontact -->
         <table name="tblusercontact">
             <column name="intContactID">1234567899</column>
