@@ -5,7 +5,7 @@
 	
 	function fillSelect() {
 		//$eid = $_SESSION['cruser'];
-		$eid = 'girl.nobody'; //temporary solution
+		$eid = "girl.nobody"; //temporary solution
 		$mysqli = getMysqli();
 		$sql = "SELECT DISTINCT sec.intYear as iYear, sec.strSeason as sSeason
 				FROM tblSection sec
