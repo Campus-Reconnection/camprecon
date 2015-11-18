@@ -77,7 +77,7 @@ function removeRow(id){
 	var objTable = document.getElementById(id);
 	var iRow = objTable.rows.length;
 	var counter=0;
-	if(objTable.rows.length>1){
+	if(objTable.rows.length>1 && confirm("Are you sure you want to drop the selected courses?")){
 		for(var i=0;i<objTable.rows.length; i++){
 			var chk=objTable.rows[i].cells[0].childNodes[0];
 			if(chk.checked){
