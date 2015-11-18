@@ -21,7 +21,7 @@
 			
 		</select>
 		<p>Class Number
-			<input type="text" name="classnumber" size="15" maxlength="30" />
+			<input type="text" name="classnumber" placeholder = "Enter Class Number" size="15" maxlength="30" />
 		</p>
 		</div>
 		<div id='overlay'></div>
@@ -32,6 +32,7 @@
 			<thead class="SearchHead">
 				<tr>
 					<td>CourseName</td>
+					<td>Section ID</td>
 					<td>Section Number</td>
 					<td>Time</td>
 					<td></td>
@@ -56,6 +57,17 @@
 			}
 		?>
 
+		<p>
+			<input type="submit" name="add" value="Add" />
+		</p>
+
+		<?php
+			require("library/getClassSearch.php");
+			//if(isset($_POST['add']))
+			//{
+
+			//}
+		?>
 	</div>
 </body>
 </html>

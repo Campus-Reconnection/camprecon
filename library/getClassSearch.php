@@ -4,6 +4,7 @@ require("system.php");
 function searchCourseID($dep, $course) {
 
 $sql = "SELECT strCourseName as courseName,
+			intSectionID as secID,
 			intSectionNumber as secNumber,
 			intSectionTimeStart as secStartTime,
 			intSectionTimeEnd as secEndTime,
@@ -20,7 +21,7 @@ $sql = "SELECT strCourseName as courseName,
 			INNER JOIN tblFacility ON tblRoom.intFacilityID = tblFacility.intFacilityID
 			WHERE tblCourse.strDepartment like '%$dep%'";
 
-	if(!empty($dep)) {
+	if(!empty($course)) {
 		$sql = $sql . " AND tblCourse.strCourseID like '".$course."'";
 	}
 
@@ -31,6 +32,7 @@ if (mysqli_num_rows($result) > 0)
 	foreach($rows as $row) {
 		echo "<tr>";
 			echo "<td>".$row['courseName']."</td>";
+			echo "<td>".$row['secID']."</td>";
 			echo "<td>".$row['secNumber']."</td>";
 			echo "<td>".$row['secStartTime']."</td>";
 			echo "<td>".$row['secEndTime']."</td>";
@@ -41,10 +43,18 @@ if (mysqli_num_rows($result) > 0)
 			echo "<td>".$row['strLastName']."</td>";
 			echo "<td>".$row['strFacilityName']."</td>";
 			echo "<td>".$row['intRoomNumber']."</td>";
+			echo "<td> <input type=\"checkbox\" name=\"check[{$row['secID']}]\" value=\"\" id=\"checkbox\" /> </td>";
 		echo "</tr>";	
 	}
 }
 
 }
 
+function addCourse($secID) {
+
+	$sql = "INSERT INTO tblEnrollment VALUES(
+		$secID)";
+
+	$result = queryDB($sql);
+}
 ?>
