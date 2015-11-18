@@ -36,6 +36,8 @@ function plotfromdatabase()
 <!DOCTYPE html>
 <html>
 <head>
+<title>Campus Reconnection</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>
 function initMap()
@@ -57,7 +59,12 @@ function initMap()
 google.maps.event.addDomListener(window,"load",initMap);
 </script>
 </head>
-<body style="margin:0px;">
-<div id="googleMap" style="width:960px; height:640px;"></div>
+<body>
+<?php include("includes/loginfo.php"); ?>
+<a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
+<div id="pagediv">
+<?php include("includes/menustrip.php"); ?>
+<div id="googleMap"></div>
+</div>
 </body>
 </html>
