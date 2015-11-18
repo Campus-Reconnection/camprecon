@@ -18,7 +18,11 @@ $sql = "SELECT strCourseName as courseName,
 			INNER JOIN tblFaculty ON tblSection.intFacultyID = tblFaculty.intFacultyID
 			INNER JOIN tblRoom ON tblSection.intRoomID = tblRoom.intRoomID
 			INNER JOIN tblFacility ON tblRoom.intFacilityID = tblFacility.intFacilityID
-			WHERE tblCourse.strDepartment like '%$dep%' or tblCourse.strCourseID like '%$course%'";
+			WHERE tblCourse.strDepartment like '%$dep%'";
+
+	if(!empty($dep)) {
+		$sql = $sql . " AND tblCourse.strCourseID like '".$course."'";
+	}
 
 $result = queryDB($sql);
 
