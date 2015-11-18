@@ -28,10 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["crlogin"] == false)
 	$username = strtolower(fixInput($_POST["username"]));
 	$password = fixInput($_POST["password"]);
 	
-	$result = mysqli_query($conn,"SELECT * FROM tblUser WHERE strUser == '$username';");
+	$result = mysqli_query($conn,"SELECT * FROM tbluser WHERE strEID = '$username'");
 	$row = mysqli_fetch_row($result);
-	
-	if ($password == $row[1])
+	if ($password == $row[2] && $password != "")
 	{
 		$_SESSION["crlogin"] = true;
 		$_SESSION["cruser"] = $username;

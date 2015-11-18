@@ -10,6 +10,19 @@
 		return $data;
 	}
 	
+	function loginHandler()
+	{
+		if (!isset($_SESSION['crlogin']))
+		{
+			$_SESSION['crlogin'] = false;
+		}
+		
+		if ($_SESSION['crlogin'] == false)
+		{
+			header("Location:/login.php");
+		}
+	}
+	
 	function openDB()
 	{
 		$servername = "localhost";
