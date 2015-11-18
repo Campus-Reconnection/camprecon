@@ -11,7 +11,7 @@ $sql = "SELECT crs.strCourseName as courseName,
 			FROM tblStudentEnrollment enr
 			JOIN tblSection sec ON enr.intSectionID = sec.intSectionID
 			JOIN tblCourse crs ON sec.strCourseID = crs.strCourseID
-			WHERE enr.intStudentID = 0
+			WHERE enr.intStudentID = 1
 			ORDER BY sectionYear,
 				case when sectionSeason = 'Spring' then 0
 				when sectionSeason = 'Summer' then 1

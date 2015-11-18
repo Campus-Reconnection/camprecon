@@ -7,7 +7,7 @@
 		$sql = "SELECT DISTINCT sec.intYear as iYear, sec.strSeason as sSeason
 				FROM tblSection sec
 				JOIN tblStudentEnrollment enr ON sec.intSectionID = enr.intSectionID
-				WHERE enr.intStudentID = 0
+				WHERE enr.intStudentID = 1
 				ORDER BY iYear;";
 		$result = queryDB($sql);
 	
