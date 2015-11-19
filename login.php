@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["crlogin"] == false)
 		$row = mysqli_fetch_row($result);
 		$_SESSION["crname"] = $row[0]." ".$row[1];
 		
-		$result = mysqli_query($conn,"SELECT vntImage FROM tblPictureID WHERE strOwner = '$username' AND blnIsThumb = 1");
+		$result = mysqli_query($conn,"SELECT vntImage FROM tblPictureID WHERE strOwner = '$username'");
 		$row = mysqli_fetch_row($result);
 		$_SESSION["crphototb"] = $row[0].".jpg";
 	}

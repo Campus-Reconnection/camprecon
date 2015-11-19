@@ -14,6 +14,25 @@ span.text-attn {
 	color:#00ff00;
 }
 
+td.loginfo { /*Login info table cell*/
+	color:#ffffff;
+	padding:10px;
+	text-align:right;
+}
+
+table#loginfoTable {
+	border-collapse:collapse;
+	float:right;
+}
+
+img#loginfoPhoto { /*Login info photo thumbnail*/
+	height:65px;
+	width:auto;
+	padding: 1px;
+	border:1px solid #021a40;
+	background-color:#f0f0f0;
+}
+
 td.advcell { /*Advisor table cell*/
 	background-color:#efefef;
 	border:1px solid black;
@@ -191,21 +210,76 @@ table#transcriptB td + td + td {
 PROFILE PAGE
 ---------------------------------------*/
 
-table#profile {
-	padding-left:25px;
+ul#tabs {
+	list-style-type: none;
+	margin: -17px 0px 0px 300px;
+	padding: 0 0 0.3em 0;
+}
+ul#tabs li {
+	display: inline;
+}
+ul#tabs li a {
+	color: #ffffff;
+	background-color: #328e43;
+	border: 1px solid black;
+	border-bottom: none;
+	padding: 0.32em;
+	text-decoration: none;
 }
 
-td.profile-field {
-	padding: 5px;
+ul#tabs li a:hover {
+	background-color: #429e53;
+}
+ul#tabs li a.selected {
+	color: #000;
+	background-color: #52ae63;
+	font-weight: bold;
+	padding: 0.7em 0.3em 0.45em 0.3em;
+}
+
+div.tabContent.hide {
+	display: none;
+}
+
+div#profileDiv {
+	overflow:auto;
+	font-size:0.85em;
+	padding:18px;
+	color:#ffffff;
+	background-color:#52ae63;
+	background-image:url("images/bg02.png");
+	background-size:100% 100%;
+	border:1px solid black;
+	box-shadow:0px 0px 24px #4f4f4f;
+}
+
+table.profile {
+	border-collapse:collapse;
+}
+
+table.profile td {
+	height:25px;
+}
+
+table.profile td:nth-child(1) {
 	font-weight:bold;
+	width:100px;
 }
 
-td.profile-data {
-	padding: 5px;
+table.profile td:nth-child(2) {
+	width:200px;
 }
 
-td.sub-field {
-	padding-left:30px;
+table.profile td:nth-child(3) {
+	font-weight:bold;
+	width:100px;
+}
+
+img#profilePicture {
+	float:left;
+	padding: 1px;
+	border:1px solid #021a40;
+	background-color:#f0f0f0;
 }
 
 /*----------------

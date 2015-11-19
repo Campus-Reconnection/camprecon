@@ -1,83 +1,153 @@
-<?php //session_start(); require("library/system.php"); loginHandler(); ?>
+<?php session_start(); require_once("library/system.php"); loginHandler();
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Campus Reconnection</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="javascript/profile.js"></script>
 </head>
-<body>
+<body onload="init()">
 <?php include("includes/loginfo.php"); ?>
 <a href="./"><img src="images/campusreconnectionlogo.png" style="border:0px;" alt="Campus Reconnection" /></a>
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Student Profile:</span>
 <br /><br />
-<div>
-<img src="images/profilepicture.png" style="float:left" alt="Profile picture" />
-</div>
-<div style="float: center">
-<table id="profile">
+<ul id="tabs">
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#emergency">Emergency</a></li>
+</ul>
+<div id="profileDiv">
+<img src="images/derpvader.jpg" alt="Profile picture" id="profilePicture" />
+<div style="margin-left:250px;">
+<div class="profileTabContent" id="about">
+<table class="profile">
   <tr>
-  <td class="profile-field">ID:</td>
-  <td class="profile-data">0000000</td>
+  <td>ID:</td>
+  <td>0000001</td>
   </tr>
   <tr>
-  <td class="profile-field">Name:</td>
-  <td class="profile-data">Derp Vader</td>
+  <td>Name:</td>
+  <td>Girl P. Nobody</td>
+  </tr>
+  <tr><td></td><td></td></tr>
+  <tr>
+  <td>Standing:</td>
+  <td>Junior</td>
   </tr>
   <tr>
-  <td class="profile-field">Date of Birth:</td>
-  <td class="profile-data">long/time/ago</td>
+  <td>Enrollment:</td>
+  <td>Full Time</td>
   </tr>
   <tr>
-  <td class="profile-field">Address:</td>
-  <td class="profile-data">502 Death Star Blvd, A galaxy far far away</td>
+  <td>Status:</td>
+  <td>Active</td>
   </tr>
   <tr>
-  <td class="profile-field">Phone:</td>
-  <td class="profile-data">(444) 444-4444</td>
+  <td>Major:</td>
+  <td>Dark Side</td>
   </tr>
   <tr>
-  <td class="profile-field">Major:</td>
-  <td class="profile-data">Dark Side</td>
+  <td>Minor:</td>
+  <td>---</td>
   </tr>
   <tr>
-  <td class="profile-field">GPA:</td>
-  <td class="profile-data">3.00</td>
-  </tr>
-  <tr>
-  <td class="profile-field">Advisor:</td>
-  <td class="profile-data">Derp Sidius</td>
-  </tr>
-  <tr>
-  <td class="profile-field">Emergency Contact:</td>
-  <td class="profile-data">Mom</td>
-  </tr>
-  <tr>
-  <td class="profile-field sub-field">Phone:</td>
-  <td class="profile-data">(555) 555-5555</td>
-  </tr>
-  <tr>
-  <td class="profile-field sub-field">Alt Phone:</td>
-  <td class="profile-data">(666) 666-6666</td>
-  </tr>
-  <tr>
-  <td class="profile-field">Active Military:</td>
-  <td class="profile-data">Yes</td>
-  </tr>
-  <tr>
-  <td class="profile-field">Enrollment Status:</td>
-  <td class="profile-data">Full Time</td>
-  </tr>
-  <tr>
-  <td class="profile-field">Credits Earned:</td>
-  <td class="profile-data">99</td>
-  </tr>
-  <tr>
-  <td class="profile-field">Academic Standing:</td>
-  <td class="profile-data">Junior</td>
+  <td>Active Military:</td>
+  <td>Yes</td>
   </tr>
 </table>
+</div>
+<div class="profileTabContent" id="contact">
+<table class="profile">
+  <tr>
+  <td>Address:</td>
+  <td>502 Death Star</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>Some Galaxy</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>Far, Far Away</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>58102</td>
+  </tr>
+  <tr><td></td><td></td></tr>
+  <tr>
+  <td>Phone:</td>
+  <td>(444)-444-4444</td>
+  </tr>
+  <tr><td></td><td></td></tr>
+  <tr>
+  <td>Email:</td>
+  <td>girl.nobody@ndsu.edu</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>coolsith69@hotmail.com</td>
+  </tr>
+</table>
+</div>
+<div class="profileTabContent" id="emergency">
+<table class="profile">
+  <tr>
+  <td>Emergency Contact #1:</td>
+  <td>Mommy Nobody</td>
+  <td>Emergency Contact #2:</td>
+  <td>Daddy Nobody</td>
+  </tr>
+  <tr>
+  <td>Relation:</td>
+  <td>Mother</td>
+  <td>Relation:</td>
+  <td>Father</td>
+  </tr>
+  <tr>
+  <td>Address:</td>
+  <td>559 Death Star II</td>
+  <td>Address:</td>
+  <td>559 Death Star II</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>Some Other Galaxy</td>
+  <td></td>
+  <td>Some Other Galaxy</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>Astonishingly Close By</td>
+  <td></td>
+  <td>Astonishingly Close By</td>
+  </tr>
+  <tr>
+  <td></td>
+  <td>90431</td>
+  <td></td>
+  <td>90431</td>
+  </tr>
+  <tr><td></td><td></td></tr>
+  <tr>
+  <td>Phone:</td>
+  <td>(555)-555-5555</td>
+  <td>Phone:</td>
+  <td>(555)-555-5555</td>
+  </tr>
+  <tr>
+  <td>Alt Phone:</td>
+  <td>(666)-666-6666</td>
+  <td>Alt Phone:</td>
+  <td>(777)-777-7777</td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 <br>
 </body>
