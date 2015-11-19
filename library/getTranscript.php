@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 				when sectionSeason = 'Fall' THEN 2
 				END,
 				courseID;";
-	
+
 	$transcript = dbGetAll($sql, "s", $eid);
 	if ($transcript)
 	{
