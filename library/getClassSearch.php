@@ -1,5 +1,5 @@
 <?php
-require("system.php");
+//require("system.php");
 
 function searchCourses($course) {
 
@@ -31,7 +31,7 @@ if (mysqli_num_rows($result) > 0)
 			echo "<td>".$row['strLastName']."</td>";
 			echo "<td>".$row['strFacilityName']."</td>";
 			echo "<td>".$row['intRoomNumber']."</td>";
-			echo "<td> <input type=\"checkbox\" name=\"check[{$row['secID']}]\" value=\"\" id=\"checkbox\" /> </td>";
+			echo "<td> <input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" id=\"checkbox\" /> </td>";
 		echo "</tr>";	
 	}
 }
