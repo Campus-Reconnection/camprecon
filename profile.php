@@ -30,7 +30,7 @@
   </tr>
   <tr>
   <td>Name:</td>
-  <td>Girl P. Nobody</td>
+  <td>Derp Vader</td>
   </tr>
   <tr><td></td><td></td></tr>
   <tr>
@@ -85,7 +85,7 @@
   <tr><td></td><td></td></tr>
   <tr>
   <td>Email:</td>
-  <td>girl.nobody@ndsu.edu</td>
+  <td>derp.vader@ndsu.edu</td>
   </tr>
   <tr>
   <td></td>
@@ -97,9 +97,9 @@
 <table class="profile">
   <tr>
   <td>Emergency Contact #1:</td>
-  <td>Mommy Nobody</td>
+  <td>Mommy Vader</td>
   <td>Emergency Contact #2:</td>
-  <td>Daddy Nobody</td>
+  <td>Daddy Vader</td>
   </tr>
   <tr>
   <td>Relation:</td>
