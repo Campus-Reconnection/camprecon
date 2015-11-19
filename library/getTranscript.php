@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 				
 	$query = $mysqli->prepare($sql);
 	if ($query) {
-		$query->bind_param"'s", $eid);
+		$query->bind_param("s", $eid);
 		if ($query->execute())
 		{
 			$result = $query->get_result();
