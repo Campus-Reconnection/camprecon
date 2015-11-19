@@ -291,6 +291,7 @@ table#planner{
 	border-collapse: collapse;
 	width: 800px;
 }
+
 td#plannerReq{
 	text-align: left;
 	padding:5px;
@@ -300,6 +301,7 @@ td#plannerReq{
 	background-size:100% 100%;
 	color:#ffffff;
 }
+
 td#plannerSubReq{
 	color: #000000;
 	padding: 3px;
