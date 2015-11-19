@@ -18,19 +18,10 @@ function openMap()
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Class Planner:</span>
 <br /><br />
-
-<!--Replace-Content-Here---------------------------------->
-<span style="color:#007f00;">
-.:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. <br />
-.:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. <br />
-.:. INSERT COOL BEANS HERE!!&nbsp; .:. <br />
-.:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. <br />
-.:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. .:. <br />
-</span>
-<!-------------------------------------------------------->
-
+<img src="images/menatwork.png" width="128px;" />
 <br /><br />
 <input type="button" value="Open Map" onclick="openMap()" />
+</div>
 </div>
 </body>
 </html>

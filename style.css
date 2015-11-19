@@ -191,21 +191,16 @@ table#transcriptB td + td + td {
 PROFILE PAGE
 ---------------------------------------*/
 
-table#profile {
-	padding-left:25px;
+img#profile-image {
+	float:left;
+	box-shadow:0px 0px 24px #4f4f4f;
+	border:1px solid #2f2f2f;
 }
 
-td.profile-field {
-	padding: 5px;
-	font-weight:bold;
-}
-
-td.profile-data {
-	padding: 5px;
-}
-
-td.sub-field {
-	padding-left:30px;
+div#profile-info {
+	float:right;
+	width:448px;
+	box-shadow:0px 0px 24px #4f4f4f;
 }
 
 /*----------------
@@ -217,6 +212,7 @@ table#planner{
 	border-collapse: collapse;
 	width: 800px;
 }
+
 td#plannerReq{
 	text-align: left;
 	padding:5px;
@@ -226,6 +222,7 @@ td#plannerReq{
 	background-size:100% 100%;
 	color:#ffffff;
 }
+
 td#plannerSubReq{
 	color: #000000;
 	padding: 3px;

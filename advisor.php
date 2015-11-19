@@ -11,7 +11,7 @@
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Academic Advisor Information:</span>
-<br /><br />
+<br />
 <div class="shadow-container">
 <table class="schedule">
 <tr>

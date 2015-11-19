@@ -11,7 +11,7 @@
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Holds:</span>
-<br /><br />
+<br />
 <div class="shadow-container">
 <table class="schedule">
 <tr>
@@ -30,7 +30,7 @@
 </div>
 <br />
 <span class="title">To-Do:</span>
-<br /><br />
+<br />
 <div class="shadow-container">
 <table class="schedule">
 <tr>
@@ -49,7 +49,7 @@
 </div>
 <br />
 <span class="title">Inbox:</span>
-<br /><br />
+<br />
 <div class="shadow-container">
 <table class="schedule">
 <tr>

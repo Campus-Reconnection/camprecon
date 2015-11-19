@@ -213,7 +213,6 @@
 		<?php include("includes/menustrip.php"); ?>
 		<span class="title">Transcript</span>
 		<br />
-		<br />
 		Semester:
 		<select id="selectSemester" onchange="semesterSelected(this.value)">
 			<?php fillSelect() ?>

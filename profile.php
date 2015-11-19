@@ -11,71 +11,75 @@
 <div id="pagediv">
 <?php include("includes/menustrip.php"); ?>
 <span class="title">Student Profile:</span>
-<br /><br />
+<br />
 <div>
-<img src="images/profilepicture.png" style="float:left" alt="Profile picture" />
+<img src="images/profilepicture.png" id="profile-image" alt="Profile picture" />
 </div>
-<div style="float: center">
-<table id="profile">
+<div id="profile-info">
+<table class="schedule">
   <tr>
-  <td class="profile-field">ID:</td>
-  <td class="profile-data">0000000</td>
+  <td class="thr">Key</td>
+  <td class="thr">Value</td>
   </tr>
   <tr>
-  <td class="profile-field">Name:</td>
-  <td class="profile-data">Derp Vader</td>
+  <td class="advcell">ID:</td>
+  <td class="advcell">0000000</td>
   </tr>
   <tr>
-  <td class="profile-field">Date of Birth:</td>
-  <td class="profile-data">long/time/ago</td>
+  <td class="advcell">Name:</td>
+  <td class="advcell">Derp Vader</td>
   </tr>
   <tr>
-  <td class="profile-field">Address:</td>
-  <td class="profile-data">502 Death Star Blvd, A galaxy far far away</td>
+  <td class="advcell">Date of Birth:</td>
+  <td class="advcell">long/time/ago</td>
   </tr>
   <tr>
-  <td class="profile-field">Phone:</td>
-  <td class="profile-data">(444) 444-4444</td>
+  <td class="advcell">Address:</td>
+  <td class="advcell">502 Death Star Blvd, A galaxy far far away</td>
   </tr>
   <tr>
-  <td class="profile-field">Major:</td>
-  <td class="profile-data">Dark Side</td>
+  <td class="advcell">Phone:</td>
+  <td class="advcell">(444) 444-4444</td>
   </tr>
   <tr>
-  <td class="profile-field">GPA:</td>
-  <td class="profile-data">3.00</td>
+  <td class="advcell">Major:</td>
+  <td class="advcell">Dark Side</td>
   </tr>
   <tr>
-  <td class="profile-field">Advisor:</td>
-  <td class="profile-data">Derp Sidius</td>
+  <td class="advcell">GPA:</td>
+  <td class="advcell">3.00</td>
   </tr>
   <tr>
-  <td class="profile-field">Emergency Contact:</td>
-  <td class="profile-data">Mom</td>
+  <td class="advcell">Advisor:</td>
+  <td class="advcell">Derp Sidius</td>
   </tr>
   <tr>
-  <td class="profile-field sub-field">Phone:</td>
-  <td class="profile-data">(555) 555-5555</td>
+  <td class="advcell">Emergency Contact:</td>
+  <td class="advcell">Mom</td>
   </tr>
   <tr>
-  <td class="profile-field sub-field">Alt Phone:</td>
-  <td class="profile-data">(666) 666-6666</td>
+  <td class="advcell">Phone:</td>
+  <td class="advcell">(555) 555-5555</td>
   </tr>
   <tr>
-  <td class="profile-field">Active Military:</td>
-  <td class="profile-data">Yes</td>
+  <td class="advcell">Alt Phone:</td>
+  <td class="advcell">(666) 666-6666</td>
   </tr>
   <tr>
-  <td class="profile-field">Enrollment Status:</td>
-  <td class="profile-data">Full Time</td>
+  <td class="advcell">Active Military:</td>
+  <td class="advcell">Yes</td>
   </tr>
   <tr>
-  <td class="profile-field">Credits Earned:</td>
-  <td class="profile-data">99</td>
+  <td class="advcell">Enrollment Status:</td>
+  <td class="advcell">Full Time</td>
   </tr>
   <tr>
-  <td class="profile-field">Academic Standing:</td>
-  <td class="profile-data">Junior</td>
+  <td class="advcell">Credits Earned:</td>
+  <td class="advcell">99</td>
+  </tr>
+  <tr>
+  <td class="advcell">Academic Standing:</td>
+  <td class="advcell">Junior</td>
   </tr>
 </table>
 </div>
