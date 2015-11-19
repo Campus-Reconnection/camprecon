@@ -2,8 +2,12 @@
 
 function getEmergencyContactInfo($conn,$id)
 {
-	$sql = "SELECT intEmergencyNumber, strEmergencyContactLastName, strEmergencyContactFirstName FROM tblUserContact WHERE intExternalID = $id";
-	return mysqli_query($conn,$sql);
+	$sql = "SELECT intEmergencyNumber, strEmergencyContactLastName, strEmergencyContactFirstName
+		FROM tblUserContact
+		WHERE intExternalID = ?";
+	if ($result = $dbGetAll($sql, "s", $id))
+		return $result;
+	return false;
 }
 
 function getPermenantContactInfo() {}

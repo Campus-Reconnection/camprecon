@@ -3,16 +3,17 @@
 /*
 // Search for class by class ID 
 // param: class ID ( CSCI222, STAT360, ...)
-// return: ID, Name, and Section
+// return: an associative array containing ID, course name, and section number; false on fail
 */
 function classSearchID($id) {
 	$sql = "SELECT strCourseID, strCourseName, intSectionNumber
 		FROM tblCourse
-		WHERE tblCourse.strCourseID = $id
+		WHERE tblCourse.strCourseID = ?
 		INNER JOIN tblSection
 		ON tblSection.strCourseID = tblCourse.strCourseID";
-	$result = $conn->query($sql);
-	return $result;
+	if ($result = $dbGetAll($sql, "s", $id))
+		return $result;
+	return false;
 }
 
 /*

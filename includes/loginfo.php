@@ -1,6 +1,6 @@
 <?php
 require_once("library/system.php");
-//if (session_status() == PHP_SESSION_NONE) session_start();
+if (session_status() == PHP_SESSION_NONE) session_start();
 
 if (isset($_SESSION['crlogin']) && $_SESSION['crlogin'] != '')
 {

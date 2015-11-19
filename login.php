@@ -17,7 +17,6 @@ if (!isset($_SESSION["crlogin"]))
 	$_SESSION["crlogin"] = false;
 }
 
-$conn = openDB();
 $error  = ""; //This string is displayed to the user upon fuck ups. 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["crlogin"] == false)
@@ -25,19 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["crlogin"] == false)
 	$username = strtolower(fixInput($_POST["username"]));
 	$password = fixInput($_POST["password"]);
 	
-	$result = mysqli_query($conn,"SELECT * FROM tbluser WHERE strEID = '$username'");
-	$row = mysqli_fetch_row($result);
-	if ($password == $row[2] && $password != "")
+	$row = dbGetFirst("SELECT * FROM tbluser WHERE strEID = ?", "s", $username);
+	if ($password != "" && $password == $row[2])
 	{
 		$_SESSION["crlogin"] = true;
 		$_SESSION["cruser"] = $username;
 		
-		$result = mysqli_query($conn,"SELECT strFirstName, strLastName FROM tblStudent WHERE strStudentEID = '$username'");
-		$row = mysqli_fetch_row($result);
+		$row = dbGetFirst("SELECT strFirstName, strLastName FROM tblStudent WHERE strStudentEID = ?", "s", $username);
 		$_SESSION["crname"] = $row[0]." ".$row[1];
 		
-		$result = mysqli_query($conn,"SELECT vntImage FROM tblPictureID WHERE strOwner = '$username'");
-		$row = mysqli_fetch_row($result);
+		$row = dbGetFirst("SELECT vntImage FROM tblPictureID WHERE strOwner = ?", "s", $username);
 		$_SESSION["crphototb"] = $row[0].".jpg";
 	}
 	else
@@ -50,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["crlogin"] == false)
 if ($_SESSION["crlogin"] == true)
 {
 	header("Location:/index.php");
+	exit();
 }
 else
 {

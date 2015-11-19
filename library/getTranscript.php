@@ -5,7 +5,6 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	$eid = $_SESSION['cruser'];
-	//$eid = "girl.nobody"; // temporary solution
 	$sql = "SELECT crs.strCourseName AS courseName,
 			   crs.intCredits AS courseCredits,
 			   crs.strCourseID AS courseId,
