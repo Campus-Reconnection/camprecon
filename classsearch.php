@@ -21,7 +21,7 @@
 				if(mysqli_num_rows($result) > 0)
 				{
 					$i = 0;
-					while ($row = mysql_fetch_array($result)) {
+					while ($row = mysqli_fetch_assoc($result)) {
 					
 						echo '<option value="'.$i.'">' . $row['strDeptCode'] . '</option>';
 						$i++;

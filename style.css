@@ -207,3 +207,27 @@ td.profile-data {
 td.sub-field {
 	padding-left:30px;
 }
+
+/*----------------
+ PLANNER PAGE
+ -----------------*/
+
+table#planner{
+	border: 2px solid black;
+	border-collapse: collapse;
+	width: 800px;
+}
+td#plannerReq{
+	text-align: left;
+	padding:5px;
+	vertical-align:center;
+	background-color:#52ae63;
+	background-image:url("images/bg02.png");
+	background-size:100% 100%;
+	color:#ffffff;
+}
+td#plannerSubReq{
+	color: #000000;
+	padding: 3px;
+	background-color:#ffff7f;
+}
