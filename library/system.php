@@ -94,7 +94,7 @@
         } 
 		call_user_func_array(array($query, "bind_param"), $Args);
 		$out = false;
-		if ($query->execute()) $out = $query->get_result()->fetch_assoc();
+		if ($query->execute()) $out = $query->get_result()->fetch_array(MYSQLI_BOTH);
 		$query->close();
 		$mysqli->close();
 		return $out;

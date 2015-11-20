@@ -234,7 +234,7 @@ ul#tabs li a.selected {
 	color: #000;
 	background-color: #52ae63;
 	font-weight: bold;
-	padding: 0.7em 0.3em 0.45em 0.3em;
+	padding: 0.7em 0.3em 0.4em 0.3em;
 }
 
 div.tabContent.hide {
@@ -258,12 +258,14 @@ table.profile {
 }
 
 table.profile td {
-	height:25px;
+	height:20px;
+	vertical-align:top;
+	padding-top:5px;
 }
 
 table.profile td:nth-child(1) {
 	font-weight:bold;
-	width:100px;
+	width:120px;
 }
 
 table.profile td:nth-child(2) {
@@ -272,7 +274,7 @@ table.profile td:nth-child(2) {
 
 table.profile td:nth-child(3) {
 	font-weight:bold;
-	width:100px;
+	width:120px;
 }
 
 img#profilePicture {

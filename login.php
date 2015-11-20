@@ -61,7 +61,6 @@ else
 	echo "</div>";
 }
 
-closeDB($conn);
 ?>
 </div>
 </body>

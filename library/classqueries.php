@@ -11,7 +11,7 @@ function classSearchID($id) {
 		WHERE tblCourse.strCourseID = ?
 		INNER JOIN tblSection
 		ON tblSection.strCourseID = tblCourse.strCourseID";
-	if ($result = $dbGetAll($sql, "s", $id))
+	if ($result = dbGetAll($sql, "s", $id))
 		return $result;
 	return false;
 }

@@ -1,4 +1,10 @@
-<?php session_start(); require_once("library/system.php"); loginHandler();
+<?php session_start(); require_once("library/system.php"); require_once("library/basicqueries.php"); loginHandler();
+
+function formatAddress($address) {
+	if ($address)
+		return $address['street']."<br />".$address['city'].", ".$address['state']."<br />".$address['country']."<br />".$address['postCode'];
+	return "";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,126 +30,64 @@
 <div style="margin-left:250px;">
 <div class="profileTabContent" id="about">
 <table class="profile">
-  <tr>
-  <td>ID:</td>
-  <td>0000001</td>
-  </tr>
-  <tr>
-  <td>Name:</td>
-  <td>Derp Vader</td>
-  </tr>
-  <tr><td></td><td></td></tr>
-  <tr>
-  <td>Standing:</td>
-  <td>Junior</td>
-  </tr>
-  <tr>
-  <td>Enrollment:</td>
-  <td>Full Time</td>
-  </tr>
-  <tr>
-  <td>Status:</td>
-  <td>Active</td>
-  </tr>
-  <tr>
-  <td>Major:</td>
-  <td>Dark Side</td>
-  </tr>
-  <tr>
-  <td>Minor:</td>
-  <td>---</td>
-  </tr>
-  <tr>
-  <td>Active Military:</td>
-  <td>Yes</td>
-  </tr>
+<?php
+	$id = ($r = getStudentID($_SESSION['cruser'])) ? $r : "";
+	$name = ($r = getStudentFullName($_SESSION['cruser'])) ? $r : "";
+	$dob = ($r = getStudentDateOfBirth($_SESSION['cruser'])) ? date_create($r): date_create("1990-00-00");
+	$age = date_diff(date_create(), $dob)->format("%y");
+	$status = ($r = getStudentStatus($_SESSION['cruser'])) ? $r : "";
+	$enroll = ($r = getStudentEnrollment($_SESSION['cruser'])) ? $r : "";
+	$type = ($r = getStudentType($_SESSION['cruser'])) ? $r : "";
+	$aService = getActiveService($_SESSION['cruser']) ? "Yes" : "No";
+	$majors = ($r = getStudentMajors($_SESSION['cruser'])) ? $r : null;
+	$major1 = isset($majors[0]) ? $majors[0][0] : "Undeclared";
+	$major2 = isset($majors[1]) ? $majors[1][0] : "";
+	$major3 = isset($majors[2]) ? $majors[2][0] : "";
+	$minors = ($r = getStudentMinors($_SESSION['cruser'])) ? $r : null;
+	$minor1 = isset($minors[0]) ? $minors[0][0] : "---";
+	$minor2 = isset($minors[1]) ? $minors[1][0] : "";
+	$minor3 = isset($minors[2]) ? $minors[2][0] : "";
+	echo "<tr><td>ID:</td><td>".$id."</td><td>Status:</td><td>".$status."</td></tr>";
+	echo "<tr><td>Name:</td><td>".$name."</td><td>Standing:</td><td>".$type."</td></tr>";
+	echo "<tr><td>Date of Birth:</td><td>".date_format($dob, "M jS, Y")."</td><td>Enrollment:</td><td>".$enroll."</td></tr>";
+	echo "<tr><td>Age:</td><td>".$age."</td><td>Active Military:</td><td>".$aService."</td></tr>";
+	echo "<tr><td></td><td></td><td></td><td></td></tr>";
+	echo "<tr><td>Majors:</td><td>".$major1."</td><td>Minors:</td><td>".$minor1."</td></tr>";
+	echo "<tr><td></td><td>".$major2."</td><td></td><td>".$minor2."</td></tr>";
+	echo "<tr><td></td><td>".$major3."</td><td></td><td>".$minor3."</td></tr>";
+?>
 </table>
 </div>
 <div class="profileTabContent" id="contact">
 <table class="profile">
-  <tr>
-  <td>Address:</td>
-  <td>502 Death Star</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>Some Galaxy</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>Far, Far Away</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>58102</td>
-  </tr>
-  <tr><td></td><td></td></tr>
-  <tr>
-  <td>Phone:</td>
-  <td>(444)-444-4444</td>
-  </tr>
-  <tr><td></td><td></td></tr>
-  <tr>
-  <td>Email:</td>
-  <td>derp.vader@ndsu.edu</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>coolsith69@hotmail.com</td>
-  </tr>
+<?php
+	$a = getPermanentContactInfo($_SESSION['cruser']);
+	$b = getSchoolContactInfo($_SESSION['cruser']);
+	$a1 = $a ? [formatAddress($a), $a['email'], $a['mobileNumber'], $a['homeNumber']] : ["", "", "", ""];
+	$b1 = $b ? [formatAddress($b), $b['email']] : ["", ""];
+	echo "<tr><td>Permanent<br />Address:</td><td>".$a1[0]."</td><td>School<br />Address:</td><td>".$b1[0]."</td></tr>";
+	echo "<tr><td></td><td></td><td></td><td></td></tr>";
+	echo "<tr><td>Personal Email:</td><td>".$a1[1]."</td><td>School Email:</td><td>".$b1[1]."</td></tr>";
+	echo "<tr><td></td><td></td><td></td><td></td></tr>";
+	echo "<tr><td>Mobile Phone:</td><td>".$a1[2]."</td></tr>";
+	echo "<tr><td>Home Phone:</td><td>".$a1[3]."</td></tr>";
+	echo "<tr><td>Work Phone:</td><td></td></tr>";
+?>
 </table>
 </div>
 <div class="profileTabContent" id="emergency">
 <table class="profile">
-  <tr>
-  <td>Emergency Contact #1:</td>
-  <td>Mommy Vader</td>
-  <td>Emergency Contact #2:</td>
-  <td>Daddy Vader</td>
-  </tr>
-  <tr>
-  <td>Relation:</td>
-  <td>Mother</td>
-  <td>Relation:</td>
-  <td>Father</td>
-  </tr>
-  <tr>
-  <td>Address:</td>
-  <td>559 Death Star II</td>
-  <td>Address:</td>
-  <td>559 Death Star II</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>Some Other Galaxy</td>
-  <td></td>
-  <td>Some Other Galaxy</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>Astonishingly Close By</td>
-  <td></td>
-  <td>Astonishingly Close By</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>90431</td>
-  <td></td>
-  <td>90431</td>
-  </tr>
-  <tr><td></td><td></td></tr>
-  <tr>
-  <td>Phone:</td>
-  <td>(555)-555-5555</td>
-  <td>Phone:</td>
-  <td>(555)-555-5555</td>
-  </tr>
-  <tr>
-  <td>Alt Phone:</td>
-  <td>(666)-666-6666</td>
-  <td>Alt Phone:</td>
-  <td>(777)-777-7777</td>
-  </tr>
+<?php
+	$c = getEmergencyContacts($_SESSION['cruser']);
+	$c1 = isset($c[0]) ? [$c[0]['firstName']." ".$c[0]['lastName'], $c[0]['relation'], formatAddress($c[0]), $c[0]['mobileNumber'], $c[0]['homeNumber']] : ["", "", "", "", ""];
+	$c2 = isset($c[1]) ? [$c[1]['firstName']." ".$c[1]['lastName'], $c[1]['relation'], formatAddress($c[1]), $c[1]['mobileNumber'], $c[1]['homeNumber']] : ["", "", "", "", ""];
+	echo "<tr><td>Contact #1:</td><td>".$c1[0]."</td><td>Contact #2:</td><td>".$c2[0]."</td></tr>";
+	echo "<tr><td>Relation:</td><td>".$c1[1]."</td><td>Relation:</td><td>".$c2[1]."</td></tr>";
+	echo "<tr><td>Address:</td><td>".$c1[2]."</td><td>Address:</td><td>".$c2[2]."</td></tr>";
+	echo "<tr><td></td><td></td><td></td><td></td></tr>";
+	echo "<tr><td>Phone:</td><td>".$c1[3]."</td><td>Phone:</td><td>".$c2[3]."</td></tr>";
+	echo "<tr><td>Alt Phone:</td><td>".$c1[4]."</td><td>Alt Phone:</td><td>".$c2[4]."</td></tr>";
+?>
 </table>
 </div>
 </div>
