@@ -19,7 +19,16 @@ require("library/getClassSearch.php");
 			<span class="title">Class Search</span>
 			<br />
 			<form method="GET" action="classsearch.php">
-				<input type="text" name="searchbar" size="64" />
+				<?php
+					if (isset($_GET["searchbar"]))
+					{
+						echo "<input type=\"text\" name=\"searchbar\" value=\"" . $_GET["searchbar"] . "\" size=\"64\" />";
+					}
+					else
+					{
+						echo "<input type=\"text\" name=\"searchbar\" value=\"\" size=\"64\" />";
+					}
+				?>
 				<input type="submit" name="search" value="Search" />
 			</form>
 			<br />
