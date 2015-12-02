@@ -17,13 +17,34 @@ function searchCourses($search)
 		INNER JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
 		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
 		INNER JOIN tblroom ON tblsection.strRoomID = tblRoom.intRoomID
-		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID
-		WHERE tblcourse.strCourseID LIKE '%$search%' OR
-			tblcourse.strDeptCode LIKE '%$search%' OR
-			tblfaculty.strLastName LIKE '$search' OR
-			tblfaculty.strFirstName LIKE '$search' OR
-			tblcourse.strCourseName LIKE '%$search%'";
+		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID";
 
+	$term = preg_replace('/\s+/',' ',$search); 
+	$term = preg_replace('/^\s|\s$/','',$term); 
+//TODO: Sanitize $term
+	$words = explode(' ',$term);
+	 
+	$fields = Array( 
+	'tblcourse.strCourseID',  
+	'tblcourse.strDeptCode',
+	'tblfaculty.strLastName',  
+	'tblfaculty.strFirstName',  
+	'tblcourse.strCourseName'
+	); 
+	$where = NULL; 
+	foreach ($words as $wd) { 
+		$andwhere = NULL; 
+		if ($where) { $where .= ' AND'; }
+		foreach ($fields as $field) { 
+			if (! empty($wd)) { 
+				if ($andwhere) { $andwhere .= ' OR'; } 
+				$andwhere .= " $field LIKE '%$wd%'"; 
+			} 
+		} 
+		if ($andwhere) { $where .= " ($andwhere)"; } 
+	} 
+
+	if ($where) { $sql .= " WHERE $where ORDER BY secNumber"; }
 	$result = queryDB($sql);
 
 	if (mysqli_num_rows($result) > 0)
