@@ -15,7 +15,7 @@
     - Structure schemas
     -->
     <pma:structure_schemas>
-        <pma:database name="camprecon" collation="latin1_swedish_ci" charset="latin1">
+        <pma:database name="camprecon" collation="utf8_unicode_ci" charset="utf8">
             <pma:table name="tblcourse">
                 CREATE TABLE `tblcourse` (
                   `strCourseID` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -64,14 +64,15 @@
                   `strFacultyEID` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `intSecurityGroup` int(3) unsigned NOT NULL DEFAULT '0',
                   PRIMARY KEY (`intFacultyID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblpictureid">
                 CREATE TABLE `tblpictureid` (
-                  `intExternalID` int(7) NOT NULL,
-                  `vntImage` varchar(32) NOT NULL,
+                  `intExternalID` int(7) NOT NULL AUTO_INCREMENT,
+                  `vntImage` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strOwner` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   PRIMARY KEY (`intExternalID`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=1234562 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblroom">
                 CREATE TABLE `tblroom` (
@@ -80,7 +81,7 @@
                   `strRoomNumber` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
                   `intSeats` int(3) DEFAULT NULL,
                   PRIMARY KEY (`intRoomID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblsection">
                 CREATE TABLE `tblsection` (
@@ -138,6 +139,7 @@
                   `intCredits` int(3) DEFAULT NULL,
                   `blnActiveService` tinyint(1) DEFAULT NULL,
                   `intSecurityGroup` int(3) NOT NULL,
+                  `dtmDateOfBirth` date DEFAULT NULL,
                   PRIMARY KEY (`intStudentID`)
                 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
             </pma:table>
@@ -179,23 +181,25 @@
             </pma:table>
             <pma:table name="tblusercontact">
                 CREATE TABLE `tblusercontact` (
-                  `intContactID` int(7) NOT NULL,
-                  `intExternalID` int(7) NOT NULL,
-                  `strCountry` varchar(15) DEFAULT NULL,
-                  `strStreet` varchar(15) DEFAULT NULL,
-                  `strCity` varchar(15) DEFAULT NULL,
-                  `strState` varchar(2) DEFAULT NULL,
-                  `strPostCode` varchar(9) DEFAULT NULL,
-                  `intMobileNumber` int(11) DEFAULT NULL,
-                  `intHomeNumber` int(11) DEFAULT NULL,
-                  `intEmergencyNumber` int(11) DEFAULT NULL,
-                  `strEmergencyContactType` varchar(15) DEFAULT NULL,
-                  `strEmergencyContactLastName` varchar(24) DEFAULT NULL,
-                  `strEmergencyContactFirstName` varchar(24) DEFAULT NULL,
-                  `blnEmergencyContact` tinyint(1) DEFAULT NULL,
-                  `blnMailingAddress` tinyint(1) DEFAULT NULL,
-                  `blnPermanent` tinyint(1) DEFAULT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                  `intContactID` int(7) NOT NULL AUTO_INCREMENT,
+                  `strExternalEID` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strCountry` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strStreet` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strCity` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strState` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strPostCode` varchar(9) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+                  `strMobileNumber` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strHomeNumber` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strEmail` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strEmergencyNumber` varchar(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strEmergencyContactType` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strEmergencyContactLastName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `strEmergencyContactFirstName` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `blnEmergencyContact` tinyint(1) NOT NULL DEFAULT '0',
+                  `blnMailingAddress` tinyint(1) NOT NULL DEFAULT '0',
+                  `blnPermanent` tinyint(1) NOT NULL DEFAULT '0',
+                  PRIMARY KEY (`intContactID`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=1234567900 DEFAULT CHARSET=latin1;
             </pma:table>
         </pma:database>
     </pma:structure_schemas>
@@ -299,6 +303,17 @@
             <column name="strDeptCode">CSCI</column>
             <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI437</column>
+            <column name="strCourseName">Principles of Software Engineering</column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
+            <column name="strPrerequisite">CSCI161</column>
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">3</column>
             <column name="dblFee">0</column>
@@ -1968,7 +1983,23 @@
             <column name="strFacultyEID">pratap.kotala</column>
             <column name="intSecurityGroup">3</column>
         </table>
+        <table name="tblfaculty">
+            <column name="intFacultyID">5</column>
+            <column name="strLastName">Cooley</column>
+            <column name="strFirstName">Dennis</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">84</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">dennis.cooley</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
         <!-- Table tblpictureid -->
+        <table name="tblpictureid">
+            <column name="intExternalID">1234560</column>
+            <column name="vntImage">derpvader</column>
+            <column name="strOwner">derp.vader</column>
+        </table>
         <!-- Table tblroom -->
         <table name="tblroom">
             <column name="intRoomID">1</column>
@@ -1987,6 +2018,12 @@
             <column name="intFacilityID">25</column>
             <column name="strRoomNumber">104</column>
             <column name="intSeats">150</column>
+        </table>
+        <table name="tblroom">
+            <column name="intRoomID">6</column>
+            <column name="intFacilityID">25</column>
+            <column name="strRoomNumber">105</column>
+            <column name="intSeats">40</column>
         </table>
         <!-- Table tblsection -->
         <table name="tblsection">
@@ -2338,14 +2375,14 @@
         <table name="tblstudent">
             <column name="intStudentID">1</column>
             <column name="intFacultyID">7654321</column>
-            <column name="strFirstName">Girl</column>
-            <column name="strLastName">Nobody</column>
+            <column name="strFirstName">Derp</column>
+            <column name="strLastName">Vader</column>
             <column name="strMiddleName">P.</column>
-            <column name="strStudentEID">girl.nobody</column>
-            <column name="strStatus">Active</column>
-            <column name="strEnrollmentStatus">FullTime</column>
+            <column name="strStudentEID">derp.vader</column>
+            <column name="strStatus">sus</column>
+            <column name="strEnrollmentStatus">Fulltime</column>
             <column name="strStudentType">und</column>
-            <column name="strMajor1">Computer Science</column>
+            <column name="strMajor1">Dark Side</column>
             <column name="strMajor2">NULL</column>
             <column name="strMajor3">NULL</column>
             <column name="strMinor1">Evil</column>
@@ -2355,6 +2392,7 @@
             <column name="intCredits">100</column>
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
+            <column name="dtmDateOfBirth">1975-04-01</column>
         </table>
         <table name="tblstudent">
             <column name="intStudentID">2</column>
@@ -2363,7 +2401,7 @@
             <column name="strLastName">Hart</column>
             <column name="strMiddleName">Paul</column>
             <column name="strStudentEID">adam.hart</column>
-            <column name="strStatus">active</column>
+            <column name="strStatus">act</column>
             <column name="strEnrollmentStatus">Fulltime</column>
             <column name="strStudentType">und</column>
             <column name="strMajor1">Computer Science</column>
@@ -2376,6 +2414,7 @@
             <column name="intCredits">100</column>
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
+            <column name="dtmDateOfBirth">NULL</column>
         </table>
         <table name="tblstudent">
             <column name="intStudentID">3</column>
@@ -2384,7 +2423,7 @@
             <column name="strLastName">Schrader</column>
             <column name="strMiddleName">Dash</column>
             <column name="strStudentEID">buster.schrader</column>
-            <column name="strStatus">active</column>
+            <column name="strStatus">act</column>
             <column name="strEnrollmentStatus">Fulltime</column>
             <column name="strStudentType">und</column>
             <column name="strMajor1">Undeclared</column>
@@ -2397,6 +2436,29 @@
             <column name="intCredits">0</column>
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
+            <column name="dtmDateOfBirth">NULL</column>
+        </table>
+        <table name="tblstudent">
+            <column name="intStudentID">1000000</column>
+            <column name="intFacultyID">7654321</column>
+            <column name="strFirstName">Mister</column>
+            <column name="strLastName">Sir</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="strStudentEID">mister.sir</column>
+            <column name="strStatus">sus</column>
+            <column name="strEnrollmentStatus">Parttime</column>
+            <column name="strStudentType">phd</column>
+            <column name="strMajor1">Underwater Basketwea</column>
+            <column name="strMajor2">NULL</column>
+            <column name="strMajor3">NULL</column>
+            <column name="strMinor1">Philosophy</column>
+            <column name="strMinor2">NULL</column>
+            <column name="strMinor3">NULL</column>
+            <column name="dblGPA">2.1</column>
+            <column name="intCredits">199</column>
+            <column name="blnActiveService">0</column>
+            <column name="intSecurityGroup">5</column>
+            <column name="dtmDateOfBirth">NULL</column>
         </table>
         <!-- Table tblstudentenrollment -->
         <table name="tblstudentenrollment">
@@ -2514,22 +2576,104 @@
         <!-- Table tbltask -->
         <!-- Table tbluser -->
         <table name="tbluser">
+            <column name="intUserId">2</column>
+            <column name="strEID">derp.vader</column>
+            <column name="strPassword">fishpants2015</column>
+		</table>
+		<table name="tbluser">
             <column name="intUserId">1</column>
             <column name="strEID">buster.d.schrader</column>
             <column name="strPassword">butt</column>
         </table>
         <!-- Table tblusercontact -->
         <table name="tblusercontact">
+            <column name="intContactID">28</column>
+            <column name="strExternalEID">derp.vader</column>
+            <column name="strCountry">United States</column>
+            <column name="strStreet">603 C Pavek</column>
+            <column name="strCity">Fargo</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58102</column>
+            <column name="strMobileNumber">NULL</column>
+            <column name="strHomeNumber">NULL</column>
+            <column name="strEmail">derp.vader@ndsu.edu</column>
+            <column name="strEmergencyNumber">NULL</column>
+            <column name="strEmergencyContactType">NULL</column>
+            <column name="strEmergencyContactLastName">NULL</column>
+            <column name="strEmergencyContactFirstName">NULL</column>
+            <column name="blnEmergencyContact">0</column>
+            <column name="blnMailingAddress">0</column>
+            <column name="blnPermanent">0</column>
+        </table>
+        <table name="tblusercontact">
+            <column name="intContactID">29</column>
+            <column name="strExternalEID">derp.vader</column>
+            <column name="strCountry">Far, Far Away</column>
+            <column name="strStreet">404 Star Destroyer Rd</column>
+            <column name="strCity">Some Galaxy</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">10813</column>
+            <column name="strMobileNumber">1112223333</column>
+            <column name="strHomeNumber">NULL</column>
+            <column name="strEmail">coolsith69@hotmail.com</column>
+            <column name="strEmergencyNumber">NULL</column>
+            <column name="strEmergencyContactType">NULL</column>
+            <column name="strEmergencyContactLastName">NULL</column>
+            <column name="strEmergencyContactFirstName">NULL</column>
+            <column name="blnEmergencyContact">0</column>
+            <column name="blnMailingAddress">1</column>
+            <column name="blnPermanent">1</column>
+        </table>
+        <table name="tblusercontact">
+            <column name="intContactID">30</column>
+            <column name="strExternalEID">derp.vader</column>
+            <column name="strCountry">Far, Far Away</column>
+            <column name="strStreet">502 Lorem Ipsum</column>
+            <column name="strCity">Whateverville</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58976</column>
+            <column name="strMobileNumber">9990009999</column>
+            <column name="strHomeNumber">1231231235</column>
+            <column name="strEmail">NULL</column>
+            <column name="strEmergencyNumber">NULL</column>
+            <column name="strEmergencyContactType">Mother</column>
+            <column name="strEmergencyContactLastName">Vader</column>
+            <column name="strEmergencyContactFirstName">Mommy</column>
+            <column name="blnEmergencyContact">1</column>
+            <column name="blnMailingAddress">0</column>
+            <column name="blnPermanent">0</column>
+        </table>
+        <table name="tblusercontact">
+            <column name="intContactID">31</column>
+            <column name="strExternalEID">derp.vader</column>
+            <column name="strCountry">Far, Far Away</column>
+            <column name="strStreet">502 Lorem Ipsum</column>
+            <column name="strCity">Whateverville</column>
+            <column name="strState">ND</column>
+            <column name="strPostCode">58976</column>
+            <column name="strMobileNumber">8887776666</column>
+            <column name="strHomeNumber">1231231235</column>
+            <column name="strEmail">NULL</column>
+            <column name="strEmergencyNumber">NULL</column>
+            <column name="strEmergencyContactType">Father</column>
+            <column name="strEmergencyContactLastName">Vader</column>
+            <column name="strEmergencyContactFirstName">Mr.</column>
+            <column name="blnEmergencyContact">1</column>
+            <column name="blnMailingAddress">0</column>
+            <column name="blnPermanent">0</column>
+        </table>
+        <table name="tblusercontact">
             <column name="intContactID">1234567899</column>
-            <column name="intExternalID">2</column>
+            <column name="strExternalEID">2</column>
             <column name="strCountry">USA</column>
             <column name="strStreet">1011 April Lane</column>
             <column name="strCity">Yankton</column>
             <column name="strState">SD</column>
             <column name="strPostCode">57078</column>
-            <column name="intMobileNumber">2147483647</column>
-            <column name="intHomeNumber">605666458</column>
-            <column name="intEmergencyNumber">2147483647</column>
+            <column name="strMobileNumber">2147483647</column>
+            <column name="strHomeNumber">605666458</column>
+            <column name="strEmail">NULL</column>
+            <column name="strEmergencyNumber">2147483647</column>
             <column name="strEmergencyContactType"></column>
             <column name="strEmergencyContactLastName"></column>
             <column name="strEmergencyContactFirstName"></column>
