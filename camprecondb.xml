@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Dec 02, 2015 at 01:08 AM
+- Generation Time: Dec 02, 2015 at 02:38 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -141,7 +141,7 @@
                   `intSecurityGroup` int(3) NOT NULL,
                   `dtmDateOfBirth` date DEFAULT NULL,
                   PRIMARY KEY (`intStudentID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblstudentenrollment">
                 CREATE TABLE `tblstudentenrollment` (
@@ -177,7 +177,7 @@
                   `strPassword` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   PRIMARY KEY (`intUserId`),
                   UNIQUE KEY `strEID` (`strEID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblusercontact">
                 CREATE TABLE `tblusercontact` (
@@ -1996,7 +1996,12 @@
         </table>
         <!-- Table tblpictureid -->
         <table name="tblpictureid">
-            <column name="intExternalID">1234560</column>
+            <column name="intExternalID">1</column>
+            <column name="vntImage">busterdschrader</column>
+            <column name="strOwner">buster.d.schrader</column>
+        </table>
+        <table name="tblpictureid">
+            <column name="intExternalID">2</column>
             <column name="vntImage">derpvader</column>
             <column name="strOwner">derp.vader</column>
         </table>
@@ -2422,18 +2427,18 @@
             <column name="strFirstName">Buster</column>
             <column name="strLastName">Schrader</column>
             <column name="strMiddleName">Dash</column>
-            <column name="strStudentEID">buster.schrader</column>
+            <column name="strStudentEID">buster.d.schrader</column>
             <column name="strStatus">act</column>
             <column name="strEnrollmentStatus">Fulltime</column>
             <column name="strStudentType">und</column>
-            <column name="strMajor1">Undeclared</column>
+            <column name="strMajor1">Computer Science</column>
             <column name="strMajor2">NULL</column>
             <column name="strMajor3">NULL</column>
             <column name="strMinor1">NULL</column>
             <column name="strMinor2">NULL</column>
             <column name="strMinor3">NULL</column>
-            <column name="dblGPA">0</column>
-            <column name="intCredits">0</column>
+            <column name="dblGPA">3.194</column>
+            <column name="intCredits">65</column>
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
             <column name="dtmDateOfBirth">NULL</column>
@@ -2494,7 +2499,7 @@
             <column name="intWaitlistPosition">NULL</column>
         </table>
         <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
+            <column name="intStudentID">2</column>
             <column name="intSectionID">5</column>
             <column name="strSectionGrade">A</column>
             <column name="strEnrollmentStatus">E</column>
@@ -2502,7 +2507,7 @@
             <column name="intWaitlistPosition">NULL</column>
         </table>
         <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
+            <column name="intStudentID">2</column>
             <column name="intSectionID">6</column>
             <column name="strSectionGrade">A</column>
             <column name="strEnrollmentStatus">E</column>
@@ -2510,7 +2515,7 @@
             <column name="intWaitlistPosition">NULL</column>
         </table>
         <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
+            <column name="intStudentID">2</column>
             <column name="intSectionID">7</column>
             <column name="strSectionGrade">A</column>
             <column name="strEnrollmentStatus">E</column>
@@ -2518,57 +2523,9 @@
             <column name="intWaitlistPosition">NULL</column>
         </table>
         <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
+            <column name="intStudentID">2</column>
             <column name="intSectionID">8</column>
             <column name="strSectionGrade">B</column>
-            <column name="strEnrollmentStatus">E</column>
-            <column name="strPermitStatus">NULL</column>
-            <column name="intWaitlistPosition">NULL</column>
-        </table>
-        <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
-            <column name="intSectionID">9</column>
-            <column name="strSectionGrade">B</column>
-            <column name="strEnrollmentStatus">E</column>
-            <column name="strPermitStatus">NULL</column>
-            <column name="intWaitlistPosition">NULL</column>
-        </table>
-        <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
-            <column name="intSectionID">10</column>
-            <column name="strSectionGrade">A</column>
-            <column name="strEnrollmentStatus">E</column>
-            <column name="strPermitStatus">NULL</column>
-            <column name="intWaitlistPosition">NULL</column>
-        </table>
-        <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
-            <column name="intSectionID">11</column>
-            <column name="strSectionGrade">A</column>
-            <column name="strEnrollmentStatus">E</column>
-            <column name="strPermitStatus">NULL</column>
-            <column name="intWaitlistPosition">NULL</column>
-        </table>
-        <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
-            <column name="intSectionID">12</column>
-            <column name="strSectionGrade">C</column>
-            <column name="strEnrollmentStatus">E</column>
-            <column name="strPermitStatus">NULL</column>
-            <column name="intWaitlistPosition">NULL</column>
-        </table>
-        <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
-            <column name="intSectionID">13</column>
-            <column name="strSectionGrade">A</column>
-            <column name="strEnrollmentStatus">E</column>
-            <column name="strPermitStatus">NULL</column>
-            <column name="intWaitlistPosition">NULL</column>
-        </table>
-        <table name="tblstudentenrollment">
-            <column name="intStudentID">1</column>
-            <column name="intSectionID">14</column>
-            <column name="strSectionGrade">A</column>
             <column name="strEnrollmentStatus">E</column>
             <column name="strPermitStatus">NULL</column>
             <column name="intWaitlistPosition">NULL</column>
@@ -2576,14 +2533,14 @@
         <!-- Table tbltask -->
         <!-- Table tbluser -->
         <table name="tbluser">
-            <column name="intUserId">2</column>
-            <column name="strEID">derp.vader</column>
-            <column name="strPassword">fishpants2015</column>
-		</table>
-		<table name="tbluser">
             <column name="intUserId">1</column>
             <column name="strEID">buster.d.schrader</column>
             <column name="strPassword">butt</column>
+        </table>
+        <table name="tbluser">
+            <column name="intUserId">2</column>
+            <column name="strEID">derp.vader</column>
+            <column name="strPassword">fishpants2015</column>
         </table>
         <!-- Table tblusercontact -->
         <table name="tblusercontact">
