@@ -4,7 +4,7 @@ function searchCourses($search)
 {
 	$sql = "SELECT DISTINCT strCourseName AS courseName,
 		intSectionID AS secID,
-		intSectionNumber AS secNumber,
+		CONCAT(tblcourse.strCourseID,'-',intSectionNumber) AS secNumber,
 		strFirstName,
 		strLastName,
 		strDayFormat,
@@ -18,7 +18,7 @@ function searchCourses($search)
 		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
 		INNER JOIN tblroom ON tblsection.strRoomID = tblRoom.intRoomID
 		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID
-		WHERE tblcourse.strCourseID LIKE '$search' OR
+		WHERE tblcourse.strCourseID LIKE '%$search%' OR
 			tblcourse.strDeptCode LIKE '%$search%' OR
 			tblfaculty.strLastName LIKE '$search' OR
 			tblfaculty.strFirstName LIKE '$search' OR
@@ -37,10 +37,11 @@ function searchCourses($search)
 		echo "<td class=\"thr\">Instructor</td>";
 		echo "<td class=\"thr\">Facility</td>";
 		echo "<td class=\"thr\">Room</td></tr>";
-		echo "</thead><tbody><tr>";
+		echo "</thead><tbody>";
 		
 		while($row = mysqli_fetch_assoc($result))
 		{
+			echo "<tr>";
 			echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
 			echo "<td class=\"advcell\">".$row['courseName']."</td>";
 			echo "<td class=\"advcell\">".$row['secNumber']."</td>";
@@ -48,9 +49,12 @@ function searchCourses($search)
 			echo "<td class=\"advcell\">".$row['time']."</td>";
 			echo "<td class=\"advcell\">".$row['strFirstName'].' '.$row['strLastName']."</td>";
 			echo "<td class=\"advcell\">".$row['strFacilityName']."</td>";
-			echo "<td class=\"advcell\">".$row['strRoomNumber']."</td>";
-			echo "</tr></tbody>";	
+			echo "<td class=\"advcell\">".$row['strRoomNumber']."</td>";	
+			echo "</tr>";
 		}
+		
+		echo "</tbody>";
+		
 	}
 	else
 	{

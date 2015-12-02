@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Nov 19, 2015 at 10:53 PM
+- Generation Time: Dec 02, 2015 at 01:08 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -64,7 +64,7 @@
                   `strFacultyEID` varchar(24) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   `intSecurityGroup` int(3) unsigned NOT NULL DEFAULT '0',
                   PRIMARY KEY (`intFacultyID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblpictureid">
                 CREATE TABLE `tblpictureid` (
@@ -175,7 +175,7 @@
                   `strPassword` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                   PRIMARY KEY (`intUserId`),
                   UNIQUE KEY `strEID` (`strEID`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=987270 DEFAULT CHARSET=latin1;
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
             </pma:table>
             <pma:table name="tblusercontact">
                 CREATE TABLE `tblusercontact` (
@@ -272,6 +272,28 @@
             <column name="strCourseDescription">NULL</column>
         </table>
         <table name="tblcourse">
+            <column name="strCourseID">CSCI213</column>
+            <column name="strCourseName">Modern Software Development</column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
+            <column name="strPrerequisite">CSCI161</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
+            <column name="strCourseID">CSCI336</column>
+            <column name="strCourseName">Theoretical Computer Science II </column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
+            <column name="strPrerequisite">CSCI335</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
             <column name="strCourseID">CSCI374</column>
             <column name="strCourseName">Computer Organization and Architecture</column>
             <column name="strDeptCode">CSCI</column>
@@ -295,7 +317,7 @@
         </table>
         <table name="tblcourse">
             <column name="strCourseID">ENGR311</column>
-            <column name="strCourseName">History of Tenchnology in America</column>
+            <column name="strCourseName">History of Technology in America</column>
             <column name="strDeptCode">ENGR</column>
             <column name="strGenEdCategory">NULL</column>
             <column name="strPrerequisite">NULL</column>
@@ -346,7 +368,7 @@
             <column name="strCorequisite">NULL</column>
             <column name="intCredits">4</column>
             <column name="dblFee">0</column>
-            <column name="strCourseDescription">Intro to Spanish</column>
+            <column name="strCourseDescription">NULL</column>
         </table>
         <table name="tblcourse">
             <column name="strCourseID">UNIV189</column>
@@ -1903,17 +1925,6 @@
         </table>
         <!-- Table tblfaculty -->
         <table name="tblfaculty">
-            <column name="intFacultyID">0</column>
-            <column name="strLastName">Kotala</column>
-            <column name="strFirstName">Pratap</column>
-            <column name="strMiddleName">NULL</column>
-            <column name="intDeptID">29</column>
-            <column name="strPosition">Professor</column>
-            <column name="blnAdvisor">0</column>
-            <column name="strFacultyEID">pratap.kotala</column>
-            <column name="intSecurityGroup">3</column>
-        </table>
-        <table name="tblfaculty">
             <column name="intFacultyID">1</column>
             <column name="strLastName">Radermacher</column>
             <column name="strFirstName">Alex</column>
@@ -1944,6 +1955,17 @@
             <column name="strPosition">Professor</column>
             <column name="blnAdvisor">0</column>
             <column name="strFacultyEID">wei.jin</column>
+            <column name="intSecurityGroup">3</column>
+        </table>
+        <table name="tblfaculty">
+            <column name="intFacultyID">4</column>
+            <column name="strLastName">Kotala</column>
+            <column name="strFirstName">Pratap</column>
+            <column name="strMiddleName">NULL</column>
+            <column name="intDeptID">29</column>
+            <column name="strPosition">Professor</column>
+            <column name="blnAdvisor">0</column>
+            <column name="strFacultyEID">pratap.kotala</column>
             <column name="intSecurityGroup">3</column>
         </table>
         <!-- Table tblpictureid -->
@@ -2007,8 +2029,8 @@
             <column name="strCourseID">CSCI160</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">2</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2024,8 +2046,8 @@
             <column name="strCourseID">CSCI160L</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">3</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2075,8 +2097,8 @@
             <column name="strCourseID">ENGL120</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">0</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2092,8 +2114,8 @@
             <column name="strCourseID">ENGR311</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">1</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2109,8 +2131,8 @@
             <column name="strCourseID">MATH105</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">2</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2143,8 +2165,8 @@
             <column name="strCourseID">MUSC111</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">2</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2160,8 +2182,8 @@
             <column name="strCourseID">UNIV189</column>
             <column name="strRoomID">1</column>
             <column name="intFacultyID">1</column>
-            <column name="intTimeSlotID">0</column>
-            <column name="intScheduleID">0</column>
+            <column name="intTimeSlotID">1</column>
+            <column name="intScheduleID">1</column>
             <column name="intYear">2014</column>
             <column name="strSeason">Spring</column>
             <column name="dtmStartDate">2015-11-03</column>
@@ -2492,7 +2514,7 @@
         <!-- Table tbltask -->
         <!-- Table tbluser -->
         <table name="tbluser">
-            <column name="intUserId">987269</column>
+            <column name="intUserId">1</column>
             <column name="strEID">buster.d.schrader</column>
             <column name="strPassword">butt</column>
         </table>
