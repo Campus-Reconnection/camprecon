@@ -27,7 +27,7 @@ table#loginfoTable {
 
 img#loginfoPhoto { /*Login info photo thumbnail*/
 	height:65px;
-	width:auto;
+	width:65px;
 	padding: 1px;
 	border:1px solid #021a40;
 	background-color:#f0f0f0;
@@ -278,6 +278,8 @@ table.profile td:nth-child(3) {
 }
 
 img#profilePicture {
+	height:250px;
+	width:250px;
 	float:left;
 	padding: 1px;
 	border:1px solid #021a40;

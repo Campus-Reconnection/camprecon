@@ -27,7 +27,7 @@ function formatAddress($address) {
 </ul>
 <div id="profileDiv">
 <img src="images/derpvader.jpg" alt="Profile picture" id="profilePicture" />
-<div style="margin-left:250px;">
+<div style="margin-left:268px;">
 <div class="profileTabContent" id="about">
 <table class="profile">
 <?php
