@@ -1,7 +1,7 @@
 <?php
-//session_start();
+session_start();
 require("library/system.php");
-//loginHandler();
+loginHandler();
 
 function addmarker($Name,$Var,$Latitude,$Longitude)
 {

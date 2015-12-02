@@ -1,9 +1,10 @@
-<?php //session_start(); require("library/system.php"); loginHandler(); ?>
+<?php session_start(); require("library/system.php"); loginHandler(); ?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Campus Reconnection</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="icon" type="image/ico" href="images/favicon.ico" />
 </head>
 <body>
 <?php include("includes/loginfo.php"); ?>

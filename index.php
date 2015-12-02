@@ -3,7 +3,8 @@
 <html>
 <head>
 <title>Campus Reconnection</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="icon" type="image/ico" href="images/favicon.ico" />
 </head>
 <body>
 <?php include("includes/loginfo.php"); ?>

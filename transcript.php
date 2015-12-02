@@ -28,7 +28,8 @@
 <html>
 <head>
   <title>Campus Reconnection</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="icon" type="image/ico" href="images/favicon.ico" />
   <script src="javascript/jquery-2.1.4.min.js"></script>
   <script src="javascript/transcript.js"></script>
 </head>

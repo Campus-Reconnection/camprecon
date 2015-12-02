@@ -10,7 +10,8 @@ function formatAddress($address) {
 <html>
 <head>
 <title>Campus Reconnection</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="icon" type="image/ico" href="images/favicon.ico" />
 <script src="javascript/profile.js"></script>
 </head>
 <body onload="init()">
