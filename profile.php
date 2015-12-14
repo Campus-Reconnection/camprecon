@@ -27,10 +27,6 @@ function formatAddress($address) {
   <li><a href="#emergency">Emergency</a></li>
 </ul>
 <div id="profileDiv">
-<img src="images/derpvader.jpg" alt="Profile picture" id="profilePicture" />
-<div style="margin-left:268px;">
-<div class="profileTabContent" id="about">
-<table class="profile">
 <?php
 	$id = ($r = getStudentID($_SESSION['cruser'])) ? $r : "";
 	$name = ($r = getStudentFullName($_SESSION['cruser'])) ? $r : "";
@@ -39,7 +35,7 @@ function formatAddress($address) {
 	$status = ($r = getStudentStatus($_SESSION['cruser'])) ? $r : "";
 	$enroll = ($r = getStudentEnrollment($_SESSION['cruser'])) ? $r : "";
 	$type = ($r = getStudentType($_SESSION['cruser'])) ? $r : "";
-	$aService = getActiveService($_SESSION['cruser']) ? "Yes" : "No";
+	$aService = getActiveService($_SESSION['cruser']) ? "No" : "Yes";
 	$majors = ($r = getStudentMajors($_SESSION['cruser'])) ? $r : null;
 	$major1 = isset($majors[0]) ? $majors[0][0] : "Undeclared";
 	$major2 = isset($majors[1]) ? $majors[1][0] : "";
@@ -48,6 +44,10 @@ function formatAddress($address) {
 	$minor1 = isset($minors[0]) ? $minors[0][0] : "---";
 	$minor2 = isset($minors[1]) ? $minors[1][0] : "";
 	$minor3 = isset($minors[2]) ? $minors[2][0] : "";
+	echo "<img src=\"images/" . $_SESSION["crphototb"] . "\" alt=\"Profile picture\" id=\"profilePicture\" />";
+	echo "<div style=\"margin-left:268px;\">";
+	echo "<div class=\"profileTabContent\" id=\"about\">";
+	echo "<table class=\"profile\">";
 	echo "<tr><td>ID:</td><td>".$id."</td><td>Status:</td><td>".$status."</td></tr>";
 	echo "<tr><td>Name:</td><td>".$name."</td><td>Standing:</td><td>".$type."</td></tr>";
 	echo "<tr><td>Date of Birth:</td><td>".date_format($dob, "M jS, Y")."</td><td>Enrollment:</td><td>".$enroll."</td></tr>";
