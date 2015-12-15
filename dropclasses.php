@@ -25,22 +25,43 @@ loginHandler();
 <span class="title">Drop Classes:</span>
 <br />
 <div class="shadow-container">
+<form method="GET" action="dropclasses.php">
 <table class="schedule" id="schedule">
 <?php returnCourses(); ?>
 </table>
 </div>
 <br />
 <input type="button" name="delete" value="Delete selected courses" onclick="removeRow('schedule')" style="float: right">
+<!--input type="submit" name="delete" value="Delete selected courses"-->
 
 <?php
-	if(isset($_GET['delete']))
+	if($_SERVER['REQUEST_METHOD'] === 'GET')
 	{
+		$classesdropped = 0;
 		foreach($_GET['check'] as $key=>$value)
 		{
-			deleteCourse($value);
+			$conn = openDB();
+			$result = deleteCourse($value);
+			closeDB($conn);
+
+			if ($result != false)
+			{
+				$classesdropped = $classesdropped+ 1;
+			}
+		}
+
+		if ($classesadded > 0)
+		{
+			echo "<table class=\"schedule\"><tr><td class=\"advcell\">You have successfully dropped " . $classesdropped . " classes.</td></tr>";
+		}
+		else
+		{
+			echo "<table class=\"schedule\"><tr><td class=\"advcell\">No classes have been dropped.</td></tr>";
 		}				
 	}
 ?>
+
+
 
 <script>
 function removeRow(id){

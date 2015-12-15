@@ -182,6 +182,6 @@ function returnCourses()
 function deleteCourses($secID) 
 {
 	$sql = "DELETE FROM tblstudentenrollment WHERE " . $secID . " = tblstudentenrollment.intSectionID";
-	queryDB($sql);
+	return queryDB($sql);
 }
 ?>
