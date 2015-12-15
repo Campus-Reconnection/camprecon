@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Dec 15, 2015 at 01:26 AM
+- Generation Time: Dec 15, 2015 at 05:26 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -333,7 +333,7 @@
             <column name="strCourseDescription">NULL</column>
         </table>
         <table name="tblcourse">
-            <column name="strCourseID">CSCI437</column>
+            <column name="strCourseID">CSCI473</column>
             <column name="strCourseName">Principles of Software Engineering</column>
             <column name="strDeptCode">CSCI</column>
             <column name="strGenEdCategory">NULL</column>
@@ -2768,7 +2768,7 @@
         <table name="tblstudentenrollment">
             <column name="intStudentID">2</column>
             <column name="intSectionID">27</column>
-            <column name="strSectionGrade">C</column>
+            <column name="strSectionGrade">NULL</column>
             <column name="strEnrollmentStatus">E</column>
             <column name="strPermitStatus">NULL</column>
             <column name="intWaitlistPosition">NULL</column>
