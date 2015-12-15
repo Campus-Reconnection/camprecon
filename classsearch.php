@@ -50,7 +50,13 @@ loginHandler();
 						foreach($_GET['check'] as $key=>$value)
 						{
 							$conn = openDB();
-							$result = addCourse($value);
+							$sql = "SELECT intStudentID FROM tblStudent WHERE strStudentEID = '" . $_SESSION["cruser"] . "';";
+							$result = queryDB($sql);
+							
+							$row = mysqli_fetch_assoc($result);
+							$studenteid = $row["intStudentID"];
+							
+							$result = addCourse($studenteid,$value);
 							closeDB($conn);
 							
 							if ($result != false)

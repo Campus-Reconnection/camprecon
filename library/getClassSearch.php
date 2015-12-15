@@ -84,9 +84,9 @@ function searchCourses($search)
 	}
 }
 
-function addCourse($secID)
+function addCourse($stuID, $secID)
 {
-	$sql = "INSERT INTO tblstudentenrollment(intStudentID,intSectionID,strEnrollmentStatus) VALUES ('2','" . $secID . "','E');";
+	$sql = "INSERT INTO tblstudentenrollment(intStudentID,intSectionID,strEnrollmentStatus) VALUES ('" . $stuID . "','" . $secID . "','E');";
 	return queryDB($sql);
 }
 

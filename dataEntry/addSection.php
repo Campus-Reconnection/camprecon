@@ -161,7 +161,7 @@ function timeslotoptions($name)
 
 function showcourses()
 {
-	$sql = "SELECT strCourseID FROM tblcourse;";
+	$sql = "SELECT crs.strCourseID AS \"cid\" FROM tblcourse crs LEFT JOIN tblsection sec ON sec.strCourseID = crs.strCourseID WHERE sec.intSectionID IS NULL;";
 	
 	$conn = openDB();
 	$result = queryDB($sql);
@@ -172,7 +172,7 @@ function showcourses()
 		
 		while($row = mysqli_fetch_assoc($result))
 		{
-			echo "<li>" . $row["strCourseID"] . "</li>";
+			echo "<li>" . $row["cid"] . "</li>";
 		}
 		
 		echo "</ul>";
@@ -206,7 +206,7 @@ function showcourses()
 <input type="submit" />
 </form>
 <br />
-Available courses:
+Courses With No Section:
 <?php showcourses(); ?>
 </body>
 </html>
