@@ -1,10 +1,26 @@
-<?php session_start(); require("library/system.php"); loginHandler(); ?>
+<?php 
+session_start(); 
+require("library/system.php"); 
+require("library/classqueries.php");
+loginHandler(); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Campus Reconnection</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-  <link rel="icon" type="image/ico" href="images/favicon.ico" />
+<link rel="icon" type="image/ico" href="images/favicon.ico" />
+<script>
+function sendalert()
+{
+	var conf = confirm("Are you sure you want to do this?");
+	
+	if (conf == true)
+	{
+		document.getElementById("dropform").submit();
+	}
+}
+</script>
 </head>
 <body>
 <?php include("includes/loginfo.php"); ?>
@@ -20,78 +36,38 @@
 <span class="title">Drop Classes:</span>
 <br />
 <div class="shadow-container">
+<form id="dropform" method="GET" action="library/classdrop.php">
 <table class="schedule" id="schedule">
-<tr>
-<td class="thr">Select</td>
-<td class="thr">Class</td>
-<td class="thr">Description</td>
-<td class="thr">Days/Times</td>
-<td class="thr">Room</td>
-<td class="thr">Instructor</td>
-</tr>
-<form action="dropclasses.php" method="get">
-<tr>	
-<td class="advcell"><input type="checkbox" name="class0"</td>
-<td class="advcell">PHYS211</td>
-<td class="advcell">Physics</td>
-<td class="advcell">MoWeFr 10:00AM - 10:50AM</td>
-<td class="advcell">South Engineering, 116 </td>
-<td class="advcell">Warren Christensen</td>
-</tr>
-<tr>
-<td class="advcell"><input type="checkbox" name="class1"</td>
-<td class="advcell">CSCI213</td>
-<td class="advcell">Modern Software Development</td>
-<td class="advcell">MoWeFr 2:00PM - 2:50PM</td>
-<td class="advcell">Quentin Burdick Bldg, 102</td>
-<td class="advcell">Oksana Myronovych</td>
-</tr>
-<tr>
-<td class="advcell"><input type="checkbox" name="class2"</td>
-<td class="advcell">CSCI222</td>
-<td class="advcell">Discrete Math</td>
-<td class="advcell">MoWeFri 4:00PM-4:50PM</td>
-<td class="advcell">Quentin Burdick Bldg, 102</td>
-<td class="advcell">Vasasant Ubhaya</td>
-</tr>
-<tr>
-<td class="advcell"><input type="checkbox" name="class3"</td>
-<td class="advcell">CSCI413</td>
-<td class="advcell">Principles of Software Engineering</td>
-<td class="advcell">TuTh 11:00AM-12:15PM</td>
-<td class="advcell">Quentin Burdick Bldg, 102</td>
-<td class="advcell">Alex Radermacher</td>
-</tr>
-<td class="advcell"><input type="checkbox" name="class4"</td>
-<td class="advcell">STAT367</td>
-<td class="advcell">Statistics</td>
-<td class="advcell">TuTh 2:00PM - 2:50PM</td>
-<td class="advcell">Van Es, 101</td>
-<td class="advcell">Tatjana Miljkovic</td>
-</tr>
+<?php returnCourses(true); ?>
 </table>
 </div>
 <br />
-<input type="button" value="Delete selected courses" onclick="removeRow('schedule')" style="float: right">
+<input type="button" name="delete" value="Delete Selected Courses" onclick="sendalert()" style="float:right">
+</form>
 <script>
-function removeRow(id){
-	var objTable = document.getElementById(id);
-	var iRow = objTable.rows.length;
-	var counter=0;
-	if(objTable.rows.length>1 && confirm("Are you sure you want to drop the selected courses?")){
-		for(var i=0;i<objTable.rows.length; i++){
-			var chk=objTable.rows[i].cells[0].childNodes[0];
-			if(chk.checked){
-				objTable.deleteRow(i);
-				iRow--;
-				i--;
-				counter=counter+1;
+var x = document.getElementsByClassName("fws");
+var checked = [];
+
+//When a checkbox is changed, change colors of corresponding table cells.
+function checkchanged(courseid)
+{
+	for (var i = 0; i < x.length; i++)
+	{
+		if (x[i].innerHTML == courseid)
+		{
+			if (checked[i] != true)
+			{
+				x[i].style.backgroundColor = "#ff0000";
+				checked[i] = true;
+			}
+			else
+			{
+				x[i].style.backgroundColor = "#52ae63";
+				checked[i] = false;
 			}
 		}
 	}
 }
-
 </script>
-</form>
 </body>
 </html>
