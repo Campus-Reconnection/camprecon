@@ -29,7 +29,7 @@ if (isset($_POST["waitlisttotal"]))
 	$sql = "INSERT INTO tblsection(
 		intSectionNumber,
 		strCourseID,
-		strRoomID,
+		intRoomID,
 		intFacultyID,
 		intTimeSlotID,
 		intScheduleID,

@@ -18,7 +18,8 @@ function formatAddress($address) {
 <!--<script src="javascript/illuminati.js"></script> !-->
 <script>
 	cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-		new Audio('javascript/illuminati.mp3').play()
+		cheet.disable('↑ ↑ ↓ ↓ ← → ← → b a');
+		new Audio('javascript/illuminati.mp3').play();
 		console.log("played");
 		$("#illuminimage").animate({opacity:1},2500);
 	});

@@ -126,20 +126,22 @@ function returnCourses($javascriptable)
 		tblsection.intSectionID AS secID,
 		CONCAT(tblcourse.strCourseID,'-',intSectionNumber) AS secNumber,
 		tblcourse.strCourseID AS secBareCourse,
-		strFirstName,
-		strLastName,
+		tblfaculty.strFirstName,
+		tblfaculty.strLastName,
 		strDayFormat,
 		CONCAT(DATE_FORMAT(timStartTime,'%l:%i%p'),'-',DATE_FORMAT(timEndTime,'%l:%i%p')) AS time,
 		strFacilityName,
 		strRoomNumber
 		FROM tblstudentenrollment
-		INNER JOIN tblsection ON tblstudentenrollment.intSectionID = tblsection.intSectionID
-		INNER JOIN tblcourse ON tblsection.strCourseID = tblcourse.strCourseID
-		INNER JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
-		INNER JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
-		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
-		INNER JOIN tblroom ON tblsection.intRoomID = tblRoom.intRoomID
-		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID";
+		JOIN tblsection ON tblstudentenrollment.intSectionID = tblsection.intSectionID
+		JOIN tblcourse ON tblsection.strCourseID = tblcourse.strCourseID
+		JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
+		JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
+		JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
+		JOIN tblroom ON tblsection.intRoomID = tblRoom.intRoomID
+		JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID
+        JOIN tblstudent ON tblstudentenrollment.intStudentID = tblstudent.intStudentID
+        WHERE tblstudent.strStudentEID = '" . $_SESSION["cruser"] . "';";
 
 	$result = queryDB($sql);
 
@@ -184,7 +186,9 @@ function returnCourses($javascriptable)
 
 function deleteCourses($secID) 
 {
-	$sql = "DELETE FROM tblstudentenrollment WHERE " . $secID . " = tblstudentenrollment.intSectionID";
+	$sql = "DELETE enr FROM tblstudentenrollment enr
+		JOIN tblstudent stu ON enr.intStudentID = stu.intStudentID
+		WHERE enr.intSectionID = '" . $secID . "' AND stu.strStudentEID = '" . $_SESSION["cruser"] . "';";
 	return queryDB($sql);
 }
 ?>

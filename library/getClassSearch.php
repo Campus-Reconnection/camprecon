@@ -16,7 +16,7 @@ function searchCourses($search)
 		INNER JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
 		INNER JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
 		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
-		INNER JOIN tblroom ON tblsection.strRoomID = tblRoom.intRoomID
+		INNER JOIN tblroom ON tblsection.intRoomID = tblRoom.intRoomID
 		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID";
 
 	$term = preg_replace('/\s+/',' ',$search); 

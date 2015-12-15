@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Dec 15, 2015 at 07:13 AM
+- Generation Time: Dec 15, 2015 at 08:29 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -2388,10 +2388,10 @@
             <column name="intFacultyID">12</column>
             <column name="intTimeSlotID">6</column>
             <column name="intScheduleID">1</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2408,7 +2408,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2425,7 +2425,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2442,7 +2442,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2459,7 +2459,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2473,10 +2473,10 @@
             <column name="intFacultyID">10</column>
             <column name="intTimeSlotID">4</column>
             <column name="intScheduleID">7</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2490,10 +2490,10 @@
             <column name="intFacultyID">6</column>
             <column name="intTimeSlotID">8</column>
             <column name="intScheduleID">7</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2507,10 +2507,10 @@
             <column name="intFacultyID">7</column>
             <column name="intTimeSlotID">1</column>
             <column name="intScheduleID">7</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2524,10 +2524,10 @@
             <column name="intFacultyID">8</column>
             <column name="intTimeSlotID">10</column>
             <column name="intScheduleID">5</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2544,7 +2544,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2561,7 +2561,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2578,7 +2578,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2595,7 +2595,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2612,7 +2612,7 @@
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2783,6 +2783,14 @@
             <column name="dtmDateOfBirth">1995-04-13</column>
         </table>
         <!-- Table tblstudentenrollment -->
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">1</column>
+            <column name="intSectionID">26</column>
+            <column name="strSectionGrade">NULL</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
         <table name="tblstudentenrollment">
             <column name="intStudentID">2</column>
             <column name="intSectionID">27</column>
