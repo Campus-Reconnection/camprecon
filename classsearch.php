@@ -31,28 +31,45 @@ loginHandler();
 					}
 				?>
 				<input type="submit" name="search" value="Search" />
-			</form>
-			<br />
-			<table class="schedule">
+				<br />
+					<?php
+						if(isset($_GET['search']))
+						{
+							echo "<br /><table class=\"schedule\">";
+							searchCourses($_GET['searchbar']);
+							echo "</table>";
+							echo "<br /><input type=\"submit\" name=\"add\" value=\"Add\" />";
+						}
+					?>
+				<br />
 				<?php
-					if(isset($_GET['search']))
+					if(isset($_GET['add']))
 					{
-						searchCourses($_GET['searchbar']);
+						$classesadded = 0;
+						
+						foreach($_GET['check'] as $key=>$value)
+						{
+							$conn = openDB();
+							$result = addCourse($value);
+							closeDB($conn);
+							
+							if ($result != false)
+							{
+								$classesadded = $classesadded + 1;
+							}
+						}
+						
+						if ($classesadded > 0)
+						{
+							echo "<table class=\"schedule\"><tr><td class=\"advcell\">You have successfully enrolled in " . $classesadded . " classes.</td></tr>";
+						}
+						else
+						{
+							echo "<table class=\"schedule\"><tr><td class=\"advcell\">No classes have been enrolled.</td></tr>";
+						}
 					}
 				?>
-			</table>
-			<br />
-			<input type="submit" name="add" value="Add" />
-			<?php
-				if(isset($_POST['add']))
-				{
-					foreach($_POST['check'] as $key=>$value)
-					{
-						addCourse($value);
-					}
-				
-				}
-			?>
+			</form>
 		</div>
 	</body>
 </html>
