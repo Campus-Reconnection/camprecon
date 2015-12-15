@@ -20,7 +20,7 @@ function formatAddress($address) {
 	cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
 		new Audio('javascript/illuminati.mp3').play()
 		console.log("played");
-		alert("illuminati confirmed");
+		$("#illuminimage").animate({opacity:1},2500);
 	});
 </script>
 </head>
@@ -103,6 +103,8 @@ function formatAddress($address) {
 </div>
 </div>
 </div>
+<br />
+<img id="illuminimage" style="opacity:0;" src="images/illuminati.png" />
 </div>
 <br>
 </body>
