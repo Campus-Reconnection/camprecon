@@ -28,8 +28,12 @@ function plotfromdatabase()
 				JOIN tblStudent ON tblStudent.intStudentID = tblStudentEnrollment.intStudentID
 				WHERE tblStudent.strStudentEID = ?";
 	if ($result = dbGetAll($sql, "s", $_SESSION['cruser']))
+	{
 		foreach ($result as $row)
+		{
 			addmarker($row["strFacilityName"],strtolower(substr($row["strFacilityName"],0,1).$row["intFacilityID"]),$row["intLatitude"],$row["intLongitude"]);
+		}
+	}
 }
 ?>
 

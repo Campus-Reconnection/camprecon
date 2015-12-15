@@ -120,11 +120,12 @@ function getAllDepartments() {
 	return $result;
 }
 
-function returnCourses()
+function returnCourses($javascriptable)
 {
 	$sql = "SELECT DISTINCT strCourseName AS courseName,
 		tblsection.intSectionID AS secID,
 		CONCAT(tblcourse.strCourseID,'-',intSectionNumber) AS secNumber,
+		tblcourse.strCourseID AS secBareCourse,
 		strFirstName,
 		strLastName,
 		strDayFormat,
@@ -158,8 +159,10 @@ function returnCourses()
 		while($row = mysqli_fetch_assoc($result))
 		{
 			echo "<tr>";
-			//echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
-			echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" /></td>";
+			if ($javascriptable == true)
+				{echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" onchange=\"checkchanged('" . $row["secBareCourse"] . "')\" /></td>";}
+			else
+				{echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" /></td>";}
 			echo "<td class=\"advcell\">".$row['courseName']."</td>";
 			echo "<td class=\"advcell\">".$row['secNumber']."</td>";
 			echo "<td class=\"advcell\">".$row['strDayFormat']."</td>";
