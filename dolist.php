@@ -17,8 +17,8 @@
 <table class="schedule">
 <tr>
 <td class="thr">Item</td>
-<td class="thr">Amount</td>
 <td class="thr">Date</td>
+<td class="thr">Amount</td>
 <td class="thr">Department</td>
 </tr>
 <tr>
@@ -37,8 +37,8 @@
 <tr>
 <td class="thr">Item</td>
 <td class="thr">Date</td>
+<td class="thr">Discription</td>
 <td class="thr">Status</td>
-<td class="thr">Description</td>
 </tr>
 <tr>
 <td class="advcell">Audit</td>
@@ -54,8 +54,8 @@
 <div class="shadow-container">
 <table class="schedule">
 <tr>
-<td class="thr">Date</td>
 <td class="thr">Description</td>
+<td class="thr">Date</td>
 <td class="thr">From</td>
 <td class="thr">&nbsp;</td>
 </tr>

@@ -22,6 +22,7 @@ function loadadvisors()
 	echo "<td class=\"advcell\">" . preg_replace("/(\\d{3})(\\d{3})(\\d{4})/","(\\1) \\2-\\3",$row["strAdvPhone"]) . "</td>\r\n";
 	echo "<td class=\"advcell\">" . $row["strFEID"] . "@ndsu.edu</td>\r\n";
 	echo "<td class=\"advcell\">" . $row["strDept"] . "</td>\r\n";
+	
 	closeDB($conn);
 }
 ?>
