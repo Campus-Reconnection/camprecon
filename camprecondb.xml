@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Dec 14, 2015 at 04:47 PM
+- Generation Time: Dec 15, 2015 at 01:26 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -137,6 +137,7 @@
                   `strMinor2` varchar(20) DEFAULT NULL,
                   `strMinor3` varchar(20) DEFAULT NULL,
                   `dblGPA` float DEFAULT NULL,
+                  `dblDues` float DEFAULT NULL,
                   `intCredits` int(3) DEFAULT NULL,
                   `blnActiveService` tinyint(1) DEFAULT NULL,
                   `intSecurityGroup` int(3) NOT NULL,
@@ -2734,6 +2735,7 @@
             <column name="strMinor2">NULL</column>
             <column name="strMinor3">NULL</column>
             <column name="dblGPA">3.71</column>
+            <column name="dblDues">4280.32</column>
             <column name="intCredits">100</column>
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
@@ -2756,6 +2758,7 @@
             <column name="strMinor2">NULL</column>
             <column name="strMinor3">NULL</column>
             <column name="dblGPA">3.194</column>
+            <column name="dblDues">3502.12</column>
             <column name="intCredits">65</column>
             <column name="blnActiveService">0</column>
             <column name="intSecurityGroup">5</column>
