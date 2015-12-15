@@ -122,9 +122,8 @@ function getAllDepartments() {
 
 function returnCourses()
 {
-
 	$sql = "SELECT DISTINCT strCourseName AS courseName,
-		intSectionID AS secID,
+		tblsection.intSectionID AS secID,
 		CONCAT(tblcourse.strCourseID,'-',intSectionNumber) AS secNumber,
 		strFirstName,
 		strLastName,
@@ -133,7 +132,8 @@ function returnCourses()
 		strFacilityName,
 		strRoomNumber
 		FROM tblstudentenrollment
-		INNER JOIN tblsection ON tblcourse.strCourseID = tblsection.strCourseID
+		INNER JOIN tblsection ON tblstudentenrollment.intSectionID = tblsection.intSectionID
+		INNER JOIN tblcourse ON tblsection.strCourseID = tblcourse.strCourseID
 		INNER JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
 		INNER JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
 		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
@@ -181,7 +181,7 @@ function returnCourses()
 
 function deleteCourses($secID) 
 {
-	$sql = "DELETE FROM tblstudentenrollment WHERE $secID=tblstudentenrollment.intSectionID";
+	$sql = "DELETE FROM tblstudentenrollment WHERE " . $secID . " = tblstudentenrollment.intSectionID";
 	queryDB($sql);
 }
 ?>
