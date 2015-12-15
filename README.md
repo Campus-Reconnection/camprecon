@@ -1,34 +1,29 @@
-# The WWW Directory
+# Campus Reconnection
+A class project for CSCI413.
+Development seizure 12/15/15.
 
-This is where the web codes go.
-If you don't know what PHP is, then git outta here!
+###How to implement this on a local machine:
+We used WAMPServer to host this project. (Windows, Apache, MySQL, and PHP)
+It's a preconfigured webhosting software with extras components to make web development less awful.
 
-###What's done?
+It can be downloaded from http://wampserver.com/en
+
+Once downloaded and installed, a tool called phpMyAdmin can be used to import the database from
+an XML file we exported. You can access it through the wamp menu or at http://localhost/phpMyAdmin/
+
+It's suggested that if you update the database that you drop the existing database completely before importing it.
+
+###Explanation of project components:
 <ul>
-<li>Login/Logout</li>
-<li>Navigation menus.</li>
-<li>Weekly schedule shell.</li>
-<li>VM server setup.</li>
-<li>Google Maps data and connection to database.</li>
+<li>dataEntry directory - These files can be run in the browser for manually entering data into the database.</li>
+<li>images directory - Contains all images that are used in the entire site.</li>
+<li>includes directory - Contains mechanisms that can be included into multiple pages (weekly schedule for instance.)</li>
+<li>javascript directory - Contains javascript libraries and transcript engine.</li>
+<li>library directory - Contains sql wrapper functions and et cetera that pull database information back for use.</li>
+<li>camprecondb.xml - Should be imported into phpMyAdmin if you want a database.</li>
+<li>style.css - Makes all pages look beautiful. To take a trip back to the 1990's, delete me.</li>
+<li>(...).php - Campus reconnection pages.</li>
 </ul>
-###What's being worked on?
-<ul>
-<li>Login information. (Buster)</li>
-<li>Connection between database and weekly schedule. (Adam Hart)</li>
-<li>Transcript page (Adam Hart)</li>
-<li>Query functions (Erik Canton)</li>
-<li>Class Planner page (Alex B/Erin)</li>
-<li>Drop Classes (Nicole)</li>
-<li>Add Classes ("Kevin" [Erik and Alex Job])</li>
-<li>Profile Page (Josh)</li>
-</ul>
-###What needs to be worked on?
-<ul>
-<li>Search bar.</li>
-<li>These pages:</li>
-<ul>
-<li>Housing / Parking Permit / Finances</li>
-<li>Activities and Tickets</li>
-</ul>
-<li>And et cetera...</li>
-</ul>
+
+###Server Environment:
+At the time we developed this, we had WAMPServer running on a virtual machine. This server was accessible at 134.129.125.206
