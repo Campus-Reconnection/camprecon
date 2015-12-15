@@ -20,16 +20,16 @@ function addmarker($Name,$Var,$Latitude,$Longitude)
 
 function plotfromdatabase()
 {
-	$sql = "SELECT strFacilityName, intFacilityID, intLatitude, intLongitude FROM tblfacility WHERE intFacilityID >= 33 AND intFacilityID < 72;";
-	$result = queryDB($sql);
-	
-	if (mysqli_num_rows($result) > 0)
-	{
-		while($row = mysqli_fetch_assoc($result))
-		{
+	$sql = "SELECT DISTINCT fac.strFacilityName, fac.intFacilityID, fac.intLatitude, fac.intLongitude
+				FROM tblfacility AS fac
+				JOIN tblRoom ON tblRoom.intFacilityID = fac.intFacilityID
+				JOIN tblSection ON tblRoom.intRoomID = tblSection.intRoomID
+				JOIN tblStudentEnrollment ON tblStudentEnrollment.intSectionID = tblSection.intSectionID
+				JOIN tblStudent ON tblStudent.intStudentID = tblStudentEnrollment.intStudentID
+				WHERE tblStudent.strStudentEID = ?";
+	if ($result = dbGetAll($sql, "s", $_SESSION['cruser']))
+		foreach ($result as $row)
 			addmarker($row["strFacilityName"],strtolower(substr($row["strFacilityName"],0,1).$row["intFacilityID"]),$row["intLatitude"],$row["intLongitude"]);
-		}
-	}
 }
 ?>
 

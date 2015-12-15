@@ -12,7 +12,17 @@ function formatAddress($address) {
 <title>Campus Reconnection</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
   <link rel="icon" type="image/ico" href="images/favicon.ico" />
+<script src="javascript/jquery-2.1.4.min.js"></script>
 <script src="javascript/profile.js"></script>
+<script src="javascript/cheet.min.js"></script>
+<!--<script src="javascript/illuminati.js"></script> !-->
+<script>
+	cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+		new Audio('javascript/illuminati.mp3').play()
+		console.log("played");
+		alert("illuminati confirmed");
+	});
+</script>
 </head>
 <body onload="init()">
 <?php include("includes/loginfo.php"); ?>
@@ -35,7 +45,7 @@ function formatAddress($address) {
 	$status = ($r = getStudentStatus($_SESSION['cruser'])) ? $r : "";
 	$enroll = ($r = getStudentEnrollment($_SESSION['cruser'])) ? $r : "";
 	$type = ($r = getStudentType($_SESSION['cruser'])) ? $r : "";
-	$aService = getActiveService($_SESSION['cruser']) ? "No" : "Yes";
+	$aService = getActiveService($_SESSION['cruser']) ? "Yes" : "No";
 	$majors = ($r = getStudentMajors($_SESSION['cruser'])) ? $r : null;
 	$major1 = isset($majors[0]) ? $majors[0][0] : "Undeclared";
 	$major2 = isset($majors[1]) ? $majors[1][0] : "";
