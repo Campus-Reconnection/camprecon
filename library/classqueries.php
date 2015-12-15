@@ -120,4 +120,68 @@ function getAllDepartments() {
 	return $result;
 }
 
+function returnCourses()
+{
+
+	$sql = "SELECT DISTINCT strCourseName AS courseName,
+		intSectionID AS secID,
+		CONCAT(tblcourse.strCourseID,'-',intSectionNumber) AS secNumber,
+		strFirstName,
+		strLastName,
+		strDayFormat,
+		CONCAT(DATE_FORMAT(timStartTime,'%l:%i%p'),'-',DATE_FORMAT(timEndTime,'%l:%i%p')) AS time,
+		strFacilityName,
+		strRoomNumber
+		FROM tblstudentenrollment
+		INNER JOIN tblsection ON tblcourse.strCourseID = tblsection.strCourseID
+		INNER JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
+		INNER JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
+		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
+		INNER JOIN tblroom ON tblsection.strRoomID = tblRoom.intRoomID
+		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID";
+
+	$result = queryDB($sql);
+
+	if (mysqli_num_rows($result) > 0)
+	{
+		echo "<thead>";
+		echo "<tr><td class=\"thr\">Select</td>";
+		echo "<td class=\"thr\">Course Name</td>";
+		echo "<td class=\"thr\">Section</td>";
+		echo "<td class=\"thr\">Schedule</td>";
+		echo "<td class=\"thr\">Time</td>";
+		echo "<td class=\"thr\">Instructor</td>";
+		echo "<td class=\"thr\">Facility</td>";
+		echo "<td class=\"thr\">Room</td></tr>";
+		echo "</thead><tbody>";
+		
+		while($row = mysqli_fetch_assoc($result))
+		{
+			echo "<tr>";
+			//echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
+			echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" /></td>";
+			echo "<td class=\"advcell\">".$row['courseName']."</td>";
+			echo "<td class=\"advcell\">".$row['secNumber']."</td>";
+			echo "<td class=\"advcell\">".$row['strDayFormat']."</td>";
+			echo "<td class=\"advcell\">".$row['time']."</td>";
+			echo "<td class=\"advcell\">".$row['strFirstName'].' '.$row['strLastName']."</td>";
+			echo "<td class=\"advcell\">".$row['strFacilityName']."</td>";
+			echo "<td class=\"advcell\">".$row['strRoomNumber']."</td>";	
+			echo "</tr>";
+		}
+		
+		echo "</tbody>";
+		
+	}
+	else
+	{
+		echo "<tr><td class=\"advcell\">You are not signed up for any classes.</td></tr>";
+	}
+}
+
+function deleteCourses($secID) 
+{
+	$sql = "DELETE FROM tblstudentenrollment WHERE $secID=tblstudentenrollment.intSectionID";
+	queryDB($sql);
+}
 ?>

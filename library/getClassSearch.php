@@ -63,7 +63,8 @@ function searchCourses($search)
 		while($row = mysqli_fetch_assoc($result))
 		{
 			echo "<tr>";
-			echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
+			//echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
+			echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" /></td>";
 			echo "<td class=\"advcell\">".$row['courseName']."</td>";
 			echo "<td class=\"advcell\">".$row['secNumber']."</td>";
 			echo "<td class=\"advcell\">".$row['strDayFormat']."</td>";
@@ -86,7 +87,7 @@ function searchCourses($search)
 function addCourse($secID)
 {
 	$sql = "INSERT INTO tblstudentenrollment VALUES($secID)";
-	$result = queryDB($sql);
+	queryDB($sql);
 }
 
 function getAllDepartments()
@@ -94,5 +95,6 @@ function getAllDepartments()
 	$sql = "SELECT * FROM tbldepartment ORDER BY strDeptCode ASC";
 	return $sql;
 }
+
 
 ?>

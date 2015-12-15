@@ -42,11 +42,16 @@ loginHandler();
 				?>
 			</table>
 			<br />
+			<input type="submit" name="add" value="Add" />
 			<?php
-				//if(isset($_POST['add']))
-				//{
-
-				//}
+				if(isset($_POST['add']))
+				{
+					foreach($_POST['check'] as $key=>$value)
+					{
+						addCourse($value);
+					}
+				
+				}
 			?>
 		</div>
 	</body>
