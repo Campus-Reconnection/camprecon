@@ -311,3 +311,43 @@ td#plannerSubReq{
 	padding: 3px;
 	background-color:#ffff7f;
 }
+
+table.plantable{
+	border-collapse: collapse;
+}
+
+td.planblack{
+	background-color: #000000;
+	font-weight: bold;
+	color: #ffffff;
+	text-align: center;
+	border: 1px solid black;
+	padding: 5px;
+}
+
+td.plangrey{
+	background-color: #d3d3d3;
+	border: 1px solid black;
+}
+
+td.planreg{
+	background-color: #fffff0;
+	border: 1px solid black;
+	padding: 3px;
+	
+}
+
+td.planregcenter{
+	background-color: #fffff0;
+	border: 1px solid black;
+	padding: 3px;
+	text-align: center;
+}
+
+td.planhead{
+	background-color:#efefef;
+	border:1px solid black;
+	font-weight: bold;
+	padding: 3px;
+	text-align: center;
+}
