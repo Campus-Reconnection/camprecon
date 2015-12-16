@@ -143,9 +143,7 @@ function returnCourses($javascriptable)
         JOIN tblstudent ON tblstudentenrollment.intStudentID = tblstudent.intStudentID
         WHERE tblstudent.strStudentEID = '" . $_SESSION["cruser"] . "';";
 
-	$result = queryDB($sql);
-
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql, "s", $_SESSION["cruser"]))
 	{
 		echo "<thead>";
 		echo "<tr><td class=\"thr\">Select</td>";
@@ -158,7 +156,7 @@ function returnCourses($javascriptable)
 		echo "<td class=\"thr\">Room</td></tr>";
 		echo "</thead><tbody>";
 		
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<tr>";
 			if ($javascriptable == true)
@@ -188,7 +186,7 @@ function deleteCourses($secID)
 {
 	$sql = "DELETE enr FROM tblstudentenrollment enr
 		JOIN tblstudent stu ON enr.intStudentID = stu.intStudentID
-		WHERE enr.intSectionID = '" . $secID . "' AND stu.strStudentEID = '" . $_SESSION["cruser"] . "';";
-	return queryDB($sql);
+		WHERE enr.intSectionID = ? AND stu.strStudentEID = ?;";
+	return dbPush($sql, "is", $secID, $_SESSION["cruser"]);
 }
 ?>

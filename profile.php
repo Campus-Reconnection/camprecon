@@ -14,8 +14,7 @@ function formatAddress($address) {
   <link rel="icon" type="image/ico" href="images/favicon.ico" />
 <script src="javascript/jquery-2.1.4.min.js"></script>
 <script src="javascript/profile.js"></script>
-<script src="javascript/cheet.min.js"></script>
-<!--<script src="javascript/illuminati.js"></script> !-->
+<script src="javascript/cheet/cheet.min.js"></script>
 <script>
 	cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
 		cheet.disable('↑ ↑ ↓ ↓ ← → ← → b a');

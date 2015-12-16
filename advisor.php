@@ -5,7 +5,6 @@ loginHandler();
 
 function loadadvisors()
 {
-	$conn = openDB();
 	$sql = "SELECT CONCAT(fac.strFirstName,' ',fac.strLastName) AS \"strAdvisor\",
 			fac.strPhone AS \"strAdvPhone\",
 			fac.strFacultyEID AS \"strFEID\",
@@ -13,17 +12,18 @@ function loadadvisors()
 			FROM tblstudent stu
 			JOIN tblfaculty fac ON stu.intFacultyID = fac.intFacultyID
 			JOIN tbldepartment dep ON fac.intDeptID = dep.intDeptID
-			WHERE strStudentEID = '" . $_SESSION["cruser"] . "';";
+			WHERE strStudentEID = ?;";
 			
-	$result = queryDB($sql);
-	$row = mysqli_fetch_assoc($result);
-
-	echo "<td class=\"advcell\">" . $row["strAdvisor"] . "</td>\r\n";
-	echo "<td class=\"advcell\">" . preg_replace("/(\\d{3})(\\d{3})(\\d{4})/","(\\1) \\2-\\3",$row["strAdvPhone"]) . "</td>\r\n";
-	echo "<td class=\"advcell\">" . $row["strFEID"] . "@ndsu.edu</td>\r\n";
-	echo "<td class=\"advcell\">" . $row["strDept"] . "</td>\r\n";
-	
-	closeDB($conn);
+	if ($result = dbGetAll($sql, "s", $_SESSION["cruser"])
+	{
+		foreach ($result as $row)
+		{
+			echo "<td class=\"advcell\">" . $row["strAdvisor"] . "</td>\r\n";
+			echo "<td class=\"advcell\">" . preg_replace("/(\\d{3})(\\d{3})(\\d{4})/","(\\1) \\2-\\3",$row["strAdvPhone"]) . "</td>\r\n";
+			echo "<td class=\"advcell\">" . $row["strFEID"] . "@ndsu.edu</td>\r\n";
+			echo "<td class=\"advcell\">" . $row["strDept"] . "</td>\r\n";
+		}
+	}	
 }
 ?>
 <!DOCTYPE html>

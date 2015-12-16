@@ -45,9 +45,7 @@ function searchCourses($search)
 	} 
 
 	if ($where) { $sql .= " WHERE $where ORDER BY secNumber"; }
-	$result = queryDB($sql);
-
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql))
 	{
 		echo "<thead>";
 		echo "<tr><td class=\"thr\">Select</td>";
@@ -60,7 +58,7 @@ function searchCourses($search)
 		echo "<td class=\"thr\">Room</td></tr>";
 		echo "</thead><tbody>";
 		
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<tr>";
 			//echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
@@ -86,8 +84,8 @@ function searchCourses($search)
 
 function addCourse($stuID, $secID)
 {
-	$sql = "INSERT INTO tblstudentenrollment(intStudentID,intSectionID,strEnrollmentStatus) VALUES ('" . $stuID . "','" . $secID . "','E');";
-	return queryDB($sql);
+	$sql = "INSERT INTO tblstudentenrollment(intStudentID,intSectionID,strEnrollmentStatus) VALUES (?, ?, 'E');";
+	return dbPush($sql, "ii", $stuID, $secID));
 }
 
 function getAllDepartments()

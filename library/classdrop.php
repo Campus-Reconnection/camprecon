@@ -8,11 +8,7 @@
 	{
 		foreach ($_GET['check'] as $key=>$value)
 		{
-			$conn = openDB();
-			$result = deleteCourses($value);
-			closeDB($conn);
-
-			if ($result != false)
+			if (deleteCourses($value))
 			{
 				header("Location: ../dropclasses.php");
 			}

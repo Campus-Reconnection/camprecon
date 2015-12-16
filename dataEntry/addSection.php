@@ -26,37 +26,9 @@ if (isset($_POST["waitlisttotal"]))
 			break;
 	}
 	
-	$sql = "INSERT INTO tblsection(
-		intSectionNumber,
-		strCourseID,
-		intRoomID,
-		intFacultyID,
-		intTimeSlotID,
-		intScheduleID,
-		intYear,
-		strSeason,
-		dtmStartDate,
-		dtmEndDate,
-		intCapacity,
-		intWaitlistTotal,
-		blnOnlineSection) VALUES ('"
-		. $_POST["sectionnumber"] . "','"
-		. $_POST["courseid"] . "','"
-		. $_POST["roomid"] . "','"
-		. $_POST["facultyid"] . "','"
-		. $_POST["timeslot"] . "','"
-		. $_POST["schedule"] . "','"
-		. $_POST["year"] . "','"
-		. $_POST["season"] . "','"
-		. $startdate . "','"
-		. $enddate . "','"
-		. $_POST["capacity"] . "','"
-		. $_POST["waitlisttotal"] . "','"
-		. $_POST["onlinesection"] . "');";
-	$conn = openDB();
-	$result = queryDB($sql);
-	closeDB($conn);
-	//echo $sql;
+	$sql = "INSERT INTO tblsection(intSectionNumber, strCourseID, intRoomID, intFacultyID, intTimeSlotID, intScheduleID, intYear, strSeason, dtmStartDate, dtmEndDate, intCapacity, intWaitlistTotal, blnOnlineSection)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
+	dbPush($sql, "isiiiiisssiii", $_POST["sectionnumber"], $_POST["courseid"], $_POST["roomid"], $_POST["facultyid"], $_POST["timeslot"], $_POST["schedule"], $_POST["year"], $_POST["season"], $startdate, $enddate, $_POST["capacity"], $_POST["waitlisttotal"], $_POST["onlinesection"]);
 }
 
 function seasonoptions($name)
@@ -75,110 +47,85 @@ function roomoptions($name)
 		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID
 		ORDER BY tblFacility.strFacilityName, tblRoom.strRoomNumber;";
 	
-	$conn = openDB();
-	$result = queryDB($sql);
-	
 	echo "<select name=\"" . $name . "\">";
 	
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql))
 	{
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<option value=\"" . $row["intRoomID"] . "\">" . $row["strRoomNumber"] . " - " . $row["strFacility"] . "</option>";
 		}
     }
 	
 	echo "</select>";
-	
-	closeDB($conn);
 }
 
 function facultyoptions($name)
 {
 	$sql = "SELECT intFacultyID, strFirstName, strLastName FROM tblfaculty ORDER BY strLastname, strFirstname;";
 	
-	$conn = openDB();
-	$result = queryDB($sql);
-	
 	echo "<select name=\"" . $name . "\">";
 	
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql))
 	{
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<option value=\"" . $row["intFacultyID"] . "\">" . $row["strFirstName"] . " " . $row["strLastName"] . "</option>";
 		}
     }
 	
 	echo "</select>";
-	
-	closeDB($conn);
 }
 
 function scheduleoptions($name)
 {
 	$sql = "SELECT intDaySlotID, strDayFormat FROM tblsectionschedule;";
 	
-	$conn = openDB();
-	$result = queryDB($sql);
-	
 	echo "<select name=\"" . $name . "\">";
 	
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql))
 	{
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<option value=\"" . $row["intDaySlotID"] . "\">" . $row["strDayFormat"] . "</option>";
 		}
     }
 	
 	echo "</select>";
-	
-	closeDB($conn);
 }
 
 function timeslotoptions($name)
 {
 	$sql = "SELECT intTimeSlotID, CONCAT(timStartTime,\" to \",timEndTime) AS \"strTime\" FROM tblsectiontimes;";
 	
-	$conn = openDB();
-	$result = queryDB($sql);
-	
 	echo "<select name=\"" . $name . "\">";
 	
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql))
 	{
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<option value=\"" . $row["intTimeSlotID"] . "\">" . $row["strTime"] . "</option>";
 		}
     }
 	
 	echo "</select>";
-	
-	closeDB($conn);
 }
 
 function showcourses()
 {
 	$sql = "SELECT crs.strCourseID AS \"cid\" FROM tblcourse crs LEFT JOIN tblsection sec ON sec.strCourseID = crs.strCourseID WHERE sec.intSectionID IS NULL;";
 	
-	$conn = openDB();
-	$result = queryDB($sql);
-
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql))
 	{
 		echo "<ul style=\"font-size:0.75em\">";
 		
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as row)
 		{
 			echo "<li>" . $row["cid"] . "</li>";
 		}
 		
 		echo "</ul>";
     }
-
-	closeDB($conn);
 }
 ?>
 

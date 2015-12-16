@@ -46,20 +46,12 @@ loginHandler();
 					if(isset($_GET['add']))
 					{
 						$classesadded = 0;
+						$sql = "SELECT intStudentID FROM tblStudent WHERE strStudentEID = ?;";
+						$studenteid = dbGetFirst($sql, "s", $_SESSION["cruser"])[0];
 						
 						foreach($_GET['check'] as $key=>$value)
 						{
-							$conn = openDB();
-							$sql = "SELECT intStudentID FROM tblStudent WHERE strStudentEID = '" . $_SESSION["cruser"] . "';";
-							$result = queryDB($sql);
-							
-							$row = mysqli_fetch_assoc($result);
-							$studenteid = $row["intStudentID"];
-							
-							$result = addCourse($studenteid,$value);
-							closeDB($conn);
-							
-							if ($result != false)
+							if (addCourse($studenteid, $value))
 							{
 								$classesadded = $classesadded + 1;
 							}
