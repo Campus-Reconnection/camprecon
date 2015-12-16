@@ -141,7 +141,7 @@ function returnCourses($javascriptable)
 		JOIN tblroom ON tblsection.intRoomID = tblRoom.intRoomID
 		JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID
         JOIN tblstudent ON tblstudentenrollment.intStudentID = tblstudent.intStudentID
-        WHERE tblstudent.strStudentEID = '" . $_SESSION["cruser"] . "';";
+        WHERE tblstudent.strStudentEID = ?;";
 
 	if ($result = dbGetAll($sql, "s", $_SESSION["cruser"]))
 	{

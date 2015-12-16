@@ -85,7 +85,7 @@ function searchCourses($search)
 function addCourse($stuID, $secID)
 {
 	$sql = "INSERT INTO tblstudentenrollment(intStudentID,intSectionID,strEnrollmentStatus) VALUES (?, ?, 'E');";
-	return dbPush($sql, "ii", $stuID, $secID));
+	return dbPush($sql, "ii", $stuID, $secID);
 }
 
 function getAllDepartments()

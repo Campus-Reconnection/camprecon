@@ -14,7 +14,7 @@ function loadadvisors()
 			JOIN tbldepartment dep ON fac.intDeptID = dep.intDeptID
 			WHERE strStudentEID = ?;";
 			
-	if ($result = dbGetAll($sql, "s", $_SESSION["cruser"])
+	if ($result = dbGetAll($sql, "s", $_SESSION["cruser"]))
 	{
 		foreach ($result as $row)
 		{
