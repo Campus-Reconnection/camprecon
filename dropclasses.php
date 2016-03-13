@@ -9,7 +9,18 @@ loginHandler();
 <head>
 <title>Campus Reconnection</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
-  <link rel="icon" type="image/ico" href="images/favicon.ico" />
+<link rel="icon" type="image/ico" href="images/favicon.ico" />
+<script>
+function sendalert()
+{
+	var conf = confirm("Are you sure you want to do this?");
+	
+	if (conf == true)
+	{
+		document.getElementById("dropform").submit();
+	}
+}
+</script>
 </head>
 <body>
 <?php include("includes/loginfo.php"); ?>
@@ -25,63 +36,38 @@ loginHandler();
 <span class="title">Drop Classes:</span>
 <br />
 <div class="shadow-container">
-<form method="GET" action="dropclasses.php">
+<form id="dropform" method="GET" action="library/classdrop.php">
 <table class="schedule" id="schedule">
-<?php returnCourses(); ?>
+<?php returnCourses(true); ?>
 </table>
 </div>
 <br />
-<input type="button" name="delete" value="Delete selected courses" onclick="removeRow('schedule')" style="float: right">
-<!--input type="submit" name="delete" value="Delete selected courses"-->
-
-<?php
-	if($_SERVER['REQUEST_METHOD'] === 'GET')
-	{
-		$classesdropped = 0;
-		foreach($_GET['check'] as $key=>$value)
-		{
-			$conn = openDB();
-			$result = deleteCourse($value);
-			closeDB($conn);
-
-			if ($result != false)
-			{
-				$classesdropped = $classesdropped+ 1;
-			}
-		}
-
-		if ($classesadded > 0)
-		{
-			echo "<table class=\"schedule\"><tr><td class=\"advcell\">You have successfully dropped " . $classesdropped . " classes.</td></tr>";
-		}
-		else
-		{
-			echo "<table class=\"schedule\"><tr><td class=\"advcell\">No classes have been dropped.</td></tr>";
-		}				
-	}
-?>
-
-
-
+<input type="button" name="delete" value="Delete Selected Courses" onclick="sendalert()" style="float:right">
+</form>
 <script>
-function removeRow(id){
-	var objTable = document.getElementById(id);
-	var iRow = objTable.rows.length;
-	var counter=0;
-	if(objTable.rows.length>1 && confirm("Are you sure you want to drop the selected courses?")){
-		for(var i=0;i<objTable.rows.length; i++){
-			var chk=objTable.rows[i].cells[0].childNodes[0];
-			if(chk.checked){
-				objTable.deleteRow(i);
-				iRow--;
-				i--;
-				counter=counter+1;
+var x = document.getElementsByClassName("fws");
+var checked = [];
+
+//When a checkbox is changed, change colors of corresponding table cells.
+function checkchanged(courseid)
+{
+	for (var i = 0; i < x.length; i++)
+	{
+		if (x[i].innerHTML == courseid)
+		{
+			if (checked[i] != true)
+			{
+				x[i].style.backgroundColor = "#ff0000";
+				checked[i] = true;
+			}
+			else
+			{
+				x[i].style.backgroundColor = "#52ae63";
+				checked[i] = false;
 			}
 		}
 	}
 }
-
 </script>
-</form>
 </body>
 </html>

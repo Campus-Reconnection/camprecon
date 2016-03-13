@@ -3,15 +3,14 @@
 	
 	function popDropDown() {
 		
-		$sql = "SELECT intFacilityId as id, strFacilityName as name
-				FROM tblFacility;";
-		$result = queryDB($sql);
-		
 		// Spit out default option
 		echo '<option value="-1">---</option>';
-		// For each returned row, spit out drop-down code.
-		if (mysqli_num_rows($result) > 0) {
-			while ($row = mysqli_fetch_assoc($result)) {
+		
+		// Retrieve options from db
+		if ($result = dbGetAll("SELECT intFacilityId as id, strFacilityName as name FROM tblFacility;"))
+		{
+			foreach ($result as $row)
+			{
 				echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
 			}
 		}

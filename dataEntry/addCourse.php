@@ -3,14 +3,14 @@
 	
 	function popDropDown() {
 		
-		$sql = "SELECT strDeptCode as code FROM tblDepartment;";
-		$result = queryDB($sql);
-		
 		// Spit out default option
 		echo '<option value="-1">---</option>';
-		// For each returned row, spit out drop-down code.
-		if (mysqli_num_rows($result) > 0) {
-			while ($row = mysqli_fetch_assoc($result)) {
+		
+		// Retrieve options from db
+		if ($result = dbGetAll("SELECT strDeptCode as code FROM tblDepartment;"))
+		{
+			foreach ($result as $row)
+			{
 				echo '<option value="' . $row['code'] . '">' . $row['code'] . '</option>';
 			}
 		}

@@ -5,7 +5,7 @@
 - http://www.phpmyadmin.net
 -
 - Host: 127.0.0.1
-- Generation Time: Dec 15, 2015 at 01:26 AM
+- Generation Time: Dec 15, 2015 at 08:29 AM
 - Server version: 5.6.17
 - PHP Version: 5.5.12
 -->
@@ -89,7 +89,7 @@
                   `intSectionID` int(12) unsigned NOT NULL AUTO_INCREMENT,
                   `intSectionNumber` tinyint(3) unsigned NOT NULL,
                   `strCourseID` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-                  `strRoomID` int(5) NOT NULL,
+                  `intRoomID` int(5) NOT NULL,
                   `intFacultyID` int(7) unsigned NOT NULL,
                   `intTimeSlotID` int(3) NOT NULL,
                   `intScheduleID` int(3) unsigned NOT NULL,
@@ -159,18 +159,25 @@
             <pma:table name="tbltask">
                 CREATE TABLE `tbltask` (
                   `intTaskID` int(12) unsigned NOT NULL AUTO_INCREMENT,
-                  `intStudentID` int(7) NOT NULL,
-                  `intFacultyID` int(7) NOT NULL,
-                  `strTask` varchar(75) CHARACTER SET latin1 NOT NULL,
-                  `strTaskMessage` varchar(140) COLLATE utf8_unicode_ci DEFAULT NULL,
-                  `dblAmount` decimal(10,0) DEFAULT NULL,
-                  `blnToDo` tinyint(1) DEFAULT NULL,
-                  `blnInbox` tinyint(1) DEFAULT NULL,
-                  `blnHold` tinyint(1) DEFAULT NULL,
-                  `strStatus` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
-                  `dtmDate` date DEFAULT NULL,
+                  `strEID` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+                  `intTaskTypeID` int(11) unsigned NOT NULL,
+                  `strReason` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `dblAmount` decimal(10,2) DEFAULT NULL,
+                  `strStatus` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `dtmIssued` date DEFAULT NULL,
+                  `dtmDue` date DEFAULT NULL,
+                  `strDepartment` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
                   PRIMARY KEY (`intTaskID`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+            <pma:table name="tbltasktype">
+                CREATE TABLE `tbltasktype` (
+                  `intTaskTypeID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `strTypeName` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+                  `strTaskClass` char(1) COLLATE utf8_unicode_ci NOT NULL,
+                  `strInstruction` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
+                  PRIMARY KEY (`intTaskTypeID`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
             </pma:table>
             <pma:table name="tbluser">
                 CREATE TABLE `tbluser` (
@@ -300,6 +307,17 @@
             <column name="strCourseDescription">NULL</column>
         </table>
         <table name="tblcourse">
+            <column name="strCourseID">CSCI222</column>
+            <column name="strCourseName">Discrete Mathematics</column>
+            <column name="strDeptCode">CSCI</column>
+            <column name="strGenEdCategory">NULL</column>
+            <column name="strPrerequisite">CSCI161</column>
+            <column name="strCorequisite">NULL</column>
+            <column name="intCredits">3</column>
+            <column name="dblFee">0</column>
+            <column name="strCourseDescription">NULL</column>
+        </table>
+        <table name="tblcourse">
             <column name="strCourseID">CSCI336</column>
             <column name="strCourseName">Theoretical Computer Science II </column>
             <column name="strDeptCode">CSCI</column>
@@ -333,7 +351,7 @@
             <column name="strCourseDescription">NULL</column>
         </table>
         <table name="tblcourse">
-            <column name="strCourseID">CSCI437</column>
+            <column name="strCourseID">CSCI413</column>
             <column name="strCourseName">Principles of Software Engineering</column>
             <column name="strDeptCode">CSCI</column>
             <column name="strGenEdCategory">NULL</column>
@@ -2366,14 +2384,14 @@
             <column name="intSectionID">18</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">ENGL120</column>
-            <column name="strRoomID">12</column>
+            <column name="intRoomID">12</column>
             <column name="intFacultyID">12</column>
             <column name="intTimeSlotID">6</column>
             <column name="intScheduleID">1</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2383,14 +2401,14 @@
             <column name="intSectionID">19</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CHEM121</column>
-            <column name="strRoomID">8</column>
+            <column name="intRoomID">8</column>
             <column name="intFacultyID">9</column>
             <column name="intTimeSlotID">10</column>
             <column name="intScheduleID">1</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2400,14 +2418,14 @@
             <column name="intSectionID">20</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CSCI122</column>
-            <column name="strRoomID">3</column>
+            <column name="intRoomID">3</column>
             <column name="intFacultyID">2</column>
             <column name="intTimeSlotID">3</column>
             <column name="intScheduleID">1</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2417,14 +2435,14 @@
             <column name="intSectionID">21</column>
             <column name="intSectionNumber">2</column>
             <column name="strCourseID">CSCI122</column>
-            <column name="strRoomID">3</column>
+            <column name="intRoomID">3</column>
             <column name="intFacultyID">2</column>
             <column name="intTimeSlotID">6</column>
             <column name="intScheduleID">1</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2434,14 +2452,14 @@
             <column name="intSectionID">22</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CSCI160</column>
-            <column name="strRoomID">9</column>
+            <column name="intRoomID">9</column>
             <column name="intFacultyID">4</column>
             <column name="intTimeSlotID">3</column>
             <column name="intScheduleID">7</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2451,14 +2469,14 @@
             <column name="intSectionID">23</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CSCI161</column>
-            <column name="strRoomID">1</column>
+            <column name="intRoomID">1</column>
             <column name="intFacultyID">10</column>
             <column name="intTimeSlotID">4</column>
             <column name="intScheduleID">7</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2468,14 +2486,14 @@
             <column name="intSectionID">24</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">MATH166</column>
-            <column name="strRoomID">11</column>
+            <column name="intRoomID">11</column>
             <column name="intFacultyID">6</column>
             <column name="intTimeSlotID">8</column>
             <column name="intScheduleID">7</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2485,14 +2503,14 @@
             <column name="intSectionID">25</column>
             <column name="intSectionNumber">2</column>
             <column name="strCourseID">MATH166</column>
-            <column name="strRoomID">11</column>
+            <column name="intRoomID">11</column>
             <column name="intFacultyID">7</column>
             <column name="intTimeSlotID">1</column>
             <column name="intScheduleID">7</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2502,14 +2520,14 @@
             <column name="intSectionID">26</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">MUSC172</column>
-            <column name="strRoomID">14</column>
+            <column name="intRoomID">14</column>
             <column name="intFacultyID">8</column>
             <column name="intTimeSlotID">10</column>
             <column name="intScheduleID">5</column>
-            <column name="intYear">2016</column>
-            <column name="strSeason">Spring</column>
-            <column name="dtmStartDate">2016-01-11</column>
-            <column name="dtmEndDate">2016-05-13</column>
+            <column name="intYear">2015</column>
+            <column name="strSeason">Fall</column>
+            <column name="dtmStartDate">2015-08-24</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2519,14 +2537,14 @@
             <column name="intSectionID">27</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">PHYS211</column>
-            <column name="strRoomID">8</column>
+            <column name="intRoomID">8</column>
             <column name="intFacultyID">9</column>
             <column name="intTimeSlotID">3</column>
             <column name="intScheduleID">1</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2536,14 +2554,14 @@
             <column name="intSectionID">28</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CSCI213</column>
-            <column name="strRoomID">16</column>
+            <column name="intRoomID">16</column>
             <column name="intFacultyID">2</column>
             <column name="intTimeSlotID">7</column>
             <column name="intScheduleID">1</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2553,14 +2571,14 @@
             <column name="intSectionID">29</column>
             <column name="intSectionNumber">2</column>
             <column name="strCourseID">CSCI213</column>
-            <column name="strRoomID">16</column>
+            <column name="intRoomID">16</column>
             <column name="intFacultyID">2</column>
             <column name="intTimeSlotID">8</column>
             <column name="intScheduleID">1</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2570,14 +2588,14 @@
             <column name="intSectionID">30</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CSCI222</column>
-            <column name="strRoomID">9</column>
+            <column name="intRoomID">9</column>
             <column name="intFacultyID">10</column>
             <column name="intTimeSlotID">15</column>
             <column name="intScheduleID">4</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2587,14 +2605,14 @@
             <column name="intSectionID">31</column>
             <column name="intSectionNumber">1</column>
             <column name="strCourseID">CSCI413</column>
-            <column name="strRoomID">9</column>
+            <column name="intRoomID">9</column>
             <column name="intFacultyID">1</column>
             <column name="intTimeSlotID">16</column>
             <column name="intScheduleID">2</column>
             <column name="intYear">2015</column>
             <column name="strSeason">Fall</column>
             <column name="dtmStartDate">2015-08-24</column>
-            <column name="dtmEndDate">2015-12-18</column>
+            <column name="dtmEndDate">2015-08-24</column>
             <column name="intCapacity">30</column>
             <column name="intWaitlistTotal">0</column>
             <column name="blnOnlineSection">0</column>
@@ -2737,7 +2755,7 @@
             <column name="dblGPA">3.71</column>
             <column name="dblDues">4280.32</column>
             <column name="intCredits">100</column>
-            <column name="blnActiveService">0</column>
+            <column name="blnActiveService">1</column>
             <column name="intSecurityGroup">5</column>
             <column name="dtmDateOfBirth">1975-04-01</column>
         </table>
@@ -2765,6 +2783,14 @@
             <column name="dtmDateOfBirth">1995-04-13</column>
         </table>
         <!-- Table tblstudentenrollment -->
+        <table name="tblstudentenrollment">
+            <column name="intStudentID">1</column>
+            <column name="intSectionID">26</column>
+            <column name="strSectionGrade">NULL</column>
+            <column name="strEnrollmentStatus">E</column>
+            <column name="strPermitStatus">NULL</column>
+            <column name="intWaitlistPosition">NULL</column>
+        </table>
         <table name="tblstudentenrollment">
             <column name="intStudentID">2</column>
             <column name="intSectionID">27</column>
@@ -2798,6 +2824,92 @@
             <column name="intWaitlistPosition">NULL</column>
         </table>
         <!-- Table tbltask -->
+        <table name="tbltask">
+            <column name="intTaskID">1</column>
+            <column name="strEID">buster.d.schrader</column>
+            <column name="intTaskTypeID">3</column>
+            <column name="strReason">NULL</column>
+            <column name="dblAmount">NULL</column>
+            <column name="strStatus">NULL</column>
+            <column name="dtmIssued">2015-10-31</column>
+            <column name="dtmDue">NULL</column>
+            <column name="strDepartment">Registration &amp; Records</column>
+        </table>
+        <table name="tbltask">
+            <column name="intTaskID">2</column>
+            <column name="strEID">buster.d.schrader</column>
+            <column name="intTaskTypeID">1</column>
+            <column name="strReason">Meningitis vaccination booster</column>
+            <column name="dblAmount">89.17</column>
+            <column name="strStatus">NULL</column>
+            <column name="dtmIssued">2015-09-16</column>
+            <column name="dtmDue">2015-12-18</column>
+            <column name="strDepartment">Financial Records Office</column>
+        </table>
+        <table name="tbltask">
+            <column name="intTaskID">3</column>
+            <column name="strEID">buster.d.schrader</column>
+            <column name="intTaskTypeID">5</column>
+            <column name="strReason">NULL</column>
+            <column name="dblAmount">25.00</column>
+            <column name="strStatus">NULL</column>
+            <column name="dtmIssued">2015-11-19</column>
+            <column name="dtmDue">2015-12-18</column>
+            <column name="strDepartment">NDSU Parking Office</column>
+        </table>
+        <table name="tbltask">
+            <column name="intTaskID">4</column>
+            <column name="strEID">buster.d.schrader</column>
+            <column name="intTaskTypeID">2</column>
+            <column name="strReason">NULL</column>
+            <column name="dblAmount">NULL</column>
+            <column name="strStatus">NULL</column>
+            <column name="dtmIssued">2015-09-01</column>
+            <column name="dtmDue">2015-12-18</column>
+            <column name="strDepartment">Customer Account Services</column>
+        </table>
+        <table name="tbltask">
+            <column name="intTaskID">5</column>
+            <column name="strEID">buster.d.schrader</column>
+            <column name="intTaskTypeID">4</column>
+            <column name="strReason">NULL</column>
+            <column name="dblAmount">NULL</column>
+            <column name="strStatus">Initiated</column>
+            <column name="dtmIssued">2015-10-15</column>
+            <column name="dtmDue">2015-11-11</column>
+            <column name="strDepartment">Customer Account Services</column>
+        </table>
+        <!-- Table tbltasktype -->
+        <table name="tbltasktype">
+            <column name="intTaskTypeID">1</column>
+            <column name="strTypeName">Unpaid Fee</column>
+            <column name="strTaskClass">H</column>
+            <column name="strInstruction">You can pay your fee by means of cash, credit, or written check to the Bison Connection office in the Memorial Union.</column>
+        </table>
+        <table name="tbltasktype">
+            <column name="intTaskTypeID">2</column>
+            <column name="strTypeName">Financial Obligation Agreement</column>
+            <column name="strTaskClass">H</column>
+            <column name="strInstruction">We don't know how to get rid of this, either.</column>
+        </table>
+        <table name="tbltasktype">
+            <column name="intTaskTypeID">3</column>
+            <column name="strTypeName">Interstate Passport</column>
+            <column name="strTaskClass">M</column>
+            <column name="strInstruction">&lt;p&gt;You have earned an Interstate Passport, which signifies completion of three Learning Outcomes (General Education categories), recognized by other WICHE Passport Initiative institutions.&lt;/p&gt;&lt;p&gt;For more information on the Interstate Passport, see ndsu.edu/registrar/gened/passport.&lt;/p&gt;</column>
+        </table>
+        <table name="tbltasktype">
+            <column name="intTaskTypeID">4</column>
+            <column name="strTypeName">1098-T Consent</column>
+            <column name="strTaskClass">T</column>
+            <column name="strInstruction">&lt;p&gt;If you would like to receive Form 1098-T in electronic format only, consent must be given. If you do not wish to receive your 1098-T electronically, no action is required.&lt;/p&gt;&lt;p&gt;Annoyingly, Campus Reconnection does not yet support electronic format of Form 1098-T, so this message is going to stick around on your To-Do list and there's nothing you can do about it.&lt;/p&gt;</column>
+        </table>
+        <table name="tbltasktype">
+            <column name="intTaskTypeID">5</column>
+            <column name="strTypeName">Parking Ticket</column>
+            <column name="strTaskClass">H</column>
+            <column name="strInstruction">Parking Ticket Fees can be paid at the NDSU Parking Office.</column>
+        </table>
         <!-- Table tbluser -->
         <table name="tbluser">
             <column name="intUserId">1</column>

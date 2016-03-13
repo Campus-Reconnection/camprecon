@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") // Only respond to POST requests from 
 				// Record does not exist - add it!
 				$sql = "INSERT INTO tblroom VALUES(NULL, ?, ?, ?)";
 				$result = dbPush($sql, "isi", $facilityId, $roomNumber, $seats);
-				if (!$result) echo "Room '".$roomNumber."' added successfully!";
-				else echo $result;
+				if ($result) echo "Room '".$roomNumber."' added successfully!";
+				//else echo $result;
 			}
 			else
 			{
@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") // Only respond to POST requests from 
 				// Record does not exist - add it!
 				$sql = "INSERT INTO tblFaculty VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$result = dbPush($sql, "sssisisi", $lName, $fName, $mName, $dept, $pos, $isAdvisor, $EID, $secGroup);
-				if (!$result) echo "Faculty member '".$fName." ".$lName."' added successfully!";
-				else echo $result;
+				if ($result) echo "Faculty member '".$fName." ".$lName."' added successfully!";
+				//else echo $result;
 			}
 			else
 			{
@@ -81,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") // Only respond to POST requests from 
 				// Record does not exist - add it!
 				$sql = "INSERT INTO tblStudent VALUES (NULL, 7654321, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 5)";
 				$result = dbPush($sql, "sssssssssssssdii", $fName, $lName, $mName, $EID, $status, $enrStatus, $sType, $major1, $major2, $major3, $minor1, $minor2, $minor3, $gpa, $credits, $aService);
-				if (!$result) echo "Student '".$fName." ".$lName."' added successfully!";
-				else echo $result;
+				if ($result) echo "Student '".$fName." ".$lName."' added successfully!";
+				//else echo $result;
 			}
 			else
 			{
@@ -109,8 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") // Only respond to POST requests from 
 				// Record does not exist - add it!
 				$sql = "INSERT INTO tblCourse VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$result = dbPush($sql, "ssssssids", $courseId, $courseName, $deptCode, $genEdCat, $preReq, $coReq, $credits, $fee, $courseDesc);
-				if (!$result) echo "Course '".$courseName."' added successfully!";
-				else echo $result;
+				if ($result) echo "Course '".$courseName."' added successfully!";
+				//else echo $result;
 			}
 			else
 			{

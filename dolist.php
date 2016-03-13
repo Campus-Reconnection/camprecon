@@ -1,10 +1,20 @@
-<?php session_start(); require("library/system.php"); loginHandler(); ?>
+<?php session_start(); require("library/system.php"); loginHandler(); setlocale(LC_MONETARY, 'en_US')?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Campus Reconnection</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
   <link rel="icon" type="image/ico" href="images/favicon.ico" />
+ <script>
+ function openWindow(message) {
+	var h = 200;
+	var w = 400;
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h);
+	var myWindow = window.open("", "Instruction", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width="+w+", height="+h+", top="+top+", left="+left);
+	myWindow.document.write(message);
+ }
+ </script>
 </head>
 <body>
 <?php include("includes/loginfo.php"); ?>
@@ -17,16 +27,34 @@
 <table class="schedule">
 <tr>
 <td class="thr">Item</td>
+<td class="thr">Issued</td>
+<td class="thr">Due</td>
+<td class="thr">Reason</td>
 <td class="thr">Amount</td>
-<td class="thr">Date</td>
 <td class="thr">Department</td>
 </tr>
-<tr>
-<td class="advcell">Financial Obligation Agreement</td>
-<td class="advcell">$0.00</td>
-<td class="advcell">10/04/2015</td>
-<td class="advcell">Customer Account Services</td>
-</tr>
+<?PHP
+	$sql = "SELECT typ.strTypeName AS taskType, tsk.dtmIssued AS dateIssued, tsk.dtmDue AS dateDue, tsk.dblAmount AS amountDue, tsk.strDepartment AS department, tsk.strReason AS reason, typ.strInstruction AS instruction
+		FROM tblTask tsk
+		JOIN tblTaskType typ ON tsk.intTaskTypeID = typ.intTaskTypeID
+		JOIN tblStudent stu ON stu.strStudentEID = tsk.strEID
+		WHERE stu.strStudentEID = ? AND typ.strTaskClass = 'H'
+		ORDER BY taskType";
+	$result = dbGetAll($sql, "s", $_SESSION['cruser']);
+	foreach($result as $row) {
+		$dateIssued = $row['dateIssued'] ? date_format(date_create($row['dateIssued']), "M/d/Y") : "---";
+		$dateDue = $row['dateDue'] ? date_format(date_create($row['dateDue']), "M/d/Y") : "---";
+		$amountDue = $row['amountDue'] ? sprintf("$%.2f", $row['amountDue']) : "---";
+		$reason = $row['reason'] ? $row['reason'] : "---";
+		echo '<tr>';
+		echo '<td class="advcell"><a href="javascript:openWindow(&quot;'.$row['instruction'].'&quot;)">'.$row['taskType'].'</a></td>';
+		echo '<td class="advcell">'.$dateIssued.'</td>';
+		echo '<td class="advcell">'.$dateDue.'</td>';
+		echo '<td class="advcell">'.$reason.'</td>';
+		echo '<td class="advcell">'.$amountDue.'</td>';
+		echo '<td class="advcell">'.$row['department'].'</td>';
+	}
+?>
 </table>
 </div>
 <br />
@@ -36,35 +64,61 @@
 <table class="schedule">
 <tr>
 <td class="thr">Item</td>
-<td class="thr">Date</td>
+<td class="thr">Issued</td>
+<td class="thr">Due</td>
 <td class="thr">Status</td>
-<td class="thr">Description</td>
+<td class="thr">Department</td>
 </tr>
-<tr>
-<td class="advcell">Audit</td>
-<td class="advcell">10/07/2015</td>
-<td class="advcell">F***ed up.</td>
-<td class="advcell">We messed everything up sor...</td>
-</tr>
+<?PHP
+	$sql = "SELECT typ.strTypeName AS taskType, tsk.dtmIssued AS dateIssued, tsk.dtmDue AS dateDue, tsk.strStatus AS status, tsk.strDepartment AS department, typ.strInstruction AS instruction
+		FROM tblTask tsk
+		JOIN tblTaskType typ ON tsk.intTaskTypeID = typ.intTaskTypeID
+		JOIN tblStudent stu ON stu.strStudentEID = tsk.strEID
+		WHERE stu.strStudentEID = ? AND typ.strTaskClass = 'T'
+		ORDER BY taskType";
+	$result = dbGetAll($sql, "s", $_SESSION['cruser']);
+	foreach($result as $row) {
+		$dateIssued = $row['dateIssued'] ? date_format(date_create($row['dateIssued']), "M/d/Y") : "---";
+		$dateDue = $row['dateDue'] ? date_format(date_create($row['dateDue']), "M/d/Y") : "---";
+		$status = $row['status'] ? $row['status'] : "---";
+		echo '<tr>';
+		echo '<td class="advcell"><a href="javascript:openWindow(&quot;'.$row['instruction'].'&quot;)">'.$row['taskType'].'</a></td>';
+		echo '<td class="advcell">'.$dateIssued.'</td>';
+		echo '<td class="advcell">'.$dateDue.'</td>';
+		echo '<td class="advcell">'.$status.'</td>';
+		echo '<td class="advcell">'.$row['department'].'</td>';
+	}
+?>
 </table>
 </div>
 <br />
-<span class="title">Inbox:</span>
+<span class="title">Milestones:</span>
 <br />
 <div class="shadow-container">
 <table class="schedule">
 <tr>
-<td class="thr">Date</td>
-<td class="thr">Description</td>
-<td class="thr">From</td>
+<td class="thr">Item</td>
+<td class="thr">Issued</td>
+<td class="thr">Department</td>
 <td class="thr">&nbsp;</td>
 </tr>
-<tr>
-<td class="advcell">10/10/1964</td>
-<td class="advcell">Science Fair</td>
-<td class="advcell">Tim</td>
-<td class="advcell">View</td>
-</tr>
+<?PHP
+	$sql = "SELECT typ.strTypeName AS taskType, tsk.dtmIssued AS dateIssued, tsk.strDepartment AS department, typ.strInstruction AS instruction
+		FROM tblTask tsk
+		JOIN tblTaskType typ ON tsk.intTaskTypeID = typ.intTaskTypeID
+		JOIN tblStudent stu ON stu.strStudentEID = tsk.strEID
+		WHERE stu.strStudentEID = ? AND typ.strTaskClass = 'M'
+		ORDER BY taskType";
+	$result = dbGetAll($sql, "s", $_SESSION['cruser']);
+	foreach($result as $row) {
+		$dateIssued = $row['dateIssued'] ? date_format(date_create($row['dateIssued']), "M/d/Y") : "---";
+		echo '<tr>';
+		echo '<td class="advcell"><a href="javascript:openWindow(&quot;'.$row['instruction'].'&quot;)">'.$row['taskType'].'</a></td>';
+		echo '<td class="advcell">'.$dateIssued.'</td>';
+		echo '<td class="advcell">'.$row['department'].'</td>';
+		echo '<td class="advcell">&nbsp;</td>';
+	}
+?>
 </table>
 </div>
 </div>

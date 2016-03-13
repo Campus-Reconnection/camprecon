@@ -24,36 +24,6 @@
 		}
 	}
 	
-	function openDB()
-	{
-		$servername = "localhost";
-		$username = "root";
-		$password = "camprecon";
-		$dbname = "camprecon";
-		
-		$conn = mysqli_connect($servername, $username, $password, $dbname);
-		
-		if (!$conn)
-		{
-			die("Connection failed: " . mysqli_connect_error());
-		}
-		
-		return $conn;
-	}
-	
-	function closeDB($conn)
-	{
-		mysqli_close($conn);
-	}
-	
-	function queryDB($sql)
-	{
-		$conn = openDB();
-		$result = mysqli_query($conn, $sql);
-		closeDB($conn);
-		return $result;
-	}
-	
 	// Gets a mysqli connection instance for use in prepared statements
 	function getMysqli()
 	{
@@ -68,13 +38,16 @@
 		$mysqli = getMysqli();
 		$sql = array_shift($arg_list);
 		$query = $mysqli->prepare($sql);
-		$Args = array();
-        foreach($arg_list as $k => &$arg){
-            $Args[$k] = &$arg;
-        } 
-		call_user_func_array(array($query, "bind_param"), $Args);
+		if (!empty($arg_list)) {
+			$Args = array();
+			foreach($arg_list as $k => &$arg) {
+				$Args[$k] = &$arg;
+			} 
+			call_user_func_array(array($query, "bind_param"), $Args);
+		}
 		$out = false;
-		if ($query->execute()) $out = $query->get_result()->fetch_all(MYSQLI_BOTH);
+		if ($query->execute())
+			$out = $query->get_result()->fetch_all(MYSQLI_BOTH);
 		$query->close();
 		$mysqli->close();
 		return $out;
@@ -121,8 +94,8 @@
 	}
 	
 	// Pushes a single INSERT query to the database using prepared statements
-	// Returns false on SUCCESS, NOT FAILURE, because there is nothing to return on success
-	// Returns an error string on failure
+	// Returns true on success
+	// Returns false on failure
 	function dbPush()
 	{
 		$arg_list = func_get_args();
@@ -135,8 +108,9 @@
         } 
 		call_user_func_array(array($query, "bind_param"), $Args);
 		$out;
-		if ($query->execute()) $out = false;
-		else $out = sprintf("errno: %d, error: %s", $query->errno, $query->error);
+		if ($query->execute()) $out = true;
+		//else $out = sprintf("errno: %d, error: %s", $query->errno, $query->error);
+		else $out = false;
 		$query->close();
 		$mysqli->close();
 		return $out;

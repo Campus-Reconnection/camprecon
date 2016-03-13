@@ -120,29 +120,30 @@ function getAllDepartments() {
 	return $result;
 }
 
-function returnCourses()
+function returnCourses($javascriptable)
 {
 	$sql = "SELECT DISTINCT strCourseName AS courseName,
 		tblsection.intSectionID AS secID,
 		CONCAT(tblcourse.strCourseID,'-',intSectionNumber) AS secNumber,
-		strFirstName,
-		strLastName,
+		tblcourse.strCourseID AS secBareCourse,
+		tblfaculty.strFirstName,
+		tblfaculty.strLastName,
 		strDayFormat,
 		CONCAT(DATE_FORMAT(timStartTime,'%l:%i%p'),'-',DATE_FORMAT(timEndTime,'%l:%i%p')) AS time,
 		strFacilityName,
 		strRoomNumber
 		FROM tblstudentenrollment
-		INNER JOIN tblsection ON tblstudentenrollment.intSectionID = tblsection.intSectionID
-		INNER JOIN tblcourse ON tblsection.strCourseID = tblcourse.strCourseID
-		INNER JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
-		INNER JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
-		INNER JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
-		INNER JOIN tblroom ON tblsection.strRoomID = tblRoom.intRoomID
-		INNER JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID";
+		JOIN tblsection ON tblstudentenrollment.intSectionID = tblsection.intSectionID
+		JOIN tblcourse ON tblsection.strCourseID = tblcourse.strCourseID
+		JOIN tblfaculty ON tblsection.intFacultyID = tblfaculty.intFacultyID
+		JOIN tblsectionschedule ON tblsection.intScheduleID = tblsectionschedule.intDaySlotID
+		JOIN tblsectiontimes ON tblsection.intTimeSlotID = tblsectiontimes.intTimeSlotID
+		JOIN tblroom ON tblsection.intRoomID = tblRoom.intRoomID
+		JOIN tblfacility ON tblroom.intFacilityID = tblFacility.intFacilityID
+        JOIN tblstudent ON tblstudentenrollment.intStudentID = tblstudent.intStudentID
+        WHERE tblstudent.strStudentEID = ?;";
 
-	$result = queryDB($sql);
-
-	if (mysqli_num_rows($result) > 0)
+	if ($result = dbGetAll($sql, "s", $_SESSION["cruser"]))
 	{
 		echo "<thead>";
 		echo "<tr><td class=\"thr\">Select</td>";
@@ -155,11 +156,13 @@ function returnCourses()
 		echo "<td class=\"thr\">Room</td></tr>";
 		echo "</thead><tbody>";
 		
-		while($row = mysqli_fetch_assoc($result))
+		foreach ($result as $row)
 		{
 			echo "<tr>";
-			//echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[".$row['secID']."]\" value=\"\" /></td>";
-			echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" /></td>";
+			if ($javascriptable == true)
+				{echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" onchange=\"checkchanged('" . $row["secBareCourse"] . "')\" /></td>";}
+			else
+				{echo "<td class=\"advcell\"><input type=\"checkbox\" name=\"check[]\" value=\"" .$row['secID']. "\" /></td>";}
 			echo "<td class=\"advcell\">".$row['courseName']."</td>";
 			echo "<td class=\"advcell\">".$row['secNumber']."</td>";
 			echo "<td class=\"advcell\">".$row['strDayFormat']."</td>";
@@ -181,7 +184,9 @@ function returnCourses()
 
 function deleteCourses($secID) 
 {
-	$sql = "DELETE FROM tblstudentenrollment WHERE " . $secID . " = tblstudentenrollment.intSectionID";
-	return queryDB($sql);
+	$sql = "DELETE enr FROM tblstudentenrollment enr
+		JOIN tblstudent stu ON enr.intStudentID = stu.intStudentID
+		WHERE enr.intSectionID = ? AND stu.strStudentEID = ?;";
+	return dbPush($sql, "is", $secID, $_SESSION["cruser"]);
 }
 ?>

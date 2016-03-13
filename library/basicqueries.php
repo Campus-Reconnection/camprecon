@@ -76,7 +76,8 @@ function getActiveService($eid)
 {
 	$sql = "SELECT blnActiveService FROM tblStudent WHERE strStudentEID = ?";
 	if ($result = dbGetFirst($sql, "s", $eid))
-		return true;
+		if ($result[0] == 1)
+			return true;
 	return false;
 }
 
